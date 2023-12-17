@@ -2,7 +2,7 @@
   "editor.formatOnPaste": false,
   "editor.formatOnSave": true,
   "editor.tabSize": 2,
-  "cSpell.words": [],
+  "cSpell.words": ["fontsource", "roboto"],
   // "liveSassCompile.settings.autoprefix": ["> 1%", "last 2 versions"],
   "prettier.requireConfig": true // prettier 설정을 프로젝트 내부 .prettierrc.json 파일에서 가져옴
 }
