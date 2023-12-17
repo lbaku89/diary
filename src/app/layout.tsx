@@ -8,6 +8,8 @@ import '@fontsource/roboto/700.css'
 import 'normalize.css'
 
 // const inter = Inter({ subsets: ['latin'] })
+import Container from '@mui/material/Container'
+import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -17,7 +19,17 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html>
-      <body>{children}</body>
+      <body>
+        {/* Using other styling solutions */}
+        <AppRouterCacheProvider options={{ enableCssLayer: true }}>
+          <Container
+            maxWidth="lg" // 1200px
+            sx={{ backgroundColor: 'aqua', minHeight: '100vh', height: '100%', overflow: 'hidden' }}
+          >
+            {children}
+          </Container>
+        </AppRouterCacheProvider>
+      </body>
     </html>
   )
 }

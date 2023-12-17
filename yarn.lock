@@ -379,6 +379,27 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@mui/material-nextjs@npm:^5.15.0":
+  version: 5.15.0
+  resolution: "@mui/material-nextjs@npm:5.15.0"
+  peerDependencies:
+    "@emotion/cache": ^11.11.0
+    "@emotion/server": ^11.11.0
+    "@mui/material": ^5.0.0
+    "@types/react": ^17.0.0 || ^18.0.0
+    next: ^13.0.0 || ^14.0.0
+    react: ^17.0.0 || ^18.0.0
+  peerDependenciesMeta:
+    "@emotion/cache":
+      optional: true
+    "@emotion/server":
+      optional: true
+    "@types/react":
+      optional: true
+  checksum: 753a33fe5de7aa6a0034a4e211588056d20712ed00a10055bef5fb2120bdd3fee4de6a111a2e997836c7fed5cf8e7cec206d4a972451b9084c368609b92d7474
+  languageName: node
+  linkType: hard
+
 "@mui/material@npm:^5.15.0":
   version: 5.15.0
   resolution: "@mui/material@npm:5.15.0"
@@ -1229,11 +1250,13 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "diary@workspace:."
   dependencies:
+    "@emotion/cache": "npm:^11.11.0"
     "@emotion/react": "npm:^11.11.1"
     "@emotion/styled": "npm:^11.11.0"
     "@fontsource/roboto": "npm:^5.0.8"
     "@mui/icons-material": "npm:^5.15.0"
     "@mui/material": "npm:^5.15.0"
+    "@mui/material-nextjs": "npm:^5.15.0"
     "@types/node": "npm:^20"
     "@types/react": "npm:^18"
     "@types/react-dom": "npm:^18"
