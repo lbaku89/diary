@@ -1241,6 +1241,7 @@ __metadata:
     eslint-config-next: "npm:14.0.4"
     eslint-config-prettier: "npm:^9.1.0"
     next: "npm:14.0.4"
+    normalize.css: "npm:^8.0.1"
     prettier: "npm:3.1.1"
     react: "npm:^18"
     react-dom: "npm:^18"
@@ -2607,6 +2608,13 @@ __metadata:
   bin:
     next: dist/bin/next
   checksum: e6c829fd473d8c3605b2b62d15e1bf41e9d90cf59a2c213b4adeadff2846999bc9a653ffef18f6aa13cc9f5d6de02469c222acf5a4184901a4690a4504bd468f
+  languageName: node
+  linkType: hard
+
+"normalize.css@npm:^8.0.1":
+  version: 8.0.1
+  resolution: "normalize.css@npm:8.0.1"
+  checksum: 4ddf56d1af5ca755fa5e692e718316d8758ecb792aa96e1ad206824b5810a043763d681d6f7697d46573515f5e9690038b4c91a95c1997567128815545fb8cd7
   languageName: node
   linkType: hard
 
