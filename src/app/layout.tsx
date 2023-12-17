@@ -1,12 +1,15 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-import './globals.css'
+// import { Inter } from 'next/font/google'
+// import './globals.css'
 import '@fontsource/roboto/300.css'
 import '@fontsource/roboto/400.css'
 import '@fontsource/roboto/500.css'
 import '@fontsource/roboto/700.css'
+import 'normalize.css'
 
-const inter = Inter({ subsets: ['latin'] })
+// const inter = Inter({ subsets: ['latin'] })
+import Container from '@mui/material/Container'
+import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -15,8 +18,18 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html>
+      <body>
+        {/* Using other styling solutions */}
+        <AppRouterCacheProvider options={{ enableCssLayer: true }}>
+          <Container
+            maxWidth="lg" // 1200px
+            sx={{ backgroundColor: 'aqua', minHeight: '100vh', height: '100%', overflow: 'hidden' }}
+          >
+            {children}
+          </Container>
+        </AppRouterCacheProvider>
+      </body>
     </html>
   )
 }
