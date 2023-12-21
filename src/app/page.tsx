@@ -1,10 +1,15 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+'use client'
+// import Image from 'next/image'
+// import styles from './page.module.css'
+import Test from '../components/Test'
 
 export default function Home() {
+  // get session info
+
   return (
     <main>
       <h1>내용</h1>
+      <Test />
     </main>
     // <main className={styles.main}>
     //   <div className={styles.description}>

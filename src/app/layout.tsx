@@ -7,6 +7,9 @@ import '@fontsource/roboto/500.css'
 import '@fontsource/roboto/700.css'
 import 'normalize.css'
 
+// import sessionProvider
+import AuthContext from '@/context/AuthContext'
+
 // const inter = Inter({ subsets: ['latin'] })
 import Container from '@mui/material/Container'
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter'
@@ -20,15 +23,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html>
       <body>
-        {/* Using other styling solutions */}
-        <AppRouterCacheProvider options={{ enableCssLayer: true }}>
-          <Container
-            maxWidth="lg" // 1200px
-            sx={{ backgroundColor: 'aqua', minHeight: '100vh', height: '100%', overflow: 'hidden' }}
-          >
-            {children}
-          </Container>
-        </AppRouterCacheProvider>
+        <AuthContext>
+          {/* Using other styling solutions */}
+          <AppRouterCacheProvider options={{ enableCssLayer: true }}>
+            <Container
+              maxWidth="lg" // 1200px
+              sx={{ backgroundColor: 'aqua', minHeight: '100vh', height: '100%', overflow: 'hidden' }}
+            >
+              {children}
+            </Container>
+          </AppRouterCacheProvider>
+        </AuthContext>
       </body>
     </html>
   )
