@@ -1,82 +1,58 @@
-import Image from 'next/image'
-import styles from './page.module.css'
-
+'use client'
+import { Typography, Button, Box } from '@mui/material'
+import { useRouter } from 'next/navigation'
+import { useContext, useState } from 'react'
+import { AuthContext } from '@/context/AuthContext'
+import { AuthContextProps } from '@/type/type'
+import { login, logout } from '@/api/api'
+;`use client`
 export default function Home() {
+  const auth = useContext(AuthContext)
+  const [currentAuth, setCurrentAuth] = useState<AuthContextProps | null>(auth)
+  const router = useRouter()
+
   return (
-    <main>
-      <h1>내용</h1>
-    </main>
-    // <main className={styles.main}>
-    //   <div className={styles.description}>
-    //     <p>
-    //       Get started by editing&nbsp;
-    //       <code className={styles.code}>src/app/page.tsx</code>
-    //     </p>
-    //     <div>
-    //       <a
-    //         href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-    //         target="_blank"
-    //         rel="noopener noreferrer"
-    //       >
-    //         By{' '}
-    //         <Image src="/vercel.svg" alt="Vercel Logo" className={styles.vercelLogo} width={100} height={24} priority />
-    //       </a>
-    //     </div>
-    //   </div>
-
-    //   <div className={styles.center}>
-    //     <Image className={styles.logo} src="/next.svg" alt="Next.js Logo" width={180} height={37} priority />
-    //   </div>
-
-    //   <div className={styles.grid}>
-    //     <a
-    //       href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-    //       className={styles.card}
-    //       target="_blank"
-    //       rel="noopener noreferrer"
-    //     >
-    //       <h2>
-    //         Docs <span>-&gt;</span>
-    //       </h2>
-    //       <p>Find in-depth information about Next.js features and API.</p>
-    //     </a>
-
-    //     <a
-    //       href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-    //       className={styles.card}
-    //       target="_blank"
-    //       rel="noopener noreferrer"
-    //     >
-    //       <h2>
-    //         Learn <span>-&gt;</span>
-    //       </h2>
-    //       <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-    //     </a>
-
-    //     <a
-    //       href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-    //       className={styles.card}
-    //       target="_blank"
-    //       rel="noopener noreferrer"
-    //     >
-    //       <h2>
-    //         Templates <span>-&gt;</span>
-    //       </h2>
-    //       <p>Explore starter templates for Next.js.</p>
-    //     </a>
-
-    //     <a
-    //       href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-    //       className={styles.card}
-    //       target="_blank"
-    //       rel="noopener noreferrer"
-    //     >
-    //       <h2>
-    //         Deploy <span>-&gt;</span>
-    //       </h2>
-    //       <p>Instantly deploy your Next.js site to a shareable URL with Vercel.</p>
-    //     </a>
-    //   </div>
-    // </main>
+    <Box
+      sx={{
+        minHeight: '100vh',
+        position: 'relative',
+      }}
+    >
+      <Box
+        sx={{
+          top: '30%',
+          position: 'absolute',
+          height: '210px',
+          width: '250px',
+          left: '50%',
+          transform: 'translateX(-50%)',
+        }}
+      >
+        {/* simple diary */}
+        <Typography variant="h2" component="h1" gutterBottom>
+          SIMPLE
+          <br />
+          <div style={{ textAlign: 'right' }}>✍️DIARY</div>
+        </Typography>
+        {/* 로그인 버튼 영역 */}
+        <Button
+          onClick={async () => {
+            login().then((res: AuthContextProps | null) => {
+              if (res) {
+                router.push('/main')
+                setCurrentAuth(res)
+              }
+            })
+          }}
+          color="primary"
+          variant="contained"
+          size="medium"
+          sx={{ boxSizing: 'border-box', width: '100%' }}
+        >
+          log in
+        </Button>
+        <Typography variant="caption">* 현재 구글 로그인만 지원합니다.</Typography>
+      </Box>
+    </Box>
   )
 }

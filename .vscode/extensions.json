@@ -8,6 +8,9 @@
     "christian-kohler.path-intellisense", // 경로 자동탐색
     "esbenp.prettier-vscode",
     // "syler.sass-indented",
-    "swyphcosmo.spellchecker" // 영어 철자 검사
+    "swyphcosmo.spellchecker", // 영어 철자 검사
+    "usernamehw.errorlens", // error 표시
+    "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint"
   ]
 }
