@@ -5,10 +5,10 @@ import '@fontsource/roboto/300.css'
 import '@fontsource/roboto/400.css'
 import '@fontsource/roboto/500.css'
 import '@fontsource/roboto/700.css'
-import 'normalize.css'
+import CssBaseline from '@mui/material/CssBaseline'
 
 // import sessionProvider
-import AuthContext from '@/context/AuthContext'
+import { AuthContextProvider } from '@/context/AuthContext'
 
 // const inter = Inter({ subsets: ['latin'] })
 import Container from '@mui/material/Container'
@@ -23,17 +23,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html>
       <body>
-        <AuthContext>
+        <AuthContextProvider>
           {/* Using other styling solutions */}
           <AppRouterCacheProvider options={{ enableCssLayer: true }}>
-            <Container
-              maxWidth="lg" // 1200px
-              sx={{ backgroundColor: 'aqua', minHeight: '100vh', height: '100%', overflow: 'hidden' }}
-            >
-              {children}
-            </Container>
+            <CssBaseline>
+              <Container
+                maxWidth="lg" // 1200px
+                sx={{ minHeight: '100vh', height: '100%', overflow: 'hidden' }}
+              >
+                {children}
+              </Container>
+            </CssBaseline>
           </AppRouterCacheProvider>
-        </AuthContext>
+        </AuthContextProvider>
       </body>
     </html>
   )
