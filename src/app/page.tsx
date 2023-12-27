@@ -1,16 +1,7 @@
-'use client'
-import { Typography, Button, Box } from '@mui/material'
-import { useRouter } from 'next/navigation'
-import { useContext, useState } from 'react'
-import { AuthContext } from '@/context/AuthContext'
-import { AuthContextProps } from '@/type/type'
-import { login, logout } from '@/api/api'
-;`use client`
-export default function Home() {
-  const auth = useContext(AuthContext)
-  const [currentAuth, setCurrentAuth] = useState<AuthContextProps | null>(auth)
-  const router = useRouter()
+import { Typography, Box } from '@mui/material'
+import { LoginButton } from '@/components/LoginButton'
 
+export default function Home() {
   return (
     <Box
       sx={{
@@ -35,22 +26,7 @@ export default function Home() {
           <div style={{ textAlign: 'right' }}>✍️DIARY</div>
         </Typography>
         {/* 로그인 버튼 영역 */}
-        <Button
-          onClick={async () => {
-            login().then((res: AuthContextProps | null) => {
-              if (res) {
-                router.push('/main')
-                setCurrentAuth(res)
-              }
-            })
-          }}
-          color="primary"
-          variant="contained"
-          size="medium"
-          sx={{ boxSizing: 'border-box', width: '100%' }}
-        >
-          log in
-        </Button>
+        <LoginButton />
         <Typography variant="caption">* 현재 구글 로그인만 지원합니다.</Typography>
       </Box>
     </Box>
