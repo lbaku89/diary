@@ -1,23 +1,34 @@
 'use client'
+
+// * import component
 import { Button } from '@mui/material'
+
+// * import api
 import { login } from '@/api/api'
+
+// * import routing
 import { useRouter } from 'next/navigation'
-import { useContext, useState } from 'react'
-import { AuthContext } from '@/context/AuthContext'
-import { AuthContextProps } from '@/type/type'
+
+// * import hook
+import { useContext } from 'react'
+
+// * import type
+import { AuthContextValue } from '@/type/type'
+
+// * import context
+import { authContext } from '@/context/authContext'
 
 export const LoginButton = () => {
-  const auth = useContext(AuthContext)
-  const [currentAuth, setCurrentAuth] = useState<AuthContextProps | null>(auth)
+  const context = useContext(authContext)
   const router = useRouter()
   return (
     <Button
       onClick={async () => {
-        login().then((res: AuthContextProps | null) => {
+        login().then((res: AuthContextValue | null) => {
           if (res) {
             console.log(`${res.displayName}님 환영합니다😊`)
             router.push('/main')
-            setCurrentAuth(res)
+            context!.setAuthContextValue(res)
           }
         })
       }}

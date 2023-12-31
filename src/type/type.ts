@@ -1,4 +1,4 @@
-export interface AuthContextProps {
+export interface AuthContextValue {
   uid: string | null
   email: string | null
   displayName: string | null
@@ -22,9 +22,11 @@ export interface CalendarCellInfo {
 }
 
 export interface CalendarCellProps {
-  // date: number // 1 ~ 31
   cellId: string
-  // cellRow: CalendarRow
-  // cellColumn: CalendarColumn
   children?: React.ReactNode
+}
+
+export interface AuthContext {
+  authContextValue: AuthContextValue | null
+  setAuthContextValue: (value: AuthContextValue | null) => void
 }
