@@ -15,7 +15,7 @@ export const LoginButton = () => {
       onClick={async () => {
         login().then((res: AuthContextProps | null) => {
           if (res) {
-            console.log(`${res.displayName}님 환연합니다😊`)
+            console.log(`${res.displayName}님 환영합니다😊`)
             router.push('/main')
             setCurrentAuth(res)
           }
