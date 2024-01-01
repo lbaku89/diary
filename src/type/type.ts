@@ -19,6 +19,7 @@ export interface CalendarCellInfo {
   month: number // 달 0~11
   date: number // 일
   day: string // 요일
+  dayIndex: number //요일 인덱스 0~6
   row: CalendarRow
   column: CalendarColumn
   calendarCellId: string
@@ -26,6 +27,7 @@ export interface CalendarCellInfo {
 
 export interface CalendarCellProps {
   cellId: string
+  date?: number // 일
   children?: React.ReactNode
 }
 
