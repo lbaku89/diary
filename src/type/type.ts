@@ -22,12 +22,10 @@ export interface CalendarCellInfo {
   dayIndex: number //요일 인덱스 0~6
   row: CalendarRow
   column: CalendarColumn
-  calendarCellId: string
 }
 
 export interface CalendarCellProps {
-  cellId: string
-  date?: number // 일
+  cellInfo?: CalendarCellInfo
   children?: React.ReactNode
 }
 

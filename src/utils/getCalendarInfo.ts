@@ -52,7 +52,6 @@ export const getCalendarInfo = ({ year, month }: { year: number; month: number }
             dayIndex: 0,
             row: row,
             column: 0,
-            calendarCellId: String(row) + String(0),
           }
           break
         case 1:
@@ -64,7 +63,6 @@ export const getCalendarInfo = ({ year, month }: { year: number; month: number }
             dayIndex: 1,
             row: row,
             column: 1,
-            calendarCellId: String(row) + String(1),
           }
           break
         case 2:
@@ -76,7 +74,6 @@ export const getCalendarInfo = ({ year, month }: { year: number; month: number }
             dayIndex: 2,
             row: row,
             column: 2,
-            calendarCellId: String(row) + String(2),
           }
           break
         case 3:
@@ -88,7 +85,6 @@ export const getCalendarInfo = ({ year, month }: { year: number; month: number }
             dayIndex: 3,
             row: row,
             column: 3,
-            calendarCellId: String(row) + String(3),
           }
           break
         case 4:
@@ -100,7 +96,6 @@ export const getCalendarInfo = ({ year, month }: { year: number; month: number }
             dayIndex: 4,
             row: row,
             column: 4,
-            calendarCellId: String(row) + String(4),
           }
           break
         case 5:
@@ -112,7 +107,6 @@ export const getCalendarInfo = ({ year, month }: { year: number; month: number }
             dayIndex: 5,
             row: row,
             column: 5,
-            calendarCellId: String(row) + String(5),
           }
           break
         case 6:
@@ -124,7 +118,6 @@ export const getCalendarInfo = ({ year, month }: { year: number; month: number }
             dayIndex: 6,
             row: row,
             column: 6,
-            calendarCellId: String(row) + String(6),
           }
           break
       }
