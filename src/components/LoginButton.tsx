@@ -27,8 +27,9 @@ export const LoginButton = () => {
         login().then((res: AuthContextValue | null) => {
           if (res) {
             console.log(`${res.displayName}님 환영합니다😊`)
-            router.push('/main')
+            localStorage.setItem('authContextValue', JSON.stringify(res))
             context!.setAuthContextValue(res)
+            router.push('/main')
           }
         })
       }}

@@ -13,11 +13,9 @@ import { DEFAULT_AUTH } from '@/constant/constant'
 import { useState } from 'react'
 
 export const AuthContextProvider = ({ children }: { children: React.ReactNode }) => {
-  const [authContextValue, setAuthContextValue] = useState<AuthContextValue | null>({
-    uid: '',
-    email: '',
-    displayName: '',
-  })
+  // * 로컬 스토리지 값 사용
+  const localStorageAuthContextValue = JSON.parse(localStorage.getItem('authContextValue')!)
+  const [authContextValue, setAuthContextValue] = useState<AuthContextValue | null>(localStorageAuthContextValue)
 
   return (
     <authContext.Provider
