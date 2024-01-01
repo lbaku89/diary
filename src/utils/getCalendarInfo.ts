@@ -44,25 +44,81 @@ export const getCalendarInfo = ({ year, month }: { year: number; month: number }
     if (indexDateMonth === firstDateMonth) {
       switch (indexDateDay) {
         case 0:
-          selectedMonthData[i] = { day: 'sunday', row: row, column: 0, calendarCellId: String(row) + String(0) }
+          selectedMonthData[i] = {
+            year: year,
+            month: month,
+            date: i,
+            day: 'sunday',
+            row: row,
+            column: 0,
+            calendarCellId: String(row) + String(0),
+          }
           break
         case 1:
-          selectedMonthData[i] = { day: 'monday', row: row, column: 1, calendarCellId: String(row) + String(1) }
+          selectedMonthData[i] = {
+            year: year,
+            month: month,
+            date: i,
+            day: 'monday',
+            row: row,
+            column: 1,
+            calendarCellId: String(row) + String(1),
+          }
           break
         case 2:
-          selectedMonthData[i] = { day: 'tuesday', row: row, column: 2, calendarCellId: String(row) + String(2) }
+          selectedMonthData[i] = {
+            year: year,
+            month: month,
+            date: i,
+            day: 'tuesday',
+            row: row,
+            column: 2,
+            calendarCellId: String(row) + String(2),
+          }
           break
         case 3:
-          selectedMonthData[i] = { day: 'wednesday', row: row, column: 3, calendarCellId: String(row) + String(3) }
+          selectedMonthData[i] = {
+            year: year,
+            month: month,
+            date: i,
+            day: 'wednesday',
+            row: row,
+            column: 3,
+            calendarCellId: String(row) + String(3),
+          }
           break
         case 4:
-          selectedMonthData[i] = { day: 'thursday', row: row, column: 4, calendarCellId: String(row) + String(4) }
+          selectedMonthData[i] = {
+            year: year,
+            month: month,
+            date: i,
+            day: 'thursday',
+            row: row,
+            column: 4,
+            calendarCellId: String(row) + String(4),
+          }
           break
         case 5:
-          selectedMonthData[i] = { day: 'friday', row: row, column: 5, calendarCellId: String(row) + String(5) }
+          selectedMonthData[i] = {
+            year: year,
+            month: month,
+            date: i,
+            day: 'friday',
+            row: row,
+            column: 5,
+            calendarCellId: String(row) + String(5),
+          }
           break
         case 6:
-          selectedMonthData[i] = { day: 'saturday', row: row, column: 6, calendarCellId: String(row) + String(6) }
+          selectedMonthData[i] = {
+            year: year,
+            month: month,
+            date: i,
+            day: 'saturday',
+            row: row,
+            column: 6,
+            calendarCellId: String(row) + String(6),
+          }
           break
       }
     }

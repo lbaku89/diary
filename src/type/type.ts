@@ -15,6 +15,9 @@ export interface CalendarInfo {
 }
 
 export interface CalendarCellInfo {
+  year: number // 년도
+  month: number // 달 0~11
+  date: number // 일
   day: string // 요일
   row: CalendarRow
   column: CalendarColumn
