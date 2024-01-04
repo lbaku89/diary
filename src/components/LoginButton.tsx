@@ -16,10 +16,10 @@ import { useContext } from 'react'
 import { AuthContextValue } from '@/type/type'
 
 // * import context
-import { authContext } from '@/context/authContext'
+import { AuthContext } from '@/context/AuthContext'
 
 export const LoginButton = () => {
-  const context = useContext(authContext)
+  const context = useContext(AuthContext)
   const router = useRouter()
   return (
     <Button

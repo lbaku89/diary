@@ -30,7 +30,7 @@ export interface CalendarCellProps {
   children?: React.ReactNode
 }
 
-export interface AuthContext {
+export interface IAuthContext {
   authContextValue: AuthContextValue | null
   setAuthContextValue: (value: AuthContextValue | null) => void
 }

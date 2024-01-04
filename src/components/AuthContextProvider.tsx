@@ -1,10 +1,10 @@
 'use client'
 
 // * import context
-import { authContext } from '@/context/authContext'
+import { AuthContext } from '@/context/AuthContext'
 
 // * import type
-import { AuthContext, AuthContextValue } from '@/type/type'
+import { IAuthContext, AuthContextValue } from '@/type/type'
 
 // * import constant
 import { DEFAULT_AUTH } from '@/constant/constant'
@@ -18,13 +18,13 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
   const [authContextValue, setAuthContextValue] = useState<AuthContextValue | null>(localStorageAuthContextValue)
 
   return (
-    <authContext.Provider
+    <AuthContext.Provider
       value={{
         authContextValue: authContextValue,
         setAuthContextValue: setAuthContextValue,
       }}
     >
       {children}
-    </authContext.Provider>
+    </AuthContext.Provider>
   )
 }
