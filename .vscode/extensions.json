@@ -11,6 +11,8 @@
     "swyphcosmo.spellchecker", // 영어 철자 검사
     "usernamehw.errorlens", // error 표시
     "esbenp.prettier-vscode",
-    "dbaeumer.vscode-eslint"
+    "dbaeumer.vscode-eslint",
+    "aaron-bond.better-comments",
+    "naumovs.color-highlight"
   ]
 }
