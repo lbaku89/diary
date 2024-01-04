@@ -10,6 +10,11 @@ export type CalendarColumn = 0 | 1 | 2 | 3 | 4 | 5 | 6
 /** 달력 UI ROW */
 export type CalendarRow = 0 | 1 | 2 | 3 | 4 | 5
 
+export type Day = 'sunday' | 'monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday'
+
+/** 한국어 요일 타입 */
+export type KoreanDay = '일요일' | '월요일' | '화요일' | '수요일' | '목요일' | '금요일' | '토요일'
+
 export interface CalendarInfo {
   [key: number]: CalendarCellInfo
 }
