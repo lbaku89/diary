@@ -26,6 +26,7 @@ export interface CalendarCellInfo {
 
 export interface CalendarCellProps {
   cellInfo?: CalendarCellInfo
+  todayInfo?: { year: number; month: number; date: number }
   children?: React.ReactNode
 }
 
