@@ -1,11 +1,11 @@
 ;`use client`
 
 // * import type
-import { AuthContextValue } from '@/type/type'
+import { AuthContextValue, Month, Date } from '@/type/type'
 
 // * import from firebase
 import { UserCredential } from 'firebase/auth'
-import { doc, setDoc } from 'firebase/firestore'
+import { doc, setDoc, addDoc, collection } from 'firebase/firestore'
 import { GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth'
 
 // * import firebase instance
@@ -20,7 +20,11 @@ export const login = async (): Promise<null | AuthContextValue> => {
   const result = await signInWithPopup(firebaseAuth, provider)
     .then((result: UserCredential) => {
       const user = result.user
-      const userInfo: AuthContextValue = { uid: user.uid, email: user.email, displayName: user.displayName }
+      const userInfo: AuthContextValue = {
+        uid: user.uid,
+        email: user.email!,
+        displayName: user.displayName!,
+      }
       return userInfo
     })
     .catch(() => {
@@ -45,5 +49,32 @@ export const addFirstVisitUser = async (authContextValue: AuthContextValue) => {
     uid: authContextValue.uid,
     email: authContextValue.email,
     getDisplayName: authContextValue.displayName,
+  })
+}
+
+/** diary 작성 내용 db에 추가 */
+export const addDiary = async ({
+  uid,
+  dateInfo: { year, month, date },
+  diary: { title, content },
+}: {
+  uid: string
+  dateInfo: {
+    year: number
+    month: number
+    date: number
+  }
+  diary: {
+    title: string
+    content: string
+  }
+}) => {
+  const convertedMonth = month < 10 ? `0${month}` : month
+  const convertedDate = date < 10 ? `0${date}` : date
+
+  // * db에 diary 추가
+  await addDoc(collection(db, `users/${uid}/${year}${convertedMonth}${convertedDate}`), {
+    title: title,
+    content: content,
   })
 }

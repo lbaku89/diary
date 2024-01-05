@@ -2,16 +2,18 @@
 
 // * import from next
 import Link from 'next/link'
+import { useSearchParams, useRouter } from 'next/navigation'
 
 // * import component
 import { Button, TextField, Typography, Box, IconButton } from '@mui/material'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 
 // * import Type
-import { Day } from '@/type/type'
+import { Day, Month } from '@/type/type'
 
-// * import from next
-import { useSearchParams } from 'next/navigation'
+// * import context
+import { AuthContext } from '@/context/AuthContext'
+import { useContext } from 'react'
 
 // * import from react
 import { useState } from 'react'
@@ -19,9 +21,9 @@ import { useState } from 'react'
 // * import utils
 import { Utils } from '@/utils/utility'
 
-// todo: 내용 validation 할건가?
-// todo: 작성 하기 누를 시 해당 내용 전송하고 '완료'alert 하고 main으로 라우팅
-// todo: 작성완료 클릭 시 제목/내용 둘다 validation 체크 확인 후 error 확인
+// * import api
+import { addDiary } from '@/api/api'
+import { error } from 'console'
 
 export default function DiaryWritePageUI() {
   const searchParams = useSearchParams()
@@ -32,6 +34,8 @@ export default function DiaryWritePageUI() {
     day: searchParams.get('day') as Day,
   }
 
+  const authContextValue = useContext(AuthContext)!.authContextValue
+  const route = useRouter()
   const [title, setTitle] = useState<string>('')
   const [content, setContent] = useState<string>('')
   const [isTitleError, setIsTitleError] = useState<boolean>(false)
@@ -77,14 +81,14 @@ export default function DiaryWritePageUI() {
           multiline
           sx={{ width: '100%', margin: '0.5rem 0' }}
         />
-        {/* 작성/취소 버튼 */}
+
         <Box sx={{ display: 'flex', justifyContent: 'end' }}>
+          {/* 작성 btn */}
           <Button
             variant="contained"
             type="submit"
             onClick={(e) => {
               e.preventDefault()
-              // [X] todo: 제목/내용 validation 체크
 
               const [isEmptyTitle, isEmptyContent] = [Utils.isEmptyText(title), Utils.isEmptyText(content)]
 
@@ -92,17 +96,31 @@ export default function DiaryWritePageUI() {
               isEmptyContent ? setIsContentError(true) : setIsContentError(false)
 
               if (!isEmptyTitle && !isEmptyContent) {
-                // todo: title이랑 content 서버로 전송,결과 alert(작성성공,실패)
-                // todo: main으로 라우팅
-                return
+                addDiary({
+                  uid: authContextValue!.uid,
+                  dateInfo: {
+                    year: Number(year),
+                    month: Number(month),
+                    date: Number(date),
+                  },
+                  diary: { title, content },
+                })
+                  .then((res) => {
+                    alert(`작성완료!`)
+                    route.push('/main')
+                  })
+                  .catch((error) => {
+                    alert(`문제가 발생하여 작성에 실패했습니다. error message:${error.message}`)
+                    console.error(error)
+                  })
               }
             }}
-            sx={{}}
           >
             작성완료
           </Button>
+          {/* 취소 btn */}
           <Link href={{ pathname: '/main' }} style={{ marginLeft: '0.5rem' }}>
-            <Button type="button" variant="outlined" onClick={() => {}}>
+            <Button type="button" variant="outlined">
               취소
             </Button>
           </Link>
