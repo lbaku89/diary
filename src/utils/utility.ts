@@ -21,4 +21,10 @@ export class Utils {
         return '토요일'
     }
   }
+
+  /** 빈 값인지 확인 */
+  static isEmptyText = (input: string | number): boolean => {
+    const Text = String(input)
+    return Text.trim() === '' ? true : false
+  }
 }
