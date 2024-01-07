@@ -82,5 +82,3 @@ export interface IAuthContext {
   authContextValue: AuthContextValue | null
   setAuthContextValue: (value: AuthContextValue | null) => void
 }
-
-export interface getDiaryListByDateProps {}
