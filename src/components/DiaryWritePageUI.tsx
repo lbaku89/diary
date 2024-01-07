@@ -9,7 +9,7 @@ import { Button, TextField, Typography, Box, IconButton } from '@mui/material'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 
 // * import Type
-import { Day, Month } from '@/type/type'
+import { Day } from '@/type/type'
 
 // * import context
 import { AuthContext } from '@/context/AuthContext'

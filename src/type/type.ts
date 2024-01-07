@@ -11,10 +11,13 @@ export type CalendarColumn = 0 | 1 | 2 | 3 | 4 | 5 | 6
 export type CalendarRow = 0 | 1 | 2 | 3 | 4 | 5
 
 /** 0 ~ 11 => 1월 ~ 12월 의미 */
-export type Month = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11
+export type MonthIndex = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11
+
+/** 1 ~ 12 월 */
+export type Month = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12
 
 /** 1 ~ 31 일  */
-export type Date =
+export type CalendarDate =
   | 1
   | 2
   | 3
@@ -61,8 +64,8 @@ export interface CalendarInfo {
 
 export interface CalendarCellInfo {
   year: number // 년도
-  month: Month // 달 0~11
-  date: Date // 일
+  monthIndex: MonthIndex // 달 0~11
+  date: CalendarDate // 일
   day: Day // 요일
   dayIndex: DayIndex //요일 인덱스 0~6
   row: CalendarRow
@@ -71,7 +74,7 @@ export interface CalendarCellInfo {
 
 export interface CalendarCellProps {
   cellInfo?: CalendarCellInfo
-  todayInfo?: { year: number; month: number; date: number }
+  todayInfo?: { year: number; monthIndex: MonthIndex; date: CalendarDate }
   children?: React.ReactNode
 }
 
@@ -79,3 +82,5 @@ export interface IAuthContext {
   authContextValue: AuthContextValue | null
   setAuthContextValue: (value: AuthContextValue | null) => void
 }
+
+export interface getDiaryListByDateProps {}

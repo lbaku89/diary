@@ -11,9 +11,14 @@ import CreateIcon from '@mui/icons-material/Create'
 // * import link
 import Link from 'next/link'
 
+// todo : 렌더링 시 해당 날짜 일기목록 get한 뒤 바 형태로 표시
+// todo : 클릭시 적혀있는 페이지로 이동 (get data by id) ->수정,삭제 가능하게
+// todo : 바에 삭제 버튼 추가하기
 export const CalendarCell = ({ cellInfo, todayInfo, children }: CalendarCellProps) => {
   let dateDecoration =
-    todayInfo?.year === cellInfo?.year && todayInfo?.month === cellInfo?.month && todayInfo?.date === cellInfo?.date
+    todayInfo?.year === cellInfo?.year &&
+    todayInfo?.monthIndex === cellInfo?.monthIndex &&
+    todayInfo?.date === cellInfo?.date
       ? {
           textDecoration: 'underline',
           textDecorationColor: 'red',
@@ -23,8 +28,6 @@ export const CalendarCell = ({ cellInfo, todayInfo, children }: CalendarCellProp
 
   let dateColor = cellInfo?.column === 0 ? '#FF4040' : cellInfo?.column === 6 ? '#3399FF' : '#000000'
 
-  // TODO [x] 쓰기 버튼 추가
-  // TODO [ ] 쓰기 버튼 클릭 시 쓰기페이지로 이동
   return (
     <Box sx={{ width: '100%' }}>
       <Box sx={{ display: 'flex' }}>
@@ -48,7 +51,7 @@ export const CalendarCell = ({ cellInfo, todayInfo, children }: CalendarCellProp
             <Link
               href={{
                 pathname: '/diary/write',
-                query: { year: cellInfo.year, month: cellInfo.month + 1, date: cellInfo.date, day: cellInfo.day }, // month 는 0 ~ 11
+                query: { year: cellInfo.year, month: cellInfo.monthIndex + 1, date: cellInfo.date, day: cellInfo.day }, // month 는 0 ~ 11
               }}
             >
               <IconButton sx={{ fontSize: '10px' }} size="small" aria-label="add-diary">
