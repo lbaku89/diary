@@ -16,7 +16,7 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
 // * import api
-import { getDiaryListByDate } from '@/api/api'
+import { getDiaryListByDate, deleteDiary } from '@/api/api'
 
 // * import context
 import { useContext } from 'react'
@@ -111,6 +111,7 @@ export const CalendarCell = ({ cellInfo, todayInfo, children }: CalendarCellProp
               month: number
               date: number
               title: string
+              diaryId: string
             },
             index: number
           ) => (
@@ -144,7 +145,26 @@ export const CalendarCell = ({ cellInfo, todayInfo, children }: CalendarCellProp
                 size="small"
                 aria-label="delete diary"
                 onClick={() => {
+                  // todo: 삭제 확인 창 띄우기
                   // todo: 해당 diary 삭제하기
+                  if (confirm('정말 삭제하시겠습니까?')) {
+                    deleteDiary({
+                      uid: uid!,
+                      diaryId: diary.diaryId,
+                      dateInfo: { year: diary.year, month: diary.month, date: diary.date },
+                    }).then(() => {
+                      getDiaryListByDate({
+                        uid: uid!,
+                        dateInfo: {
+                          year: cellInfo!.year,
+                          month: cellInfo!.monthIndex + 1,
+                          date: cellInfo!.date,
+                        },
+                      }).then((res) => {
+                        setDiaryList(res)
+                      })
+                    })
+                  }
                 }}
               >
                 <DeleteIcon sx={{ fontSize: '1rem' }} />

@@ -5,7 +5,7 @@ import { AuthContextValue } from '@/type/type'
 
 // * import from firebase
 import { UserCredential } from 'firebase/auth'
-import { doc, setDoc, addDoc, collection, getDocs } from 'firebase/firestore'
+import { doc, setDoc, addDoc, collection, getDocs, deleteDoc } from 'firebase/firestore'
 import { GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth'
 
 // * import firebase instance
@@ -123,4 +123,24 @@ export const getDiaryListByDate = async ({
   })
 
   return diaryList
+}
+
+/** diary 삭제 */
+export const deleteDiary = async ({
+  uid,
+  diaryId,
+  dateInfo,
+}: {
+  uid: string
+  diaryId: string
+  dateInfo: {
+    year: number //
+    month: number // 1 ~ 12
+    date: number // 1 ~ 29 or 30 or 31
+  }
+}) => {
+  // * 한자리 숫자는 앞에 0 붙여주기
+  const convertedMonth = dateInfo.month < 10 ? `0${dateInfo.month}` : dateInfo.month
+  const convertedDate = dateInfo.date < 10 ? `0${dateInfo.date}` : dateInfo.date
+  await deleteDoc(doc(db, `users/${uid}/${dateInfo.year}${convertedMonth}${convertedDate}`, diaryId))
 }
