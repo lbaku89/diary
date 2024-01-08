@@ -5,12 +5,15 @@ import { AuthContextValue } from '@/type/type'
 
 // * import from firebase
 import { UserCredential } from 'firebase/auth'
-import { doc, setDoc, addDoc, collection, getDocs, deleteDoc } from 'firebase/firestore'
+import { doc, setDoc, addDoc, collection, getDocs, deleteDoc, getDoc } from 'firebase/firestore'
 import { GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth'
 
 // * import firebase instance
 import { db } from '@/firebase/firebaseClient'
 import { firebaseAuth } from '@/firebase/firebaseClient'
+
+// * import utils
+import { Utils } from '@/utils/utility'
 
 export const login = async (): Promise<null | AuthContextValue> => {
   const provider = new GoogleAuthProvider()
@@ -143,4 +146,42 @@ export const deleteDiary = async ({
   const convertedMonth = dateInfo.month < 10 ? `0${dateInfo.month}` : dateInfo.month
   const convertedDate = dateInfo.date < 10 ? `0${dateInfo.date}` : dateInfo.date
   await deleteDoc(doc(db, `users/${uid}/${dateInfo.year}${convertedMonth}${convertedDate}`, diaryId))
+}
+
+/** 단일 diary 정보 가져오기 */
+export const getDiary = async (
+  uid: string,
+  diaryInfo: {
+    year: number
+    month: number
+    date: number
+    diaryId: string
+  }
+) => {
+  const yyyymmdd = Utils.getYYYYMMDD(diaryInfo.year, diaryInfo.month, diaryInfo.date)
+  // * 해당 날짜의 collection 문서 가져오기
+  const docRef = doc(db, `users/${uid}/${yyyymmdd}`, `${diaryInfo.diaryId}`)
+  const querySnapshot = await getDoc(docRef)
+  return querySnapshot.data()
+}
+
+/** diary 수정 */
+export const modifyDiary = async (
+  uid: string,
+  diaryInfo: {
+    year: number
+    month: number
+    date: number
+    diaryId: string
+    title: string
+    content: string
+  }
+) => {
+  const yyyymmdd = Utils.getYYYYMMDD(diaryInfo.year, diaryInfo.month, diaryInfo.date)
+
+  // * db에 diary 수정
+  await setDoc(doc(db, `users/${uid}/${yyyymmdd}`, diaryInfo.diaryId), {
+    title: diaryInfo.title,
+    content: diaryInfo.content,
+  })
 }
