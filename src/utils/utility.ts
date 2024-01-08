@@ -27,4 +27,12 @@ export class Utils {
     const Text = String(input)
     return Text.trim() === '' ? true : false
   }
+
+  /** YYYYMMDD 문자열로 return */
+  static getYYYYMMDD = (year: number, month: number, date: number): string => {
+    const convertedMonth = month < 10 ? `0${month}` : String(month)
+    const convertedDate = date < 10 ? `0${date}` : String(date)
+
+    return `${year}${convertedMonth}${convertedDate}`
+  }
 }
