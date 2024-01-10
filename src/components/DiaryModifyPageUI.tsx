@@ -59,8 +59,6 @@ export const DiaryModifyPageUI = () => {
       })
   }, [authContextValue, year, month, date, diaryId])
 
-  // todo: 제목, 내용 칸, 수정 버튼만 csc
-
   return (
     <>
       <Box sx={{ padding: '2rem 0' }}>
@@ -105,7 +103,10 @@ export const DiaryModifyPageUI = () => {
               variant="contained"
               type="submit"
               onClick={(e) => {
-                if (isModifyMode) {
+                e.preventDefault()
+                const target = e.target as HTMLButtonElement
+                const mode = target.textContent
+                if (mode === '수정완료') {
                   // * 유효성 검사
                   const [isEmptyTitle, isEmptyContent] = [Utils.isEmptyText(title), Utils.isEmptyText(content)]
                   isEmptyTitle ? setIsTitleError(true) : setIsTitleError(false)
@@ -122,13 +123,13 @@ export const DiaryModifyPageUI = () => {
                     })
                       .then(() => {
                         alert('수정되었습니다.')
+                        setIsModifyMode(false)
                       })
                       .catch((err) => {
                         alert('요청중 오류가 발생 됐습니다.')
                         console.log(err)
                       })
                     // * 성공 실패 상관 없이 수정모드 해제
-                    setIsModifyMode(false)
                   }
                 } else {
                   // * 수정모드로 변경
