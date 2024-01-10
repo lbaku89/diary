@@ -116,6 +116,7 @@ export const CalendarCell = ({ cellInfo, todayInfo, children }: CalendarCellProp
             index: number
           ) => (
             <Box key={index} sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              {/* 제목만 */}
               <Typography
                 variant="body2"
                 sx={{
@@ -124,20 +125,34 @@ export const CalendarCell = ({ cellInfo, todayInfo, children }: CalendarCellProp
                   whiteSpace: 'nowrap',
                 }}
               >
-                <Box
-                  component={'span'}
-                  sx={{
-                    '@media(min-width:600.1px)': {
-                      display: 'inline',
-                    },
-                    '@media(max-width:600px)': {
-                      display: 'none',
+                <Link
+                  href={{
+                    pathname: `/diary/modify`,
+                    query: {
+                      diaryId: diary.diaryId,
+                      year: diary.year,
+                      month: diary.month,
+                      date: diary.date,
+                      day: cellInfo?.day,
                     },
                   }}
+                  style={{ textDecoration: 'none', color: 'unset' }}
                 >
-                  ✍️
-                </Box>
-                {diary.title}
+                  <Box
+                    component={'span'}
+                    sx={{
+                      '@media(min-width:600.1px)': {
+                        display: 'inline',
+                      },
+                      '@media(max-width:600px)': {
+                        display: 'none',
+                      },
+                    }}
+                  >
+                    ✍️
+                  </Box>
+                  {diary.title}
+                </Link>
               </Typography>
 
               {/* 삭제버튼 */}
@@ -145,8 +160,6 @@ export const CalendarCell = ({ cellInfo, todayInfo, children }: CalendarCellProp
                 size="small"
                 aria-label="delete diary"
                 onClick={() => {
-                  // todo: 삭제 확인 창 띄우기
-                  // todo: 해당 diary 삭제하기
                   if (confirm('정말 삭제하시겠습니까?')) {
                     deleteDiary({
                       uid: uid!,

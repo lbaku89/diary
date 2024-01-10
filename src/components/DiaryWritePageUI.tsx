@@ -7,6 +7,7 @@ import { useSearchParams, useRouter } from 'next/navigation'
 // * import component
 import { Button, TextField, Typography, Box, IconButton } from '@mui/material'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
+import { BackBtn } from './BackBtn'
 
 // * import Type
 import { Day } from '@/type/type'
@@ -43,12 +44,8 @@ export default function DiaryWritePageUI() {
 
   return (
     <Box sx={{ padding: '2rem 0' }}>
-      {/* 뒤로가기 */}
-      <Link href={{ pathname: '/main' }}>
-        <IconButton>
-          <ArrowBackIcon />
-        </IconButton>
-      </Link>
+      {/* 뒤로가기 btn*/}
+      <BackBtn pathName="/main"></BackBtn>
       {/* 날짜 */}
       <Typography variant="h5" sx={{ textAlign: 'center' }}>
         {year}.{month}.{date} {Utils.convertDayToKorean(day)}
@@ -61,7 +58,7 @@ export default function DiaryWritePageUI() {
             setTitle(e.target.value)
           }}
           error={isTitleError}
-          // type="text"
+          type="text"
           helperText={isTitleError ? '제목을 입력하세요' : ''}
           label="제목"
           sx={{ width: '100%', margin: '0.5rem 0' }}
@@ -74,10 +71,9 @@ export default function DiaryWritePageUI() {
           }}
           error={isContentError}
           helperText={isContentError ? '내용을 입력하세요' : ''}
-          // type="text"
+          type="text"
           label="내용"
           minRows={12}
-          // rows={20}
           multiline
           sx={{ width: '100%', margin: '0.5rem 0' }}
         />
