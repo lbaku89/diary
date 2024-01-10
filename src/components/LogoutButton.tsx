@@ -5,10 +5,10 @@ import { logout } from '@/api/api'
 import { useContext } from 'react'
 
 // * import context
-import { authContext } from '@/context/authContext'
+import { AuthContext } from '@/context/AuthContext'
 
 export default function LogoutButton() {
-  const auth = useContext(authContext)
+  const auth = useContext(AuthContext)
   const router = useRouter()
   return (
     <>

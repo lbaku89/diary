@@ -4,7 +4,7 @@
 import { Button } from '@mui/material'
 
 // * import api
-import { login } from '@/api/api'
+import { login, addFirstVisitUser } from '@/api/api'
 
 // * import routing
 import { useRouter } from 'next/navigation'
@@ -16,10 +16,10 @@ import { useContext } from 'react'
 import { AuthContextValue } from '@/type/type'
 
 // * import context
-import { authContext } from '@/context/authContext'
+import { AuthContext } from '@/context/AuthContext'
 
 export const LoginButton = () => {
-  const context = useContext(authContext)
+  const context = useContext(AuthContext)
   const router = useRouter()
   return (
     <Button
@@ -29,6 +29,7 @@ export const LoginButton = () => {
             console.log(`${res.displayName}님 환영합니다😊`)
             localStorage.setItem('authContextValue', JSON.stringify(res))
             context!.setAuthContextValue(res)
+            addFirstVisitUser(res)
             router.push('/main')
           }
         })

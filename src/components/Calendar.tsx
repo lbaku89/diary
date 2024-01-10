@@ -11,7 +11,7 @@ import { CalendarCell } from '@/components/CalendarCell'
 // import IconButton from '@mui/material/IconButton';
 
 // ** import type
-import { CalendarCellInfo } from '@/type/type'
+import { CalendarCellInfo, MonthIndex } from '@/type/type'
 
 // * import icon
 import ArrowBackIosNewSharpIcon from '@mui/icons-material/ArrowBackIosNewSharp'
@@ -20,12 +20,12 @@ import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp'
 export default function Calendar() {
   const todayInfo = getTodayInfo()
 
-  const [selected, setSelected] = useState({
+  const [selected, setSelected] = useState<{ year: number; monthIndex: MonthIndex }>({
     year: todayInfo.year,
-    month: todayInfo.month,
+    monthIndex: todayInfo.monthIndex,
   })
 
-  const calendarInfo = getCalendarInfo({ year: selected.year, month: selected.month })
+  const calendarInfo = getCalendarInfo({ year: selected.year, monthIndex: selected.monthIndex })
 
   const calendarInfoArray: CalendarCellInfo[] = Object.values(calendarInfo)
   const dummyCellCount: number = calendarInfoArray[0].dayIndex
@@ -43,7 +43,7 @@ export default function Calendar() {
           size="small"
           variant="contained"
           onClick={() => {
-            setSelected({ year: todayInfo.year, month: todayInfo.month })
+            setSelected({ year: todayInfo.year, monthIndex: todayInfo.monthIndex })
           }}
         >
           today
@@ -54,10 +54,10 @@ export default function Calendar() {
           size="small"
           sx={{}}
           onClick={() => {
-            if (selected.month === 0) {
-              setSelected({ year: selected.year - 1, month: 11 })
+            if (selected.monthIndex === 0) {
+              setSelected({ year: selected.year - 1, monthIndex: 11 })
             } else {
-              setSelected({ ...selected, month: selected.month - 1 })
+              setSelected({ ...selected, monthIndex: (selected.monthIndex - 1) as MonthIndex })
             }
           }}
         >
@@ -68,10 +68,10 @@ export default function Calendar() {
           size="small"
           sx={{}}
           onClick={() => {
-            if (selected.month === 11) {
-              setSelected({ year: selected.year + 1, month: 0 })
+            if (selected.monthIndex === 11) {
+              setSelected({ year: selected.year + 1, monthIndex: 0 })
             } else {
-              setSelected({ ...selected, month: selected.month + 1 })
+              setSelected({ ...selected, monthIndex: (selected.monthIndex + 1) as MonthIndex })
             }
           }}
         >
@@ -79,7 +79,7 @@ export default function Calendar() {
         </IconButton>
         {/* 선택된 달력 */}
         <Typography>
-          {selected.year}.{selected.month + 1}
+          {selected.year}.{selected.monthIndex + 1}
         </Typography>
       </Box>
 
