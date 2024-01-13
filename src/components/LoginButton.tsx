@@ -18,6 +18,9 @@ import { AuthContextValue } from '@/type/type'
 // * import context
 import { AuthContext } from '@/context/AuthContext'
 
+// * import
+import Image from 'next/image'
+
 export const LoginButton = () => {
   const context = useContext(AuthContext)
   const router = useRouter()
@@ -36,10 +39,23 @@ export const LoginButton = () => {
       }}
       color="primary"
       variant="contained"
-      size="medium"
-      sx={{ boxSizing: 'border-box', width: '100%' }}
+      size="large"
+      sx={{
+        boxSizing: 'border-box',
+        width: '100%',
+        backgroundColor: '#fff',
+        color: 'black',
+        ':hover': { backgroundColor: '#fff' },
+      }}
     >
-      log in
+      <Image
+        alt="google_icon"
+        src={'/images/google_icon.png'}
+        width={20}
+        height={20}
+        style={{ marginRight: '0.4rem' }}
+      ></Image>
+      구글 계정으로 로그인
     </Button>
   )
 }
