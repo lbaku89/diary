@@ -22,9 +22,12 @@ import { getDiaryListByDate, deleteDiary } from '@/api/api'
 import { useContext } from 'react'
 import { AuthContext } from '@/context/AuthContext'
 
-// todo : 렌더링 시 해당 날짜 일기목록 get한 뒤 바 형태로 표시
-// todo : 클릭시 적혀있는 페이지로 이동 (get data by id) ->수정,삭제 가능하게
-// todo : 바에 삭제 버튼 추가하기
+// todo : 모바일 대응 방법 구색 -> 스크롤바 너비 줄이기, 삭제버튼 위치 크기 조정? 모바일에 다 안보임 제목을 어떻게 할까 ..
+// todo : 삭제 버튼 모바일에서는 없애기, 그리고 수정 란에서도 삭제할 수 있게 하기
+// todo : loading bar
+// todo : api error -> error page redirect
+// todo : 로그인 정보 있으면 알아서 main page 진입
+// todo : 컴포넌트 라우팅 구조로 잡기
 export const CalendarCell = ({ cellInfo, todayInfo, children }: CalendarCellProps) => {
   const uid = useContext(AuthContext)!.authContextValue?.uid
 
@@ -96,10 +99,13 @@ export const CalendarCell = ({ cellInfo, todayInfo, children }: CalendarCellProp
           overflowY: 'auto',
           textOverflow: 'ellipsis',
           '@media(min-width:600.1px)': {
-            height: '100px',
+            height: '120px',
           },
           '@media(max-width:600px)': {
-            height: '50px',
+            height: '69px',
+          },
+          '::-webkit-scrollbar': {
+            width: '0',
           },
         }}
       >
@@ -159,6 +165,11 @@ export const CalendarCell = ({ cellInfo, todayInfo, children }: CalendarCellProp
               <IconButton
                 size="small"
                 aria-label="delete diary"
+                sx={{
+                  '@media(max-width:600px)': {
+                    display: 'none !important',
+                  },
+                }}
                 onClick={() => {
                   if (confirm('정말 삭제하시겠습니까?')) {
                     deleteDiary({
