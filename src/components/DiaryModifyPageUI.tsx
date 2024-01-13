@@ -25,6 +25,9 @@ import { Utils } from '@/utils/utility'
 // * import type
 import { Day } from '@/type/type'
 
+// * import
+import { useRouter } from 'next/navigation'
+
 export const DiaryModifyPageUI = () => {
   // * url params 받아오기
   const searchParams = useSearchParams()
@@ -35,6 +38,9 @@ export const DiaryModifyPageUI = () => {
     diaryId: searchParams.get('diaryId'),
     day: searchParams.get('day'),
   }
+
+  // * router
+  const router = useRouter()
 
   // * state
   const [title, setTitle] = useState<string>('')
@@ -123,7 +129,7 @@ export const DiaryModifyPageUI = () => {
                     })
                       .then(() => {
                         alert('수정되었습니다.')
-                        setIsModifyMode(false)
+                        router.push('/main')
                       })
                       .catch((err) => {
                         alert('요청중 오류가 발생 됐습니다.')
