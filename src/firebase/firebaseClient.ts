@@ -10,7 +10,7 @@ import { initializeApp } from 'firebase/app'
 import { getFirestore, collection, getDocs, addDoc } from 'firebase/firestore'
 
 // firebase auth 관련
-import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth'
+import { getAuth, signInWithPopup, GoogleAuthProvider, setPersistence, browserSessionPersistence } from 'firebase/auth'
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -29,6 +29,8 @@ export const app = initializeApp(firebaseConfig)
 
 // Initialize Authentication
 export const firebaseAuth = getAuth(app)
+// * session 끝날 때까지 유지
+setPersistence(firebaseAuth, browserSessionPersistence)
 
 // To apply the default browser preference instead of explicitly setting it.
 firebaseAuth.useDeviceLanguage()
