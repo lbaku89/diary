@@ -1,16 +1,13 @@
-import firebase from 'firebase/compat/app'
+// * import firebase
 // Required for side-effects
 import 'firebase/firestore'
-
-// Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app'
 
-// TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
-import { getFirestore, collection, getDocs, addDoc } from 'firebase/firestore'
+import { getFirestore } from 'firebase/firestore'
 
-// firebase auth 관련
-import { getAuth, signInWithPopup, GoogleAuthProvider, setPersistence, browserSessionPersistence } from 'firebase/auth'
+// * import firebase auth 관련
+import { getAuth, setPersistence, browserLocalPersistence } from 'firebase/auth'
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -29,47 +26,12 @@ export const app = initializeApp(firebaseConfig)
 
 // Initialize Authentication
 export const firebaseAuth = getAuth(app)
-// * session 끝날 때까지 유지
-setPersistence(firebaseAuth, browserSessionPersistence)
+
+// * 명시적으로 로그아웃 하지 않은 이상 로그인 상태 유지
+setPersistence(firebaseAuth, browserLocalPersistence)
 
 // To apply the default browser preference instead of explicitly setting it.
 firebaseAuth.useDeviceLanguage()
 
 // Initialize Cloud Firestore through Firebase
 export const db = getFirestore(app)
-
-// Initialize Cloud Firestore and get a reference to the service
-// export const addDoc1 = async () => {
-//   try {
-//     const docRef = await addDoc(collection(db, 'users'), {
-//       first: '현우',
-//       last: '권',
-//       born: 1815,
-//     })
-//     console.log('Document written with ID: ', docRef.id)
-//   } catch (e) {
-//     console.error('Error adding document: ', e)
-//   }
-// }
-
-// export const addDco2 = async () => {
-//   try {
-//     const docRef = await addDoc(collection(db, 'users'), {
-//       first: '나영',
-//       middle: '오리',
-//       last: '김',
-//       born: 1912,
-//     })
-
-//     console.log('Document written with ID: ', docRef.id)
-//   } catch (e) {
-//     console.error('Error adding document: ', e)
-//   }
-// }
-
-// export const readDocs = async () => {
-//   const querySnapshot = await getDocs(collection(db, 'users'))
-//   querySnapshot.forEach((doc) => {
-//     console.log(`${doc.id} => ${JSON.stringify(doc.data())}`)
-//   })
-// }
