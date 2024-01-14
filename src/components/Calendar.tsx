@@ -8,7 +8,6 @@ import { getTodayInfo, getCalendarInfo } from '@/utils/getCalendarInfo'
 // * import component
 import { Box, Typography, Grid, IconButton, Button } from '@mui/material'
 import { CalendarCell } from '@/components/CalendarCell'
-// import IconButton from '@mui/material/IconButton';
 
 // ** import type
 import { CalendarCellInfo, MonthIndex } from '@/type/type'
@@ -17,8 +16,13 @@ import { CalendarCellInfo, MonthIndex } from '@/type/type'
 import ArrowBackIosNewSharpIcon from '@mui/icons-material/ArrowBackIosNewSharp'
 import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp'
 
+// * import context
+import { AuthContext } from '@/context/AuthContext'
+
 export default function Calendar() {
   const todayInfo = getTodayInfo()
+
+  const authContextValue = useContext(AuthContext)!.authContextValue
 
   const [selected, setSelected] = useState<{ year: number; monthIndex: MonthIndex }>({
     year: todayInfo.year,
@@ -38,6 +42,9 @@ export default function Calendar() {
 
   return (
     <>
+      <Typography variant="h6" sx={{ marginBottom: '0.5rem' }}>
+        {authContextValue?.displayName}님의 다이어리
+      </Typography>
       <Box sx={{ display: 'flex', alignItems: 'end', marginBottom: '2rem' }}>
         <Button
           size="small"
@@ -79,7 +86,7 @@ export default function Calendar() {
         </IconButton>
         {/* 선택된 달력 */}
         <Typography>
-          {selected.year}.{selected.monthIndex + 1}
+          {selected.year}년 {selected.monthIndex + 1}월
         </Typography>
       </Box>
 

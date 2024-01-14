@@ -1,7 +1,7 @@
 'use client'
 
 // * import from next
-import { useSearchParams } from 'next/navigation'
+import { useSearchParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
 
 // * import context
@@ -11,7 +11,7 @@ import { AuthContext } from '@/context/AuthContext'
 import { useContext, useEffect, useState } from 'react'
 
 // * import api
-import { getDiary, modifyDiary } from '@/api/api'
+import { getDiary, modifyDiary, deleteDiary } from '@/api/api'
 
 // * import component
 import { BackBtn } from './BackBtn'
@@ -35,6 +35,9 @@ export const DiaryModifyPageUI = () => {
     diaryId: searchParams.get('diaryId'),
     day: searchParams.get('day'),
   }
+
+  // * router
+  const router = useRouter()
 
   // * state
   const [title, setTitle] = useState<string>('')
@@ -123,7 +126,7 @@ export const DiaryModifyPageUI = () => {
                     })
                       .then(() => {
                         alert('수정되었습니다.')
-                        setIsModifyMode(false)
+                        router.push('/main')
                       })
                       .catch((err) => {
                         alert('요청중 오류가 발생 됐습니다.')
@@ -138,6 +141,31 @@ export const DiaryModifyPageUI = () => {
               }}
             >
               {isModifyMode ? '수정완료' : '수정하기'}
+            </Button>
+            {/* 삭제 */}
+            <Button
+              variant="contained"
+              color="info"
+              sx={{ marginLeft: '0.5rem' }}
+              onClick={() => {
+                if (confirm('정말 삭제하시겠습니까?')) {
+                  deleteDiary({
+                    uid: authContextValue!.uid,
+                    diaryId: diaryId!,
+                    dateInfo: { year: Number(year), month: Number(month), date: Number(date) },
+                  })
+                    .then(() => {
+                      alert('삭제되었습니다.')
+                      router.push('/main')
+                    })
+                    .catch((err) => {
+                      alert('삭제중 오류가 발생했습니다.')
+                      console.error(err)
+                    })
+                }
+              }}
+            >
+              삭제하기
             </Button>
             {/* 취소 btn */}
             <Link href={{ pathname: '/main' }} style={{ marginLeft: '0.5rem' }}>
