@@ -4,19 +4,38 @@
 import { AuthContext } from '@/context/AuthContext'
 
 // * import type
-import { IAuthContext, AuthContextValue } from '@/type/type'
-
-// * import constant
-import { DEFAULT_AUTH } from '@/constant/constant'
+import { AuthContextValue } from '@/type/type'
 
 // * import hook
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+
+// * import
+import { onAuthStateChanged } from 'firebase/auth'
+
+// * firebase
+import { firebaseAuth } from '@/firebase/firebaseClient'
+import { User } from 'firebase/auth'
 
 export const AuthContextProvider = ({ children }: { children: React.ReactNode }) => {
-  // * 로컬 스토리지 값 사용
-  const localStorageAuthContextValue = JSON.parse(localStorage.getItem('authContextValue')!)
-  const [authContextValue, setAuthContextValue] = useState<AuthContextValue | null>(localStorageAuthContextValue)
+  const [authContextValue, setAuthContextValue] = useState<AuthContextValue | null>(null)
 
+  useEffect(() => {
+    // Adds an observer for changes to the user's sign-in state.
+    onAuthStateChanged(firebaseAuth, (user: User | null) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/auth.user
+        setAuthContextValue!({
+          uid: user!.uid,
+          email: user!.email!,
+          displayName: user!.displayName!,
+        })
+      } else {
+        // User is signed out
+        setAuthContextValue!(null)
+      }
+    })
+  }, [])
   return (
     <AuthContext.Provider
       value={{

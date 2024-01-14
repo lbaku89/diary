@@ -17,8 +17,6 @@ export default function LogoutButton() {
         onClick={() => {
           logout()
             .then(() => {
-              localStorage.setItem('authContextValue', JSON.stringify(null))
-              auth!.setAuthContextValue(null)
               router.push('/')
             })
             .catch(() => {})
