@@ -18,8 +18,11 @@ import { AuthContextValue } from '@/type/type'
 // * import context
 import { AuthContext } from '@/context/AuthContext'
 
-// * import
+// * import from next
 import Image from 'next/image'
+
+// * import utils
+import { Utils } from '@/utils/utility'
 
 export const LoginButton = () => {
   const context = useContext(AuthContext)
@@ -30,6 +33,11 @@ export const LoginButton = () => {
         login().then((res: AuthContextValue | null) => {
           if (res) {
             console.log(`${res.displayName}님 환영합니다😊`)
+            Utils.setCookie({
+              cookieName: 'isLoggedIn',
+              cookieValue: 'true',
+              validDays: 100,
+            })
             addFirstVisitUser(res)
             router.push('/main')
           }

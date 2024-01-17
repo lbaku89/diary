@@ -7,6 +7,9 @@ import { useContext } from 'react'
 // * import context
 import { AuthContext } from '@/context/AuthContext'
 
+// * import utils
+import { Utils } from '@/utils/utility'
+
 export default function LogoutButton() {
   const auth = useContext(AuthContext)
   const router = useRouter()
@@ -17,6 +20,7 @@ export default function LogoutButton() {
         onClick={() => {
           logout()
             .then(() => {
+              Utils.deleteCookie({ cookieName: 'isLoggedIn' })
               router.push('/')
             })
             .catch(() => {})
