@@ -1,5 +1,5 @@
 // * import type
-import { CalendarInfo, CalendarCellInfo, CalendarRow, MonthIndex, CalendarDate } from '@/type/type'
+import { CalendarInfo, CalendarCellInfo, CalendarRow, MonthIndex, CalendarDate } from '@/shared/types/type'
 
 /**
  * 오늘 날짜 정보를 반환한다.

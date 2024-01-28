@@ -1,6 +1,6 @@
 import { Box } from '@mui/material'
-import LogoutButton from '@/components/LogoutButton'
-import Calendar from '@/components/Calendar'
+import LogoutButton from '@/shared/components/LogoutButton'
+import Calendar from './_component/Calendar'
 
 export default function MainPage() {
   return (

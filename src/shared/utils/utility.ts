@@ -1,5 +1,5 @@
 // * import type
-import { Day, KoreanDay } from '@/type/type'
+import { Day, KoreanDay } from '@/shared/types/type'
 
 export class Utils {
   /** 영어 요일을 한국말 요일로 변경  */

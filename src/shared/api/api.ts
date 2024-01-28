@@ -1,7 +1,7 @@
 ;`use client`
 
 // * import type
-import { AuthContextValue } from '@/type/type'
+import { AuthContextValue } from '@/shared/types/type'
 
 // * import from firebase
 import { UserCredential } from 'firebase/auth'
@@ -9,11 +9,11 @@ import { doc, setDoc, addDoc, collection, getDocs, deleteDoc, getDoc } from 'fir
 import { GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth'
 
 // * import firebase instance
-import { db } from '@/firebase/firebaseClient'
-import { firebaseAuth } from '@/firebase/firebaseClient'
+import { db } from '@/shared/firebase/firebaseClient'
+import { firebaseAuth } from '@/shared/firebase/firebaseClient'
 
 // * import utils
-import { Utils } from '@/utils/utility'
+import { Utils } from '@/shared/utils/utility'
 
 export const login = async (): Promise<null | AuthContextValue> => {
   const provider = new GoogleAuthProvider()

@@ -1,10 +1,10 @@
 'use client'
 
 // * import context
-import { AuthContext } from '@/context/AuthContext'
+import { AuthContext } from '@/shared/context/AuthContext'
 
 // * import type
-import { AuthContextValue } from '@/type/type'
+import { AuthContextValue } from '@/shared/types/type'
 
 // * import hook
 import { useEffect, useState } from 'react'
@@ -13,7 +13,7 @@ import { useEffect, useState } from 'react'
 import { onAuthStateChanged } from 'firebase/auth'
 
 // * firebase
-import { firebaseAuth } from '@/firebase/firebaseClient'
+import { firebaseAuth } from '@/shared/firebase/firebaseClient'
 import { User } from 'firebase/auth'
 
 export const AuthContextProvider = ({ children }: { children: React.ReactNode }) => {

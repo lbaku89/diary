@@ -1,14 +1,14 @@
 'use client'
 import { Button } from '@mui/material'
 import { useRouter } from 'next/navigation'
-import { logout } from '@/api/api'
+import { logout } from '@/shared/api/api'
 import { useContext } from 'react'
 
 // * import context
-import { AuthContext } from '@/context/AuthContext'
+import { AuthContext } from '@/shared/context/AuthContext'
 
 // * import utils
-import { Utils } from '@/utils/utility'
+import { Utils } from '@/shared/utils/utility'
 
 export default function LogoutButton() {
   const auth = useContext(AuthContext)

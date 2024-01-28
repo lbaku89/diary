@@ -3,21 +3,21 @@
 import { useContext, useEffect, useRef, useState } from 'react'
 
 // * import util
-import { getTodayInfo, getCalendarInfo } from '@/utils/getCalendarInfo'
+import { getTodayInfo, getCalendarInfo } from '@/shared/utils/getCalendarInfo'
 
 // * import component
 import { Box, Typography, Grid, IconButton, Button } from '@mui/material'
-import { CalendarCell } from '@/components/CalendarCell'
+import { CalendarCell } from './CalendarCell'
 
 // ** import type
-import { CalendarCellInfo, MonthIndex } from '@/type/type'
+import { CalendarCellInfo, MonthIndex } from '@/shared/types/type'
 
 // * import icon
 import ArrowBackIosNewSharpIcon from '@mui/icons-material/ArrowBackIosNewSharp'
 import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp'
 
 // * import context
-import { AuthContext } from '@/context/AuthContext'
+import { AuthContext } from '@/shared/context/AuthContext'
 
 export default function Calendar() {
   const todayInfo = getTodayInfo()

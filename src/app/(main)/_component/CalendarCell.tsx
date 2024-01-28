@@ -1,6 +1,6 @@
 'use client'
 // * import type
-import { CalendarCellProps } from '@/type/type'
+import { CalendarCellProps } from '@/shared/types/type'
 
 // * import component
 import { Box, Typography, Button, IconButton } from '@mui/material'
@@ -16,18 +16,18 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
 // * import api
-import { getDiaryListByDate, deleteDiary } from '@/api/api'
+import { getDiaryListByDate, deleteDiary } from '@/shared/api/api'
 
 // * import context
 import { useContext } from 'react'
-import { AuthContext } from '@/context/AuthContext'
+import { AuthContext } from '@/shared/context/AuthContext'
 
-// todo : 모바일 대응 방법 구색 -> 스크롤바 너비 줄이기, 삭제버튼 위치 크기 조정? 모바일에 다 안보임 제목을 어떻게 할까 ..
-// todo : 삭제 버튼 모바일에서는 없애기, 그리고 수정 란에서도 삭제할 수 있게 하기
+// todo : 폴더 구조
 // todo : loading bar
+// todo : component 폴더 구조 변경
 // todo : api error -> error page redirect
-// todo : 로그인 정보 있으면 알아서 main page 진입
-// todo : 컴포넌트 라우팅 구조로 잡기
+// todo : 로그인 페이지 -> domain/login  , domain/main , domain/diary/write , domain/diary/modify
+// todo : loading fallback suspense 처리
 export const CalendarCell = ({ cellInfo, todayInfo, children }: CalendarCellProps) => {
   const uid = useContext(AuthContext)!.authContextValue?.uid
 
@@ -83,7 +83,7 @@ export const CalendarCell = ({ cellInfo, todayInfo, children }: CalendarCellProp
             </Typography>
             <Link
               href={{
-                pathname: '/diary/write',
+                pathname: '/writeDiary',
                 query: { year: cellInfo.year, month: cellInfo.monthIndex + 1, date: cellInfo.date, day: cellInfo.day }, // month 는 0 ~ 11
               }}
             >
@@ -133,7 +133,7 @@ export const CalendarCell = ({ cellInfo, todayInfo, children }: CalendarCellProp
               >
                 <Link
                   href={{
-                    pathname: `/diary/modify`,
+                    pathname: `/modifyDiary`,
                     query: {
                       diaryId: diary.diaryId,
                       year: diary.year,

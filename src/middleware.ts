@@ -13,14 +13,14 @@ export function middleware(request: NextRequest) {
   // todo : 로딩 표기 추가 ( 여기서 아니고 다른데스, context로 다룰까 ..? )
 
   // * 로그인 여부에 따른 페이지 리다이렉션 처리
-  if (requestPathname === '/' && isLoggedIn) {
-    return NextResponse.redirect(new URL('/main', request.url))
-  } else if (requestPathname !== '/' && !isLoggedIn) {
+  if (requestPathname === '/login' && isLoggedIn) {
     return NextResponse.redirect(new URL('/', request.url))
+  } else if (requestPathname !== '/login' && !isLoggedIn) {
+    return NextResponse.redirect(new URL('/login', request.url))
   }
 }
 
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: ['/', '/main/:path*', '/diary/:path*'],
+  matcher: ['/', '/login', '/modifyDiary:path*', '/writeDiary:path*'],
 }

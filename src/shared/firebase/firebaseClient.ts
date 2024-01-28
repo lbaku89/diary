@@ -1,5 +1,6 @@
 // * import firebase
 // Required for side-effects
+
 import 'firebase/firestore'
 import { initializeApp } from 'firebase/app'
 

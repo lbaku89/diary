@@ -7,23 +7,23 @@ import { useSearchParams, useRouter } from 'next/navigation'
 // * import component
 import { Button, TextField, Typography, Box, IconButton } from '@mui/material'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
-import { BackBtn } from './BackBtn'
+import { BackBtn } from '../../../../shared/components/BackBtn'
 
 // * import Type
-import { Day } from '@/type/type'
+import { Day } from '@/shared/types/type'
 
 // * import context
-import { AuthContext } from '@/context/AuthContext'
+import { AuthContext } from '@/shared/context/AuthContext'
 import { useContext } from 'react'
 
 // * import from react
 import { useState } from 'react'
 
 // * import utils
-import { Utils } from '@/utils/utility'
+import { Utils } from '@/shared/utils/utility'
 
 // * import api
-import { addDiary } from '@/api/api'
+import { addDiary } from '@/shared/api/api'
 import { error } from 'console'
 
 export default function DiaryWritePageUI() {
@@ -45,7 +45,7 @@ export default function DiaryWritePageUI() {
   return (
     <Box sx={{ padding: '2rem 0' }}>
       {/* 뒤로가기 btn*/}
-      <BackBtn pathName="/main"></BackBtn>
+      <BackBtn pathName="/"></BackBtn>
       {/* 날짜 */}
       <Typography variant="h5" sx={{ textAlign: 'center' }}>
         {year}.{month}.{date} {Utils.convertDayToKorean(day)}
@@ -103,7 +103,7 @@ export default function DiaryWritePageUI() {
                 })
                   .then((res) => {
                     alert(`작성완료!`)
-                    route.push('/main')
+                    route.push('/')
                   })
                   .catch((error) => {
                     alert(`문제가 발생하여 작성에 실패했습니다. error message:${error.message}`)
@@ -115,7 +115,7 @@ export default function DiaryWritePageUI() {
             작성완료
           </Button>
           {/* 취소 btn */}
-          <Link href={{ pathname: '/main' }} style={{ marginLeft: '0.5rem' }}>
+          <Link href={{ pathname: '/' }} style={{ marginLeft: '0.5rem' }}>
             <Button type="button" variant="outlined">
               취소
             </Button>
