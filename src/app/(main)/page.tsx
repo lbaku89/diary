@@ -1,3 +1,4 @@
+'use client'
 import { Box } from '@mui/material'
 import LogoutButton from '@/shared/components/LogoutButton'
 import Calendar from './_component/Calendar'

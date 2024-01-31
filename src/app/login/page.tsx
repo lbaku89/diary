@@ -1,9 +1,7 @@
 import { Typography, Box } from '@mui/material'
 import { LoginButton } from '@/shared/components/LoginButton'
 
-export default function Home() {
-  console.log('22')
-
+export default function Page() {
   return (
     <Box
       sx={{

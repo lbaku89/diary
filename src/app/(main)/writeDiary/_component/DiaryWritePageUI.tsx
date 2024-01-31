@@ -24,7 +24,6 @@ import { Utils } from '@/shared/utils/utility'
 
 // * import api
 import { addDiary } from '@/shared/api/api'
-import { error } from 'console'
 
 export default function DiaryWritePageUI() {
   const searchParams = useSearchParams()

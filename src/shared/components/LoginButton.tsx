@@ -30,8 +30,6 @@ export const LoginButton = () => {
   return (
     <Button
       onClick={async () => {
-        console.log('1')
-
         login().then((res: AuthContextValue | null) => {
           if (res) {
             console.log(`${res.displayName}님 환영합니다😊`)
