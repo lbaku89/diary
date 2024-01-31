@@ -64,4 +64,35 @@ export class Utils {
 
     return matches ? decodeURIComponent(matches[1]) : undefined
   }
+
+  // * Suspense를 위한 함수
+  static wrapPromise = (promise: Promise<any>) => {
+    let status: 'pending' | 'success' | 'error' = 'pending'
+    let result = ''
+    let suspender = promise.then(
+      (response) => {
+        status = 'success'
+        result = response
+      },
+      (error) => {
+        status = 'error'
+        result = error
+      }
+    )
+
+    const read = () => {
+      switch (status) {
+        case 'pending':
+          throw suspender
+        case 'error':
+          throw result
+        default:
+          return result
+      }
+    }
+
+    return {
+      read,
+    }
+  }
 }
