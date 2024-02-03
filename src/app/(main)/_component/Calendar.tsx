@@ -3,7 +3,7 @@
 import { useContext, useState } from 'react'
 
 // * import util
-import { getTodayInfo, getCalendarInfo } from '@/shared/utils/getCalendarInfo'
+import { getTodayInfo, getCalendarInfo, getDummyCellArray } from '@/shared/utils/getCalendarInfo'
 
 // * import component
 import { Box, Typography, Grid, IconButton, Button } from '@mui/material'
@@ -33,12 +33,7 @@ export default function Calendar() {
 
   const calendarInfoArray: CalendarCellInfo[] = Object.values(calendarInfo)
   const dummyCellCount: number = calendarInfoArray[0].dayIndex
-  const dummyCellArray: null[] = []
-  let i = 1
-  while (i <= dummyCellCount) {
-    dummyCellArray.unshift(null)
-    ++i
-  }
+  const dummyCellArray = getDummyCellArray(dummyCellCount)
 
   return (
     <>

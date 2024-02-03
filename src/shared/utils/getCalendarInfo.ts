@@ -138,3 +138,13 @@ export const getCalendarInfo = ({
 
   return selectedMonthData
 }
+
+export const getDummyCellArray = (count: number): null[] => {
+  const dummyCellArray: null[] = []
+  let i = 1
+  while (i <= count) {
+    dummyCellArray.unshift(null)
+    ++i
+  }
+  return dummyCellArray
+}
