@@ -34,7 +34,7 @@ export default function Calendar() {
   const calendarInfoArray: CalendarCellInfo[] = Object.values(calendarInfo)
   const dummyCellCount: number = calendarInfoArray[0].dayIndex
   const dummyCellArray = getDummyCellArray(dummyCellCount)
-  const calendarCellArray = dummyCellArray.concat(calendarInfoArray)
+  const calendarCellArray = [...dummyCellArray, ...calendarInfoArray]
 
   return (
     <>
