@@ -10,8 +10,6 @@ export function middleware(request: NextRequest) {
   const isLoggedIn: RequestCookie | undefined = request.cookies.get('isLoggedIn')
   const requestPathname: string = request.nextUrl.pathname
 
-  // todo : 로딩 표기 추가 ( 여기서 아니고 다른데스, context로 다룰까 ..? )
-
   // * 로그인 여부에 따른 페이지 리다이렉션 처리
   if (requestPathname === '/login' && isLoggedIn) {
     return NextResponse.redirect(new URL('/', request.url))

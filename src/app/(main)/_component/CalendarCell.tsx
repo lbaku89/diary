@@ -3,7 +3,7 @@
 import { CalendarCellProps } from '@/shared/types/type'
 
 // * import component
-import { Box, Typography, Button, IconButton } from '@mui/material'
+import { Box, Typography, Button, IconButton, CircularProgress } from '@mui/material'
 
 // * import icon
 import CreateIcon from '@mui/icons-material/Create'
@@ -22,17 +22,11 @@ import { getDiaryListByDate, deleteDiary } from '@/shared/api/api'
 import { useContext } from 'react'
 import { AuthContext } from '@/shared/context/AuthContext'
 
-// todo : 폴더 구조
-// todo : loading bar
-// todo : component 폴더 구조 변경
-// todo : api error -> error page redirect
-// todo : 로그인 페이지 -> domain/login  , domain/main , domain/diary/write , domain/diary/modify
-// todo : loading fallback suspense 처리
 export const CalendarCell = ({ cellInfo, todayInfo, children }: CalendarCellProps) => {
   const uid = useContext(AuthContext)!.authContextValue?.uid
 
   const [diaryList, setDiaryList] = useState<any>([])
-
+  const [isLoading, setIsLoading] = useState<boolean>(true)
   useEffect(() => {
     if (cellInfo && uid) {
       getDiaryListByDate({
@@ -44,7 +38,11 @@ export const CalendarCell = ({ cellInfo, todayInfo, children }: CalendarCellProp
         },
       }).then((res) => {
         setDiaryList(res)
+        setIsLoading(false)
       })
+    } else {
+      setDiaryList([])
+      setIsLoading(false)
     }
   }, [cellInfo, uid])
 

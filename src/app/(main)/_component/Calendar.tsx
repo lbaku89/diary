@@ -34,6 +34,7 @@ export default function Calendar() {
   const calendarInfoArray: CalendarCellInfo[] = Object.values(calendarInfo)
   const dummyCellCount: number = calendarInfoArray[0].dayIndex
   const dummyCellArray = getDummyCellArray(dummyCellCount)
+  const calendarCellArray = dummyCellArray.concat(calendarInfoArray)
 
   return (
     <>
@@ -99,18 +100,29 @@ export default function Calendar() {
                 </Box>
               </Grid>
             ))}
+            {calendarCellArray.map((cellInfo, index) =>
+              cellInfo ? (
+                <Grid item xs={1} key={index}>
+                  <CalendarCell key={index} cellInfo={cellInfo} todayInfo={todayInfo}></CalendarCell>
+                </Grid>
+              ) : (
+                <Grid item xs={1} key={index}>
+                  <CalendarCell key={index}></CalendarCell>
+                </Grid>
+              )
+            )}
             {/* dummy cell */}
-            {dummyCellArray.map((cell, index) => (
+            {/* {dummyCellArray.map((cell, index) => (
               <Grid item xs={1} key={index}>
                 <CalendarCell key={index}></CalendarCell>
               </Grid>
-            ))}
+            ))} */}
             {/* calendar cell */}
-            {calendarInfoArray.map((cellInfo, index) => (
+            {/* {calendarInfoArray.map((cellInfo, index) => (
               <Grid item xs={1} key={index}>
                 <CalendarCell key={index} cellInfo={cellInfo} todayInfo={todayInfo}></CalendarCell>
               </Grid>
-            ))}
+            ))} */}
           </Grid>
         </>
       ) : (
