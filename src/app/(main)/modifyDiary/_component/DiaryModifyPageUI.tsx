@@ -5,25 +5,25 @@ import { useSearchParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
 
 // * import context
-import { AuthContext } from '@/context/AuthContext'
+import { AuthContext } from '@/shared/context/AuthContext'
 
 // * import from react
 import { useContext, useEffect, useState } from 'react'
 
 // * import api
-import { getDiary, modifyDiary, deleteDiary } from '@/api/api'
+import { getDiary, modifyDiary, deleteDiary } from '@/shared/api/api'
 
 // * import component
-import { BackBtn } from './BackBtn'
+import { BackBtn } from '../../../../shared/components/BackBtn'
 
 // * import mui
 import { Typography, Box, TextField, Button } from '@mui/material'
 
 // * import utils
-import { Utils } from '@/utils/utility'
+import { Utils } from '@/shared/utils/utility'
 
 // * import type
-import { Day } from '@/type/type'
+import { Day } from '@/shared/types/type'
 
 export const DiaryModifyPageUI = () => {
   // * url params 받아오기
@@ -66,7 +66,7 @@ export const DiaryModifyPageUI = () => {
     <>
       <Box sx={{ padding: '2rem 0' }}>
         {/* 뒤로가기버튼 */}
-        <BackBtn pathName="/main"></BackBtn>
+        <BackBtn pathName="/"></BackBtn>
         {/* 날짜 - 2024.1.24 */}
         <Typography variant="h5" sx={{ textAlign: 'center' }}>
           {year}.{month}.{date} {Utils.convertDayToKorean(day as Day)}
@@ -126,7 +126,7 @@ export const DiaryModifyPageUI = () => {
                     })
                       .then(() => {
                         alert('수정되었습니다.')
-                        router.push('/main')
+                        router.push('/')
                       })
                       .catch((err) => {
                         alert('요청중 오류가 발생 됐습니다.')
@@ -156,7 +156,7 @@ export const DiaryModifyPageUI = () => {
                   })
                     .then(() => {
                       alert('삭제되었습니다.')
-                      router.push('/main')
+                      router.push('/')
                     })
                     .catch((err) => {
                       alert('삭제중 오류가 발생했습니다.')
@@ -168,7 +168,7 @@ export const DiaryModifyPageUI = () => {
               삭제하기
             </Button>
             {/* 취소 btn */}
-            <Link href={{ pathname: '/main' }} style={{ marginLeft: '0.5rem' }}>
+            <Link href={{ pathname: '/' }} style={{ marginLeft: '0.5rem' }}>
               <Button type="button" variant="outlined">
                 취소
               </Button>

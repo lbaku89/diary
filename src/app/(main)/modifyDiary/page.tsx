@@ -1,5 +1,5 @@
 // * import components
-import { DiaryModifyPageUI } from '@/components/DiaryModifyPageUI'
+import { DiaryModifyPageUI } from '@/app/(main)/modifyDiary/_component/DiaryModifyPageUI'
 
 export default function DiaryModifyPage() {
   return (

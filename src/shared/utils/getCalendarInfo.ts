@@ -1,5 +1,5 @@
 // * import type
-import { CalendarInfo, CalendarCellInfo, CalendarRow, MonthIndex, CalendarDate } from '@/type/type'
+import { CalendarInfo, CalendarCellInfo, CalendarRow, MonthIndex, CalendarDate } from '@/shared/types/type'
 
 /**
  * 오늘 날짜 정보를 반환한다.
@@ -137,4 +137,14 @@ export const getCalendarInfo = ({
   }
 
   return selectedMonthData
+}
+
+export const getDummyCellArray = (count: number): null[] => {
+  const dummyCellArray: null[] = []
+  let i = 1
+  while (i <= count) {
+    dummyCellArray.unshift(null)
+    ++i
+  }
+  return dummyCellArray
 }

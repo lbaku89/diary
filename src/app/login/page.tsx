@@ -1,7 +1,7 @@
 import { Typography, Box } from '@mui/material'
-import { LoginButton } from '@/components/LoginButton'
+import { LoginButton } from '@/shared/components/LoginButton'
 
-export default function Home() {
+export default function Page() {
   return (
     <Box
       sx={{
@@ -14,7 +14,7 @@ export default function Home() {
           top: '30%',
           position: 'absolute',
           height: '210px',
-          width: '250px',
+          width: '270px',
           left: '50%',
           transform: 'translateX(-50%)',
         }}
