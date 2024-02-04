@@ -13,6 +13,7 @@
     "esbenp.prettier-vscode",
     "dbaeumer.vscode-eslint",
     "aaron-bond.better-comments",
-    "naumovs.color-highlight"
+    "naumovs.color-highlight",
+    "alefragnani.bookmarks"
   ]
 }
