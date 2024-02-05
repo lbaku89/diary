@@ -21,7 +21,7 @@ export default function LogoutButton() {
           logout()
             .then(() => {
               Utils.deleteCookie({ cookieName: 'isLoggedIn' })
-              router.push('/')
+              router.push('/login')
             })
             .catch(() => {})
         }}

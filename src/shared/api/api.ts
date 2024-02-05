@@ -37,7 +37,7 @@ export const login = async (): Promise<null | AuthContextValue> => {
 }
 
 export const logout = async () => {
-  await signOut(firebaseAuth)
+  return await signOut(firebaseAuth)
     .then((res) => {
       alert('로그아웃 되었습니다.')
     })
