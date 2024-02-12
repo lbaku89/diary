@@ -30,7 +30,8 @@ export const login = async (): Promise<null | AuthContextValue> => {
       }
       return userInfo
     })
-    .catch(() => {
+    .catch((err) => {
+      alert(`error:${err}`)
       return null
     })
   return result

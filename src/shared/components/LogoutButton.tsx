@@ -18,12 +18,19 @@ export default function LogoutButton() {
       <Button
         variant="text"
         onClick={() => {
+          // 로그인 페이지 화면 Loading 처리
+          auth!.setIsLoading(true)
           logout()
             .then(() => {
               Utils.deleteCookie({ cookieName: 'isLoggedIn' })
               router.push('/login')
             })
-            .catch(() => {})
+            .catch((err) => {
+              alert(err)
+            })
+            .finally(() => {
+              auth!.setIsLoading(false)
+            })
         }}
       >
         로그아웃

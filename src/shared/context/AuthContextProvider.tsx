@@ -18,6 +18,7 @@ import { User } from 'firebase/auth'
 
 export const AuthContextProvider = ({ children }: { children: React.ReactNode }) => {
   const [authContextValue, setAuthContextValue] = useState<AuthContextValue | null>(null)
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
     // Adds an observer for changes to the user's sign-in state.
@@ -41,6 +42,8 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
       value={{
         authContextValue: authContextValue,
         setAuthContextValue: setAuthContextValue,
+        isLoading: isLoading,
+        setIsLoading: setIsLoading,
       }}
     >
       {children}

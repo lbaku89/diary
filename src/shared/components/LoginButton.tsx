@@ -30,18 +30,24 @@ export const LoginButton = () => {
   return (
     <Button
       onClick={async () => {
-        login().then((res: AuthContextValue | null) => {
-          if (res) {
-            console.log(`${res.displayName}님 환영합니다😊`)
-            Utils.setCookie({
-              cookieName: 'isLoggedIn',
-              cookieValue: 'true',
-              validDays: 100,
-            })
-            addFirstVisitUser(res)
-            router.push('/')
-          }
-        })
+        // 로그인 페이지 화면 Loading 처리
+        context!.setIsLoading(true)
+        login()
+          .then((res: AuthContextValue | null) => {
+            if (res) {
+              console.log(`${res.displayName}님 환영합니다😊`)
+              Utils.setCookie({
+                cookieName: 'isLoggedIn',
+                cookieValue: 'true',
+                validDays: 100,
+              })
+              addFirstVisitUser(res)
+              router.push('/')
+            }
+          })
+          .finally(() => {
+            context!.setIsLoading(false)
+          })
       }}
       color="primary"
       variant="contained"

@@ -81,4 +81,6 @@ export interface CalendarCellProps {
 export interface IAuthContext {
   authContextValue: AuthContextValue | null
   setAuthContextValue: (value: AuthContextValue | null) => void
+  isLoading: boolean
+  setIsLoading: (value: boolean) => void
 }
