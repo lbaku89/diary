@@ -73,8 +73,6 @@ yarn build
 
   - ✔️vercel 이용
 
-- todo: 로그인 끝난후 context isLoading false 처리 어떻게 해야 할지 고민
-
 ##### 부연 설명
 
 - 로그인 관련
