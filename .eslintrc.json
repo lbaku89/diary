@@ -1,8 +1,13 @@
 {
   "extends": ["next/core-web-vitals", "airbnb", "airbnb-typescript", "prettier"],
   "parserOptions": {
-    // "project": "./tsconfig.json"
+    "project": "./tsconfig.json"
   },
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "ignorePatterns": ["next.config.js"],
   "rules": {
     "no-useless-escape": "off",
     "no-unused-vars": "off",
