@@ -67,7 +67,7 @@ export interface CalendarCellInfo {
   monthIndex: MonthIndex // 달 0~11
   date: CalendarDate // 일
   day: Day // 요일
-  dayIndex: DayIndex //요일 인덱스 0~6
+  dayIndex: DayIndex // 요일 인덱스 0~6
   row: CalendarRow
   column: CalendarColumn
 }

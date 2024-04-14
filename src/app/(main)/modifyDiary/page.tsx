@@ -1,10 +1,6 @@
 // * import components
-import { DiaryModifyPageUI } from '@/app/(main)/modifyDiary/_component/DiaryModifyPageUI'
+import DiaryModifyPageUI from '@/app/(main)/modifyDiary/_component/DiaryModifyPageUI'
 
 export default function DiaryModifyPage() {
-  return (
-    <>
-      <DiaryModifyPageUI />
-    </>
-  )
+  return <DiaryModifyPageUI />
 }

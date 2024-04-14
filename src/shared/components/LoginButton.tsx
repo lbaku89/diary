@@ -16,15 +16,15 @@ import { useContext } from 'react'
 import { AuthContextValue } from '@/shared/types/type'
 
 // * import context
-import { AuthContext } from '@/shared/context/AuthContext'
+import AuthContext from '@/shared/context/AuthContext'
 
 // * import from next
 import Image from 'next/image'
 
 // * import utils
-import { Utils } from '@/shared/utils/utility'
+import Utils from '@/shared/utils/utility'
 
-export const LoginButton = () => {
+export default function LoginButton() {
   const context = useContext(AuthContext)
   const router = useRouter()
   return (
@@ -60,13 +60,7 @@ export const LoginButton = () => {
         ':hover': { backgroundColor: '#fff' },
       }}
     >
-      <Image
-        alt="google_icon"
-        src={'/images/google_icon.png'}
-        width={20}
-        height={20}
-        style={{ marginRight: '0.4rem' }}
-      ></Image>
+      <Image alt="google_icon" src="/images/google_icon.png" width={20} height={20} style={{ marginRight: '0.4rem' }} />
       구글 계정으로 로그인
     </Button>
   )

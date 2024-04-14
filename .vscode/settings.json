@@ -1,6 +1,10 @@
 {
   "editor.formatOnPaste": false,
   "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "eslint.validate": ["javascript", "typescript"],
   "editor.tabSize": 2,
   "cSpell.words": ["fontsource", "roboto", "nextjs", "firestore", "zustand"],
   // "liveSassCompile.settings.autoprefix": ["> 1%", "last 2 versions"],

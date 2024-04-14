@@ -13,9 +13,12 @@ export function middleware(request: NextRequest) {
   // * 로그인 여부에 따른 페이지 리다이렉션 처리
   if (requestPathname === '/login' && isLoggedIn) {
     return NextResponse.redirect(new URL('/', request.url))
-  } else if (requestPathname !== '/login' && !isLoggedIn) {
+  }
+  if (requestPathname !== '/login' && !isLoggedIn) {
     return NextResponse.redirect(new URL('/login', request.url))
   }
+
+  return null
 }
 
 // See "Matching Paths" below to learn more
