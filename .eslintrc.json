@@ -4,6 +4,11 @@
     "project": "./tsconfig.json"
   },
   "rules": {
-    "react/jsx-props-no-spreading": "off"
+    "no-useless-escape": "off",
+    "no-unused-vars": "off",
+    "no-alert": "off",
+    "react/jsx-props-no-spreading": "off",
+    "react/react-in-jsx-scope": "off", // React 17버전 이후로 Import React from 'react'; 없이도 문제없이 코드를 작성
+    "@typescript-eslint/no-unused-vars": "warn"
   }
 }
