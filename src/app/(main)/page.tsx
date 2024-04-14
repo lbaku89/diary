@@ -19,7 +19,6 @@ import Calendar from './_component/Calendar'
 // todo: 성능 테스트 (light house)
 // todo: test tool 로 시나리오 테스트 (jest)
 // todo: test
-// todo: test2
 export default function MainPage() {
   const context = useContext(AuthContext)
   return context?.isLoading ? (
