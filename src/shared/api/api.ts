@@ -1,19 +1,17 @@
-;`use client`
+'use client'
 
 // * import type
 import { AuthContextValue } from '@/shared/types/type'
 
 // * import from firebase
-import { UserCredential } from 'firebase/auth'
 import { doc, setDoc, addDoc, collection, getDocs, deleteDoc, getDoc } from 'firebase/firestore'
-import { GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth'
+import { UserCredential, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth'
 
 // * import firebase instance
-import { db } from '@/shared/firebase/firebaseClient'
-import { firebaseAuth } from '@/shared/firebase/firebaseClient'
+import { db, firebaseAuth } from '@/shared/firebase/firebaseClient'
 
 // * import utils
-import { Utils } from '@/shared/utils/utility'
+import Utils from '@/shared/utils/utility'
 
 export const login = async (): Promise<null | AuthContextValue> => {
   const provider = new GoogleAuthProvider()
@@ -21,8 +19,8 @@ export const login = async (): Promise<null | AuthContextValue> => {
     login_hint: 'user@example.com',
   })
   const result = await signInWithPopup(firebaseAuth, provider)
-    .then((result: UserCredential) => {
-      const user = result.user
+    .then((userCredential: UserCredential) => {
+      const { user } = userCredential
       const userInfo: AuthContextValue = {
         uid: user.uid,
         email: user.email!,
@@ -37,15 +35,14 @@ export const login = async (): Promise<null | AuthContextValue> => {
   return result
 }
 
-export const logout = async () => {
-  return await signOut(firebaseAuth)
-    .then((res) => {
+export const logout = async () =>
+  signOut(firebaseAuth)
+    .then(() => {
       alert('로그아웃 되었습니다.')
     })
     .catch((error) => {
       alert(`error:${error}`)
     })
-}
 
 /** 로그인 시 유저정보 확인 후 처음 왔으면 db에 유저정보 생성 */
 export const addFirstVisitUser = async (authContextValue: AuthContextValue) => {
@@ -78,8 +75,8 @@ export const addDiary = async ({
 
   // * db에 diary 추가
   await addDoc(collection(db, `users/${uid}/${year}${convertedMonth}${convertedDate}`), {
-    title: title,
-    content: content,
+    title,
+    content,
   })
 }
 
@@ -112,11 +109,11 @@ export const getDiaryListByDate = async ({
   }[] = []
 
   // * 문서들을 순회하며 diaryList에 추가
-  querySnapshot.forEach((doc) => {
-    const diary = doc.data() as { title: string; content: string }
+  querySnapshot.forEach((document) => {
+    const diary = document.data() as { title: string; content: string }
     const diaryInfo = {
-      uid: uid,
-      diaryId: doc.id, // * 문서 id
+      uid,
+      diaryId: document.id, // * 문서 id
       year: dateInfo.year,
       month: dateInfo.month,
       date: dateInfo.date,

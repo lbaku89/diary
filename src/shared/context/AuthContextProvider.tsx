@@ -1,22 +1,21 @@
 'use client'
 
 // * import context
-import { AuthContext } from '@/shared/context/AuthContext'
+import AuthContext from '@/shared/context/AuthContext'
 
 // * import type
 import { AuthContextValue } from '@/shared/types/type'
 
 // * import hook
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useMemo } from 'react'
 
 // * import
-import { onAuthStateChanged } from 'firebase/auth'
 
 // * firebase
 import { firebaseAuth } from '@/shared/firebase/firebaseClient'
-import { User } from 'firebase/auth'
+import { User, onAuthStateChanged } from 'firebase/auth'
 
-export const AuthContextProvider = ({ children }: { children: React.ReactNode }) => {
+export default function AuthContextProvider({ children }: { children: React.ReactNode }) {
   const [authContextValue, setAuthContextValue] = useState<AuthContextValue | null>(null)
   const [isLoading, setIsLoading] = useState(false)
 
@@ -37,16 +36,11 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
       }
     })
   }, [])
-  return (
-    <AuthContext.Provider
-      value={{
-        authContextValue: authContextValue,
-        setAuthContextValue: setAuthContextValue,
-        isLoading: isLoading,
-        setIsLoading: setIsLoading,
-      }}
-    >
-      {children}
-    </AuthContext.Provider>
+
+  const memoizedAuthContext = useMemo(
+    () => ({ authContextValue, setAuthContextValue, isLoading, setIsLoading }),
+    [authContextValue, isLoading]
   )
+
+  return <AuthContext.Provider value={memoizedAuthContext}>{children}</AuthContext.Provider>
 }

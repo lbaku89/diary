@@ -6,7 +6,7 @@ import '@fontsource/roboto/700.css'
 import CssBaseline from '@mui/material/CssBaseline'
 
 // * import contextProvider
-import { AuthContextProvider } from '@/shared/context/AuthContextProvider'
+import AuthContextProvider from '@/shared/context/AuthContextProvider'
 
 // const inter = Inter({ subsets: ['latin'] })
 import Container from '@mui/material/Container'
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html>
+    <html lang="ko">
       <body>
         <AuthContextProvider>
           {/* Using other styling solutions */}

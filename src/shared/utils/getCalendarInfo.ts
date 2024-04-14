@@ -17,7 +17,7 @@ export const getTodayInfo = (): {
 
   return {
     year,
-    monthIndex: monthIndex,
+    monthIndex,
     date,
   }
 }
@@ -27,13 +27,7 @@ export const getTodayInfo = (): {
  * @param param0 year, month 정보
  * @returns {CalendarInfo}
  */
-export const getCalendarInfo = ({
-  year,
-  monthIndex: monthIndex,
-}: {
-  year: number
-  monthIndex: MonthIndex
-}): CalendarInfo => {
+export const getCalendarInfo = ({ year, monthIndex }: { year: number; monthIndex: MonthIndex }): CalendarInfo => {
   const selectedMonthData: {
     [key: number]: CalendarCellInfo
   } = {}
@@ -42,7 +36,7 @@ export const getCalendarInfo = ({
   const firstDate: Date = new Date(year, monthIndex, 1)
   const [firstDateMonthIndex, firstDateDay] = [firstDate.getMonth(), firstDate.getDay()]
 
-  for (let i = 1; i <= 31; i++) {
+  for (let i = 1; i <= 31; i += 1) {
     // 0 ~ 6
     const row = Number(Math.floor((i + firstDateDay - 1) / 7)) as CalendarRow
 
@@ -52,85 +46,88 @@ export const getCalendarInfo = ({
     const indexDate = new Date(year, monthIndex, i)
     const [indexDateMonth, indexDateDay] = [indexDate.getMonth(), indexDate.getDay()]
 
+    // todo default 에 대한 처리 필요
     // i 일이 다음달로 넘어가지 않은지 판별 후
     if (indexDateMonth === firstDateMonthIndex) {
       switch (indexDateDay) {
         case 0:
           selectedMonthData[i] = {
-            year: year,
-            monthIndex: monthIndex,
-            date: date,
+            year,
+            monthIndex,
+            date,
             day: 'sunday',
             dayIndex: 0,
-            row: row,
+            row,
             column: 0,
           }
           break
         case 1:
           selectedMonthData[i] = {
-            year: year,
-            monthIndex: monthIndex,
-            date: date,
+            year,
+            monthIndex,
+            date,
             day: 'monday',
             dayIndex: 1,
-            row: row,
+            row,
             column: 1,
           }
           break
         case 2:
           selectedMonthData[i] = {
-            year: year,
-            monthIndex: monthIndex,
-            date: date,
+            year,
+            monthIndex,
+            date,
             day: 'tuesday',
             dayIndex: 2,
-            row: row,
+            row,
             column: 2,
           }
           break
         case 3:
           selectedMonthData[i] = {
-            year: year,
-            monthIndex: monthIndex,
-            date: date,
+            year,
+            monthIndex,
+            date,
             day: 'wednesday',
             dayIndex: 3,
-            row: row,
+            row,
             column: 3,
           }
           break
         case 4:
           selectedMonthData[i] = {
-            year: year,
-            monthIndex: monthIndex,
-            date: date,
+            year,
+            monthIndex,
+            date,
             day: 'thursday',
             dayIndex: 4,
-            row: row,
+            row,
             column: 4,
           }
           break
         case 5:
           selectedMonthData[i] = {
-            year: year,
-            monthIndex: monthIndex,
-            date: date,
+            year,
+            monthIndex,
+            date,
             day: 'friday',
             dayIndex: 5,
-            row: row,
+            row,
             column: 5,
           }
           break
         case 6:
           selectedMonthData[i] = {
-            year: year,
-            monthIndex: monthIndex,
-            date: date,
+            year,
+            monthIndex,
+            date,
             day: 'saturday',
             dayIndex: 6,
-            row: row,
+            row,
             column: 6,
           }
+          break
+        default:
           break
       }
     }
@@ -144,7 +141,7 @@ export const getDummyCellArray = (count: number): null[] => {
   let i = 1
   while (i <= count) {
     dummyCellArray.unshift(null)
-    ++i
+    i += 1
   }
   return dummyCellArray
 }

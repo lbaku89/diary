@@ -5,25 +5,21 @@ import Link from 'next/link'
 import { useSearchParams, useRouter } from 'next/navigation'
 
 // * import component
-import { Button, TextField, Typography, Box, IconButton } from '@mui/material'
-import ArrowBackIcon from '@mui/icons-material/ArrowBack'
-import { BackBtn } from '../../../../shared/components/BackBtn'
+import { Button, TextField, Typography, Box } from '@mui/material'
 
 // * import Type
 import { Day } from '@/shared/types/type'
 
 // * import context
-import { AuthContext } from '@/shared/context/AuthContext'
-import { useContext } from 'react'
-
-// * import from react
-import { useState } from 'react'
+import AuthContext from '@/shared/context/AuthContext'
+import { useContext, useState } from 'react'
 
 // * import utils
-import { Utils } from '@/shared/utils/utility'
+import Utils from '@/shared/utils/utility'
 
 // * import api
 import { addDiary } from '@/shared/api/api'
+import BackBtn from '../../../../shared/components/BackBtn'
 
 export default function DiaryWritePageUI() {
   const searchParams = useSearchParams()
@@ -34,7 +30,7 @@ export default function DiaryWritePageUI() {
     day: searchParams.get('day') as Day,
   }
 
-  const authContextValue = useContext(AuthContext)!.authContextValue
+  const { authContextValue } = useContext(AuthContext)!
   const route = useRouter()
   const [title, setTitle] = useState<string>('')
   const [content, setContent] = useState<string>('')
@@ -43,8 +39,8 @@ export default function DiaryWritePageUI() {
 
   return (
     <Box sx={{ padding: '2rem 0' }}>
-      {/* 뒤로가기 btn*/}
-      <BackBtn pathName="/"></BackBtn>
+      {/* 뒤로가기 btn */}
+      <BackBtn pathName="/" />
       {/* 날짜 */}
       <Typography variant="h5" sx={{ textAlign: 'center' }}>
         {year}.{month}.{date} {Utils.convertDayToKorean(day)}
@@ -87,8 +83,17 @@ export default function DiaryWritePageUI() {
 
               const [isEmptyTitle, isEmptyContent] = [Utils.isEmptyText(title), Utils.isEmptyText(content)]
 
-              isEmptyTitle ? setIsTitleError(true) : setIsTitleError(false)
-              isEmptyContent ? setIsContentError(true) : setIsContentError(false)
+              if (isEmptyTitle) {
+                setIsTitleError(true)
+              } else {
+                setIsTitleError(false)
+              }
+
+              if (isEmptyContent) {
+                setIsContentError(true)
+              } else {
+                setIsContentError(false)
+              }
 
               if (!isEmptyTitle && !isEmptyContent) {
                 addDiary({
@@ -100,7 +105,7 @@ export default function DiaryWritePageUI() {
                   },
                   diary: { title, content },
                 })
-                  .then((res) => {
+                  .then(() => {
                     alert(`작성완료!`)
                     route.push('/')
                   })

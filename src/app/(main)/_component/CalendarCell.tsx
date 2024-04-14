@@ -1,9 +1,10 @@
 'use client'
+
 // * import type
 import { CalendarCellProps } from '@/shared/types/type'
 
 // * import component
-import { Box, Typography, Button, IconButton, CircularProgress } from '@mui/material'
+import { Box, Typography, IconButton } from '@mui/material'
 
 // * import icon
 import CreateIcon from '@mui/icons-material/Create'
@@ -13,16 +14,15 @@ import DeleteIcon from '@mui/icons-material/Delete'
 import Link from 'next/link'
 
 // * import hooks
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 
 // * import api
 import { getDiaryListByDate, deleteDiary } from '@/shared/api/api'
 
 // * import context
-import { useContext } from 'react'
-import { AuthContext } from '@/shared/context/AuthContext'
+import AuthContext from '@/shared/context/AuthContext'
 
-export const CalendarCell = ({ cellInfo, todayInfo, children }: CalendarCellProps) => {
+export default function CalendarCell({ cellInfo, todayInfo }: CalendarCellProps) {
   const uid = useContext(AuthContext)!.authContextValue?.uid
 
   const [diaryList, setDiaryList] = useState<any>([])
@@ -30,7 +30,7 @@ export const CalendarCell = ({ cellInfo, todayInfo, children }: CalendarCellProp
   useEffect(() => {
     if (cellInfo && uid) {
       getDiaryListByDate({
-        uid: uid,
+        uid,
         dateInfo: {
           year: cellInfo.year,
           month: cellInfo.monthIndex + 1,
@@ -46,7 +46,7 @@ export const CalendarCell = ({ cellInfo, todayInfo, children }: CalendarCellProp
     }
   }, [cellInfo, uid])
 
-  let dateDecoration =
+  const dateDecoration =
     todayInfo?.year === cellInfo?.year &&
     todayInfo?.monthIndex === cellInfo?.monthIndex &&
     todayInfo?.date === cellInfo?.date
@@ -57,7 +57,17 @@ export const CalendarCell = ({ cellInfo, todayInfo, children }: CalendarCellProp
         }
       : null
 
-  let dateColor = cellInfo?.column === 0 ? '#FF4040' : cellInfo?.column === 6 ? '#3399FF' : '#000000'
+  let dateColor = null
+  switch (cellInfo?.column) {
+    case 0:
+      dateColor = '#FF4040'
+      break
+    case 6:
+      dateColor = '#3399FF'
+      break
+    default:
+      dateColor = '#000000'
+  }
 
   return (
     <Box sx={{ width: '100%' }}>
@@ -108,18 +118,8 @@ export const CalendarCell = ({ cellInfo, todayInfo, children }: CalendarCellProp
         }}
       >
         {diaryList.map(
-          (
-            diary: {
-              uid: string
-              year: number
-              month: number
-              date: number
-              title: string
-              diaryId: string
-            },
-            index: number
-          ) => (
-            <Box key={index} sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          (diary: { uid: string; year: number; month: number; date: number; title: string; diaryId: string }) => (
+            <Box key={diary.uid} sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               {/* 제목만 */}
               <Typography
                 variant="body2"
@@ -143,7 +143,7 @@ export const CalendarCell = ({ cellInfo, todayInfo, children }: CalendarCellProp
                   style={{ textDecoration: 'none', color: 'unset' }}
                 >
                   <Box
-                    component={'span'}
+                    component="span"
                     sx={{
                       '@media(min-width:600.1px)': {
                         display: 'inline',
@@ -169,7 +169,7 @@ export const CalendarCell = ({ cellInfo, todayInfo, children }: CalendarCellProp
                   },
                 }}
                 onClick={() => {
-                  if (confirm('정말 삭제하시겠습니까?')) {
+                  if (window.confirm('정말 삭제하시겠습니까?')) {
                     deleteDiary({
                       uid: uid!,
                       diaryId: diary.diaryId,
