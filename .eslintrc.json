@@ -3,6 +3,11 @@
   "parserOptions": {
     "project": "./tsconfig.json"
   },
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "ignorePatterns": ["next.config.js"],
   "rules": {
     "no-useless-escape": "off",
     "no-unused-vars": "off",
