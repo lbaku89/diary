@@ -2,16 +2,9 @@
 
 import { Typography, Box } from '@mui/material'
 import LoginButton from '@/shared/components/LoginButton'
-import { useContext } from 'react'
-import AuthContext from '@/shared/context/AuthContext'
-import LoadingSpinner from '@/shared/components/LoadingSpinner'
 
 export default function Page() {
-  const context = useContext(AuthContext)
-
-  return context?.isLoading ? (
-    <LoadingSpinner />
-  ) : (
+  return (
     <Box
       sx={{
         minHeight: '100vh',
