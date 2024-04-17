@@ -35,14 +35,7 @@ export const login = async (): Promise<null | AuthContextValue> => {
   return result
 }
 
-export const logout = async () =>
-  signOut(firebaseAuth)
-    .then(() => {
-      alert('로그아웃 되었습니다.')
-    })
-    .catch((error) => {
-      alert(`error:${error}`)
-    })
+export const logout = async () => signOut(firebaseAuth)
 
 /** 로그인 시 유저정보 확인 후 처음 왔으면 db에 유저정보 생성 */
 export const addFirstVisitUser = async (authContextValue: AuthContextValue) => {
