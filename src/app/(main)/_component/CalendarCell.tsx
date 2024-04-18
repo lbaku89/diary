@@ -4,22 +4,18 @@
 import { CalendarCellProps, DiaryInfo } from '@/shared/types/type'
 
 // * import component
-import { Box, Typography, IconButton } from '@mui/material'
+import { Box, IconButton } from '@mui/material'
 
 // * import icon
 import CreateIcon from '@mui/icons-material/Create'
-import DeleteIcon from '@mui/icons-material/Delete'
 
-// * import link
 import Link from 'next/link'
-// * import hooks
 import { useEffect, useState, useContext } from 'react'
 
-// * import api
-import { getDiaryListByDate, deleteDiary } from '@/shared/api/api'
-
-// * import context
+import { getDiaryListByDate } from '@/shared/api/api'
 import AuthContext from '@/shared/context/AuthContext'
+import CalendarCellDate from './CalendarCellDate'
+
 import CalendarCellDiaryTitle from './CalendarCellDiaryTitle'
 import CalendarCellDiaryDeleteBtn from './CalendarCellDiaryDeleteBtn'
 
@@ -47,45 +43,12 @@ export default function CalendarCell({ cellInfo, isTodayCell }: CalendarCellProp
     }
   }, [cellInfo, uid])
 
-  const dateDecoration = isTodayCell
-    ? {
-        textDecoration: 'underline',
-        textDecorationColor: 'red',
-        textDecorationThickness: '3px',
-      }
-    : null
-
-  let dateColor = null
-  switch (cellInfo?.column) {
-    case 0:
-      dateColor = '#FF4040'
-      break
-    case 6:
-      dateColor = '#3399FF'
-      break
-    default:
-      dateColor = '#000000'
-  }
-
   return (
     <Box sx={{ width: '100%' }}>
       <Box sx={{ display: 'flex' }}>
         {cellInfo ? (
           <>
-            <Typography
-              variant="body1"
-              sx={{
-                verticalAlign: 'middle',
-                display: 'inline',
-                lineHeight: '2',
-                paddingTop: '',
-                paddingLeft: '0.5rem',
-                color: dateColor,
-                ...dateDecoration,
-              }}
-            >
-              {cellInfo ? cellInfo.date : null}
-            </Typography>
+            <CalendarCellDate calendarCellInfo={cellInfo} />
             <Link
               href={{
                 pathname: '/writeDiary',
