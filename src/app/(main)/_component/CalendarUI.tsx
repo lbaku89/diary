@@ -40,17 +40,14 @@ export default function CalendarUI() {
       ))}
       {dummyCellArray.map((cellInfo) => (
         <Grid item xs={1} key={cellInfo.key}>
-          <CalendarCell key={cellInfo.key} />
+          <CalendarCell />
         </Grid>
       ))}
-      {calendarInfoArray.map((cellInfo) => {
-        const isTodayCell = checkIsTodayCell(todayInfo, cellInfo)
-        return (
-          <Grid item xs={1} key={cellInfo.date}>
-            <CalendarCell key={cellInfo.date} cellInfo={cellInfo} isTodayCell={isTodayCell} />
-          </Grid>
-        )
-      })}
+      {calendarInfoArray.map((cellInfo) => (
+        <Grid item xs={1} key={cellInfo.date}>
+          <CalendarCell cellInfo={cellInfo} />
+        </Grid>
+      ))}
     </Grid>
   )
 }

@@ -1,7 +1,7 @@
 'use client'
 
 // * import type
-import { CalendarCellProps, DiaryInfo } from '@/shared/types/type'
+import { CalendarCellInfo, DiaryInfo } from '@/shared/types/type'
 
 // * import component
 import { Box } from '@mui/material'
@@ -13,7 +13,7 @@ import CalendarCellDiaryTitle from './CalendarCellDiaryTitle'
 import CalendarCellDiaryDeleteBtn from './CalendarCellDiaryDeleteBtn'
 import CalendarCellDiaryCreateBtn from './CalendarCellDiaryCreateBtn'
 
-export default function CalendarCell({ cellInfo, isTodayCell }: CalendarCellProps) {
+export default function CalendarCell({ cellInfo }: { cellInfo?: CalendarCellInfo }) {
   const uid = useContext(AuthContext)!.authContextValue?.uid
 
   const [diaryList, setDiaryList] = useState<any>([])

@@ -78,12 +78,6 @@ export interface CalendarCellInfo {
   column: CalendarColumn
 }
 
-export interface CalendarCellProps {
-  cellInfo?: CalendarCellInfo
-  isTodayCell?: boolean
-  children?: React.ReactNode
-}
-
 export interface IAuthContext {
   authContextValue: AuthContextValue | null
   setAuthContextValue: (value: AuthContextValue | null) => void
