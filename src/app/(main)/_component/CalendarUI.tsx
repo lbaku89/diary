@@ -5,6 +5,7 @@ import { getTodayInfo, getCalendarInfo, getDummyCellArray } from '@/shared/utils
 import { MonthIndex, CalendarCellInfo } from '@/shared/types/type'
 import { Grid, Box, Typography } from '@mui/material'
 import CalendarCell from './CalendarCell'
+import checkIsTodayCell from '../_utils/checkIsTodayCell'
 
 export default function CalendarUI() {
   const searchParams = useSearchParams()
@@ -16,7 +17,7 @@ export default function CalendarUI() {
   const dummyCellCount: number = calendarInfoArray[0].dayIndex
   const dummyCellArray = getDummyCellArray(dummyCellCount).map((key, i) => ({ key: i }))
 
-  const dayOfTheWeekArray = [
+  const DAYS_HEADERS = [
     { day: '일', key: 'sunday' },
     { day: '월', key: 'monday' },
     { day: '화', key: 'tuesday' },
@@ -28,7 +29,7 @@ export default function CalendarUI() {
 
   return (
     <Grid container spacing={0} columns={7}>
-      {dayOfTheWeekArray.map((day) => (
+      {DAYS_HEADERS.map((day) => (
         <Grid item xs={1} key={day.key}>
           <Box sx={{ width: '100%', minHeight: '35px' }}>
             <Typography variant="caption" sx={{ paddingLeft: '0.5rem', color: '#7a7d8c' }}>
@@ -42,12 +43,14 @@ export default function CalendarUI() {
           <CalendarCell key={cellInfo.key} />
         </Grid>
       ))}
-      {calendarInfoArray.map((cellInfo) => (
-        <Grid item xs={1} key={cellInfo.date}>
-          {/* //todo: today info 전부 넣을 필요 없음 그냥 true/false 로 넣으면 */}
-          <CalendarCell key={cellInfo.date} cellInfo={cellInfo} todayInfo={todayInfo} />
-        </Grid>
-      ))}
+      {calendarInfoArray.map((cellInfo) => {
+        const isTodayCell = checkIsTodayCell(todayInfo, cellInfo)
+        return (
+          <Grid item xs={1} key={cellInfo.date}>
+            <CalendarCell key={cellInfo.date} cellInfo={cellInfo} isTodayCell={isTodayCell} />
+          </Grid>
+        )
+      })}
     </Grid>
   )
 }
