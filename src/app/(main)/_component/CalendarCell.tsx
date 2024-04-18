@@ -4,20 +4,14 @@
 import { CalendarCellProps, DiaryInfo } from '@/shared/types/type'
 
 // * import component
-import { Box, IconButton } from '@mui/material'
-
-// * import icon
-import CreateIcon from '@mui/icons-material/Create'
-
-import Link from 'next/link'
+import { Box } from '@mui/material'
 import { useEffect, useState, useContext } from 'react'
-
 import { getDiaryListByDate } from '@/shared/api/api'
 import AuthContext from '@/shared/context/AuthContext'
 import CalendarCellDate from './CalendarCellDate'
-
 import CalendarCellDiaryTitle from './CalendarCellDiaryTitle'
 import CalendarCellDiaryDeleteBtn from './CalendarCellDiaryDeleteBtn'
+import CalendarCellDiaryCreateBtn from './CalendarCellDiaryCreateBtn'
 
 export default function CalendarCell({ cellInfo, isTodayCell }: CalendarCellProps) {
   const uid = useContext(AuthContext)!.authContextValue?.uid
@@ -49,16 +43,7 @@ export default function CalendarCell({ cellInfo, isTodayCell }: CalendarCellProp
         {cellInfo ? (
           <>
             <CalendarCellDate calendarCellInfo={cellInfo} />
-            <Link
-              href={{
-                pathname: '/writeDiary',
-                query: { year: cellInfo.year, month: cellInfo.monthIndex + 1, date: cellInfo.date, day: cellInfo.day }, // month 는 0 ~ 11
-              }}
-            >
-              <IconButton size="small" aria-label="add-diary">
-                <CreateIcon sx={{ fontSize: '1rem' }} />
-              </IconButton>
-            </Link>
+            <CalendarCellDiaryCreateBtn calendarCellInfo={cellInfo} />
           </>
         ) : null}
       </Box>
