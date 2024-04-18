@@ -12,6 +12,7 @@ import CalendarCellDate from './CalendarCellDate'
 import CalendarCellDiaryTitle from './CalendarCellDiaryTitle'
 import CalendarCellDiaryDeleteBtn from './CalendarCellDiaryDeleteBtn'
 import CalendarCellDiaryCreateBtn from './CalendarCellDiaryCreateBtn'
+import CalendarCellContentContainer from './CalendarCellContentContainer'
 
 export default function CalendarCell({ cellInfo }: { cellInfo?: CalendarCellInfo }) {
   const uid = useContext(AuthContext)!.authContextValue?.uid
@@ -47,28 +48,16 @@ export default function CalendarCell({ cellInfo }: { cellInfo?: CalendarCellInfo
           </>
         ) : null}
       </Box>
-      <Box
-        sx={{
-          overflowY: 'auto',
-          textOverflow: 'ellipsis',
-          '@media(min-width:600.1px)': {
-            height: '120px',
-          },
-          '@media(max-width:600px)': {
-            height: '69px',
-          },
-          '::-webkit-scrollbar': {
-            width: '0',
-          },
-        }}
-      >
-        {diaryList.map((diary: DiaryInfo) => (
-          <Box key={diary.uid} sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <CalendarCellDiaryTitle diaryInfo={{ ...diary, day: cellInfo!.day }} />
-            <CalendarCellDiaryDeleteBtn diaryInfo={diary} setDiaryList={setDiaryList} />
-          </Box>
-        ))}
-      </Box>
+      <CalendarCellContentContainer>
+        <Box>
+          {diaryList.map((diary: DiaryInfo) => (
+            <Box key={diary.uid} sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <CalendarCellDiaryTitle diaryInfo={{ ...diary, day: cellInfo!.day }} />
+              <CalendarCellDiaryDeleteBtn diaryInfo={diary} setDiaryList={setDiaryList} />
+            </Box>
+          ))}
+        </Box>
+      </CalendarCellContentContainer>
     </Box>
   )
 }
