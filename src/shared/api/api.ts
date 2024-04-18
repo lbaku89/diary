@@ -1,7 +1,7 @@
 'use client'
 
 // * import type
-import { AuthContextValue } from '@/shared/types/type'
+import { AuthContextValue, DiaryInfo } from '@/shared/types/type'
 
 // * import from firebase
 import { doc, setDoc, addDoc, collection, getDocs, deleteDoc, getDoc } from 'firebase/firestore'
@@ -92,14 +92,7 @@ export const getDiaryListByDate = async ({
   // * 해당 날짜의 collection 문서 가져오기
   const querySnapshot = await getDocs(collection(db, `users/${uid}/${dateInfo.year}${convertedMonth}${convertedDate}`))
 
-  const diaryList: {
-    uid: string
-    diaryId: string
-    year: number
-    month: number
-    date: number
-    title: string
-  }[] = []
+  const diaryList: DiaryInfo[] = []
 
   // * 문서들을 순회하며 diaryList에 추가
   querySnapshot.forEach((document) => {
@@ -111,7 +104,7 @@ export const getDiaryListByDate = async ({
       month: dateInfo.month,
       date: dateInfo.date,
       title: diary.title,
-    }
+    } as DiaryInfo
 
     diaryList.push(diaryInfo)
   })

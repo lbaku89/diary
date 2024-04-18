@@ -100,3 +100,17 @@ export interface CalendarCellDiaryTitleProps {
   diaryId: string
   day: string
 }
+
+export interface DiaryInfo {
+  uid: string
+  diaryId: string
+  title: string
+  year: number
+  month: Month
+  date: CalendarDate
+}
+
+export interface CalendarCellDiaryDeleteBtnProps {
+  diaryInfo: DiaryInfo
+  setDiaryList: (diaryList: DiaryInfo[]) => void
+}
