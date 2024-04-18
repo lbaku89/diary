@@ -51,15 +51,22 @@ export default function DiaryModifyPageUI() {
 
   useEffect(() => {
     // * diary 정보 get
-    getDiary(authContextValue!.uid, { year: Number(year), month: Number(month), date: Number(date), diaryId: diaryId! })
-      .then((res) => {
-        setTitle(res!.title)
-        setContent(res!.content)
+    if (authContextValue) {
+      getDiary(authContextValue!.uid, {
+        year: Number(year),
+        month: Number(month),
+        date: Number(date),
+        diaryId: diaryId!,
       })
-      .catch((err: Error) => {
-        alert(err.message)
-        console.error(err)
-      })
+        .then((res) => {
+          setTitle(res!.title)
+          setContent(res!.content)
+        })
+        .catch((err: Error) => {
+          alert(err.message)
+          console.error(err)
+        })
+    }
   }, [authContextValue, year, month, date, diaryId])
 
   return (
