@@ -21,8 +21,9 @@ import { getDiaryListByDate, deleteDiary } from '@/shared/api/api'
 
 // * import context
 import AuthContext from '@/shared/context/AuthContext'
+import CalendarCellDiaryTitle from './CalendarCellDiaryTitle'
 
-export default function CalendarCell({ cellInfo, todayInfo }: CalendarCellProps) {
+export default function CalendarCell({ cellInfo, isTodayCell }: CalendarCellProps) {
   const uid = useContext(AuthContext)!.authContextValue?.uid
 
   const [diaryList, setDiaryList] = useState<any>([])
@@ -46,16 +47,13 @@ export default function CalendarCell({ cellInfo, todayInfo }: CalendarCellProps)
     }
   }, [cellInfo, uid])
 
-  const dateDecoration =
-    todayInfo?.year === cellInfo?.year &&
-    todayInfo?.monthIndex === cellInfo?.monthIndex &&
-    todayInfo?.date === cellInfo?.date
-      ? {
-          textDecoration: 'underline',
-          textDecorationColor: 'red',
-          textDecorationThickness: '3px',
-        }
-      : null
+  const dateDecoration = isTodayCell
+    ? {
+        textDecoration: 'underline',
+        textDecorationColor: 'red',
+        textDecorationThickness: '3px',
+      }
+    : null
 
   let dateColor = null
   switch (cellInfo?.column) {
@@ -82,7 +80,6 @@ export default function CalendarCell({ cellInfo, todayInfo }: CalendarCellProps)
                 lineHeight: '2',
                 paddingTop: '',
                 paddingLeft: '0.5rem',
-                // height: '32px',
                 color: dateColor,
                 ...dateDecoration,
               }}
@@ -121,43 +118,7 @@ export default function CalendarCell({ cellInfo, todayInfo }: CalendarCellProps)
           (diary: { uid: string; year: number; month: number; date: number; title: string; diaryId: string }) => (
             <Box key={diary.uid} sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               {/* 제목만 */}
-              <Typography
-                variant="body2"
-                sx={{
-                  overflow: 'hidden',
-                  textOverflow: 'ellipsis',
-                  whiteSpace: 'nowrap',
-                }}
-              >
-                <Link
-                  href={{
-                    pathname: `/modifyDiary`,
-                    query: {
-                      diaryId: diary.diaryId,
-                      year: diary.year,
-                      month: diary.month,
-                      date: diary.date,
-                      day: cellInfo?.day,
-                    },
-                  }}
-                  style={{ textDecoration: 'none', color: 'unset' }}
-                >
-                  <Box
-                    component="span"
-                    sx={{
-                      '@media(min-width:600.1px)': {
-                        display: 'inline',
-                      },
-                      '@media(max-width:600px)': {
-                        display: 'none',
-                      },
-                    }}
-                  >
-                    ✍️
-                  </Box>
-                  {diary.title}
-                </Link>
-              </Typography>
+              <CalendarCellDiaryTitle diaryInfo={{ ...diary, day: cellInfo!.day }} />
 
               {/* 삭제버튼 */}
               <IconButton

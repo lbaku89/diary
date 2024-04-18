@@ -58,6 +58,12 @@ export type DayIndex = 0 | 1 | 2 | 3 | 4 | 5 | 6
 /** 한국어 요일 타입 */
 export type KoreanDay = '일요일' | '월요일' | '화요일' | '수요일' | '목요일' | '금요일' | '토요일'
 
+export interface TodayInfo {
+  year: number
+  monthIndex: MonthIndex
+  date: CalendarDate
+}
+
 export interface CalendarInfo {
   [key: number]: CalendarCellInfo
 }
@@ -74,7 +80,7 @@ export interface CalendarCellInfo {
 
 export interface CalendarCellProps {
   cellInfo?: CalendarCellInfo
-  todayInfo?: { year: number; monthIndex: MonthIndex; date: CalendarDate }
+  isTodayCell?: boolean
   children?: React.ReactNode
 }
 
@@ -83,4 +89,14 @@ export interface IAuthContext {
   setAuthContextValue: (value: AuthContextValue | null) => void
   isLoading: boolean
   setIsLoading: (value: boolean) => void
+}
+
+export interface CalendarCellDiaryTitleProps {
+  uid: string
+  year: number
+  month: number
+  date: number
+  title: string
+  diaryId: string
+  day: string
 }
