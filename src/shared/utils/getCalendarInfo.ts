@@ -1,23 +1,20 @@
 // * import type
-import { CalendarInfo, CalendarCellInfo, CalendarRow, MonthIndex, CalendarDate } from '@/shared/types/type'
+import { CalendarInfo, CalendarCellInfo, CalendarRow, MonthIndex, CalendarDate, Month } from '@/shared/types/type'
 
 /**
  * 오늘 날짜 정보를 반환한다.
- * @returns {{year: number, month: number, date: number}}}
  */
-export const getTodayInfo = (): {
-  year: number
-  monthIndex: MonthIndex
-  date: CalendarDate
-} => {
+export const getTodayInfo = () => {
   const today = new Date()
   const year = today.getFullYear()
   const monthIndex = today.getMonth() as MonthIndex
+  const month = (monthIndex + 1) as Month
   const date = today.getDate() as CalendarDate
 
   return {
     year,
     monthIndex,
+    month,
     date,
   }
 }
