@@ -113,3 +113,8 @@ export interface CalendarControlUIProps {
   selectedYear: number
   selectedMonth: Month
 }
+
+export interface CalendarUIProps {
+  selectedYear: number
+  selectedMonth: Month
+}

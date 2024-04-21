@@ -37,7 +37,7 @@ export default function CalendarUI({ selectedYear, selectedMonth }: CalendarUIPr
         </Grid>
       ))}
       {calendarInfoArray.map((cellInfo) => (
-        <Grid item xs={1} key={cellInfo.date}>
+        <Grid item xs={1} key={`${String(cellInfo.row)}-${String(cellInfo.column)}`}>
           <CalendarCell cellInfo={cellInfo} />
         </Grid>
       ))}
