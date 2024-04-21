@@ -46,7 +46,7 @@ export default function MainPage({ searchParams }: { searchParams: { [key: strin
       </Box>
       <UserName />
       <CalendarControlUI selectedYear={selectedYear} selectedMonth={selectedMonth} />
-      <CalendarUI />
+      <CalendarUI selectedYear={selectedYear} selectedMonth={selectedMonth} />
     </>
   )
 }

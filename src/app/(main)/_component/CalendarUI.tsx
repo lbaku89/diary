@@ -1,17 +1,10 @@
-'use client'
-
-import { useSearchParams } from 'next/navigation'
-import { getTodayInfo, getCalendarInfo, getDummyCellArray } from '@/shared/utils/getCalendarInfo'
-import { MonthIndex, CalendarCellInfo } from '@/shared/types/type'
+import { getCalendarInfo, getDummyCellArray } from '@/shared/utils/getCalendarInfo'
+import { MonthIndex, CalendarCellInfo, CalendarUIProps } from '@/shared/types/type'
 import { Grid, Box, Typography } from '@mui/material'
 import CalendarCell from './CalendarCell'
-import checkIsTodayCell from '../_utils/checkIsTodayCell'
 
-export default function CalendarUI() {
-  const searchParams = useSearchParams()
-  const [year, month, todayInfo] = [searchParams.get('year'), searchParams.get('month'), getTodayInfo()]
-
-  const calendarInfo = getCalendarInfo({ year: Number(year), monthIndex: (Number(month) - 1) as MonthIndex })
+export default function CalendarUI({ selectedYear, selectedMonth }: CalendarUIProps) {
+  const calendarInfo = getCalendarInfo({ year: selectedYear, monthIndex: (selectedMonth - 1) as MonthIndex })
   const calendarInfoArray: CalendarCellInfo[] = Object.values(calendarInfo)
 
   const dummyCellCount: number = calendarInfoArray[0].dayIndex
