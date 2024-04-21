@@ -108,3 +108,8 @@ export interface CalendarCellDiaryDeleteBtnProps {
   diaryInfo: DiaryInfo
   setDiaryList: (diaryList: DiaryInfo[]) => void
 }
+
+export interface CalendarControlUIProps {
+  selectedYear: number
+  selectedMonth: Month
+}
