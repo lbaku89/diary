@@ -4,6 +4,7 @@ import { Typography } from '@mui/material'
 import { useContext } from 'react'
 import AuthContext from '@/shared/context/AuthContext'
 
+// todo 로딩중 스켈레톤 처리 (dynamic import)
 export default function UserName() {
   const name = useContext(AuthContext)?.authContextValue?.displayName
 
