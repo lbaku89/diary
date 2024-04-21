@@ -72,7 +72,7 @@ export default function DiaryModifyPageUI() {
   return (
     <Box sx={{ padding: '2rem 0' }}>
       {/* 뒤로가기버튼 */}
-      <BackBtn pathName="/" />
+      <BackBtn />
       {/* 날짜 - 2024.1.24 */}
       <Typography variant="h5" sx={{ textAlign: 'center' }}>
         {year}.{month}.{date} {Utils.convertDayToKorean(day as Day)}

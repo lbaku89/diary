@@ -40,7 +40,7 @@ export default function DiaryWritePageUI() {
   return (
     <Box sx={{ padding: '2rem 0' }}>
       {/* 뒤로가기 btn */}
-      <BackBtn pathName="/" />
+      <BackBtn />
       {/* 날짜 */}
       <Typography variant="h5" sx={{ textAlign: 'center' }}>
         {year}.{month}.{date} {Utils.convertDayToKorean(day)}
@@ -74,7 +74,7 @@ export default function DiaryWritePageUI() {
         />
 
         <Box sx={{ display: 'flex', justifyContent: 'end' }}>
-          {/* 작성 btn */}
+          {/* 작성 btn - 여기 client */}
           <Button
             variant="contained"
             type="submit"
