@@ -23,6 +23,7 @@ import Image from 'next/image'
 
 // * import utils
 import Utils from '@/shared/utils/utility'
+import { getTodayInfo } from '../utils/getCalendarInfo'
 
 export default function LoginButton() {
   const context = useContext(AuthContext)
@@ -42,7 +43,8 @@ export default function LoginButton() {
                 validDays: 100,
               })
               addFirstVisitUser(res)
-              router.push('/')
+              const todayInfo = getTodayInfo()
+              router.push(`/?year=${todayInfo.year}&month=${todayInfo.month}`)
             }
           })
           .finally(() => {
