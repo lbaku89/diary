@@ -1,14 +1,19 @@
-import { getCalendarInfo, getDummyCellArray } from '@/shared/utils/getCalendarInfo'
-import { MonthIndex, CalendarCellInfo, CalendarUIProps } from '@/shared/types/type'
+import { getCalendarCellsInfo } from '@/shared/utils/getCalendarInfo'
+import { MonthIndex, CalendarUIProps } from '@/shared/types/type'
 import { Grid, Box, Typography } from '@mui/material'
 import CalendarCell from './CalendarCell'
 
 export default function CalendarUI({ selectedYear, selectedMonth }: CalendarUIProps) {
-  const calendarInfo = getCalendarInfo({ year: selectedYear, monthIndex: (selectedMonth - 1) as MonthIndex })
-  const calendarInfoArray: CalendarCellInfo[] = Object.values(calendarInfo)
-
-  const dummyCellCount: number = calendarInfoArray[0].dayIndex
-  const dummyCellArray = getDummyCellArray(dummyCellCount).map((key, i) => ({ key: i }))
+  const calendarCellsInfo = getCalendarCellsInfo({ year: selectedYear, monthIndex: (selectedMonth - 1) as MonthIndex })
+  const calendarCellsInfoArray = Object.values(calendarCellsInfo).map((cellInfo) => ({
+    ...cellInfo,
+    isDummyCell: false,
+  }))
+  const dummyCellCount: number = calendarCellsInfoArray[0].dayIndex
+  const dummyCellsInfoArray = [...Array(dummyCellCount)].map((value, i) => ({ key: `0-${i}`, isDummyCell: true }))
+  // todo valid cell, dummy cell 구분
+  // todo getTotalCalendarCellsInfo 함수로 분리 하여 모듈화 하는게 좋은 것 같아 보임
+  const totalCellsInfoArray = [...dummyCellsInfoArray, ...calendarCellsInfoArray]
 
   const DAYS_HEADERS = [
     { day: '일', key: 'sunday' },
@@ -31,14 +36,10 @@ export default function CalendarUI({ selectedYear, selectedMonth }: CalendarUIPr
           </Box>
         </Grid>
       ))}
-      {dummyCellArray.map((cellInfo) => (
+
+      {totalCellsInfoArray.map((cellInfo) => (
         <Grid item xs={1} key={cellInfo.key}>
-          <CalendarCell />
-        </Grid>
-      ))}
-      {calendarInfoArray.map((cellInfo) => (
-        <Grid item xs={1} key={`${String(cellInfo.row)}-${String(cellInfo.column)}`}>
-          <CalendarCell cellInfo={cellInfo} />
+          {cellInfo.isDummyCell ? <CalendarCell /> : <CalendarCell cellInfo={cellInfo} />}
         </Grid>
       ))}
     </Grid>
