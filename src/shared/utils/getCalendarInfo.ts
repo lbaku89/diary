@@ -24,7 +24,7 @@ export const getTodayInfo = () => {
  * @param param0 year, month 정보
  * @returns {CalendarInfo}
  */
-export const getCalendarInfo = ({ year, monthIndex }: { year: number; monthIndex: MonthIndex }): CalendarInfo => {
+export const getCalendarCellsInfo = ({ year, monthIndex }: { year: number; monthIndex: MonthIndex }): CalendarInfo => {
   const selectedMonthData: {
     [key: number]: CalendarCellInfo
   } = {}
@@ -56,6 +56,7 @@ export const getCalendarInfo = ({ year, monthIndex }: { year: number; monthIndex
             dayIndex: 0,
             row,
             column: 0,
+            key: `${row}-${0}`,
           }
           break
         case 1:
@@ -67,6 +68,7 @@ export const getCalendarInfo = ({ year, monthIndex }: { year: number; monthIndex
             dayIndex: 1,
             row,
             column: 1,
+            key: `${row}-${1}`,
           }
           break
         case 2:
@@ -78,6 +80,7 @@ export const getCalendarInfo = ({ year, monthIndex }: { year: number; monthIndex
             dayIndex: 2,
             row,
             column: 2,
+            key: `${row}-${2}`,
           }
           break
         case 3:
@@ -89,6 +92,7 @@ export const getCalendarInfo = ({ year, monthIndex }: { year: number; monthIndex
             dayIndex: 3,
             row,
             column: 3,
+            key: `${row}-${3}`,
           }
           break
         case 4:
@@ -100,6 +104,7 @@ export const getCalendarInfo = ({ year, monthIndex }: { year: number; monthIndex
             dayIndex: 4,
             row,
             column: 4,
+            key: `${row}-${4}`,
           }
           break
         case 5:
@@ -111,6 +116,7 @@ export const getCalendarInfo = ({ year, monthIndex }: { year: number; monthIndex
             dayIndex: 5,
             row,
             column: 5,
+            key: `${row}-${5}`,
           }
           break
         case 6:
@@ -122,6 +128,7 @@ export const getCalendarInfo = ({ year, monthIndex }: { year: number; monthIndex
             dayIndex: 6,
             row,
             column: 6,
+            key: `${row}-${6}`,
           }
           break
         default:

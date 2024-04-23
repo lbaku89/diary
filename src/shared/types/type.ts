@@ -76,6 +76,7 @@ export interface CalendarCellInfo {
   dayIndex: DayIndex // 요일 인덱스 0~6
   row: CalendarRow
   column: CalendarColumn
+  key: string // row-column 값 (component key값으로 사용하기 위해서 사용)
 }
 
 export interface IAuthContext {
