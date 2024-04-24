@@ -77,6 +77,12 @@ export interface CalendarCellInfo {
   row: CalendarRow
   column: CalendarColumn
   key: string // row-column 값 (component key값으로 사용하기 위해서 사용)
+  isDummyCell: boolean
+}
+
+export interface CalendarDummyCellInfo {
+  key: string
+  isDummyCell: boolean
 }
 
 export interface IAuthContext {
