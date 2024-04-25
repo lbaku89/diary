@@ -2,14 +2,14 @@
 
 import { useRouter } from 'next/navigation'
 import { Button, TextField, Box } from '@mui/material'
-import { DiaryContentAndBtnsProps } from '@/shared/types/type'
+import { DiaryInputAndWriteBtnProps } from '@/shared/types/type'
 import AuthContext from '@/shared/context/AuthContext'
 import { useContext, useState } from 'react'
 import Utils from '@/shared/utils/utility'
 import { addDiary } from '@/shared/api/api'
 import CancelBtn from '@/shared/components/CancelBtn'
 
-export default function DiaryContentAndBtns({ year, month, date, day }: DiaryContentAndBtnsProps) {
+export default function DiaryInputAndWriteBtn({ year, month, date, day }: DiaryInputAndWriteBtnProps) {
   const uid = useContext(AuthContext)?.authContextValue?.uid
   const router = useRouter()
 

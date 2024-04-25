@@ -1,8 +1,8 @@
-import DiaryContentAndBtns from '@/app/(main)/writeDiary/_component/DiaryContentAndBtns'
 import { Day, Month, CalendarDate } from '@/shared/types/type'
 import { Box, Typography } from '@mui/material'
 import BackBtn from '@/shared/components/BackBtn'
 import Utils from '@/shared/utils/utility'
+import DiaryInputAndWriteBtn from './_component/DiaryInputAndWriteBtn'
 
 export default function DiaryWritePage({ searchParams }: { searchParams: { [key: string]: string | undefined } }) {
   const { year, month, date, day } = searchParams
@@ -13,7 +13,7 @@ export default function DiaryWritePage({ searchParams }: { searchParams: { [key:
       <Typography variant="h5" sx={{ textAlign: 'center' }}>
         {year}.{month}.{date} {Utils.convertDayToKorean(day as Day)}
       </Typography>
-      <DiaryContentAndBtns
+      <DiaryInputAndWriteBtn
         year={Number(year)}
         month={Number(month) as Month}
         date={Number(date) as CalendarDate}
