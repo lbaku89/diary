@@ -125,3 +125,10 @@ export interface CalendarUIProps {
   selectedYear: number
   selectedMonth: Month
 }
+
+export interface DiaryContentAndBtnsProps {
+  year: number
+  month: number
+  date: number
+  day: Day
+}

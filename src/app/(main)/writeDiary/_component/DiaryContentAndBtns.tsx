@@ -2,26 +2,17 @@
 
 import { useRouter } from 'next/navigation'
 import { Button, TextField, Box } from '@mui/material'
-import { Day } from '@/shared/types/type'
+import { DiaryContentAndBtnsProps } from '@/shared/types/type'
 import AuthContext from '@/shared/context/AuthContext'
 import { useContext, useState } from 'react'
 import Utils from '@/shared/utils/utility'
 import { addDiary } from '@/shared/api/api'
 import CancelBtn from '@/shared/components/CancelBtn'
 
-export default function DiaryWritePageUI({
-  year,
-  month,
-  date,
-  day,
-}: {
-  year: number
-  month: number
-  date: number
-  day: Day
-}) {
-  const { authContextValue } = useContext(AuthContext)!
+export default function DiaryContentAndBtns({ year, month, date, day }: DiaryContentAndBtnsProps) {
+  const uid = useContext(AuthContext)?.authContextValue?.uid
   const router = useRouter()
+
   const [title, setTitle] = useState<string>('')
   const [content, setContent] = useState<string>('')
   const [isTitleError, setIsTitleError] = useState<boolean>(false)
@@ -44,7 +35,7 @@ export default function DiaryWritePageUI({
 
     if (!isEmptyTitle && !isEmptyContent) {
       addDiary({
-        uid: authContextValue!.uid,
+        uid: uid!,
         dateInfo: {
           year: Number(year),
           month: Number(month),
@@ -62,16 +53,20 @@ export default function DiaryWritePageUI({
     }
   }
 
-  // todo : 컴포넌트 이름 변경 (제목,내용,버튼을 포함하는 이름으로)
-  // todo : 컴포넌트 정리하기
+  const handleChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTitle(e.target.value)
+  }
+
+  const handleChangeContent = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setContent(e.target.value)
+  }
+
   return (
     <Box component="form">
       {/* 제목 */}
       <TextField
         value={title}
-        onChange={(e) => {
-          setTitle(e.target.value)
-        }}
+        onChange={handleChangeTitle}
         error={isTitleError}
         type="text"
         helperText={isTitleError ? '제목을 입력하세요' : ''}
@@ -81,9 +76,7 @@ export default function DiaryWritePageUI({
       {/* 내용 */}
       <TextField
         value={content}
-        onChange={(e) => {
-          setContent(e.target.value)
-        }}
+        onChange={handleChangeContent}
         error={isContentError}
         helperText={isContentError ? '내용을 입력하세요' : ''}
         type="text"
@@ -95,7 +88,7 @@ export default function DiaryWritePageUI({
 
       <Box sx={{ display: 'flex', justifyContent: 'end' }}>
         {/* 작성 btn */}
-        <Button variant="contained" onClick={handleClickWriteDiaryBtn}>
+        <Button variant="contained" onClick={handleClickWriteDiaryBtn} disabled={!uid}>
           작성완료
         </Button>
         {/* 취소 btn */}
