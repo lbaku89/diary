@@ -3,7 +3,7 @@
 import { Typography, Box } from '@mui/material'
 import LoginButton from '@/shared/components/LoginButton'
 
-export default function Page() {
+export default function LoginPage() {
   return (
     <Box
       sx={{
