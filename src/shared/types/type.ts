@@ -132,3 +132,11 @@ export interface DiaryInputAndWriteBtnProps {
   date: number
   day: Day
 }
+
+export interface DiaryContentAndModifyBtnProps {
+  year: number
+  month: number
+  date: number
+  day: Day
+  diaryId: string | undefined
+}

@@ -6,16 +6,8 @@ import { useContext, useEffect, useState } from 'react'
 import { getDiary, modifyDiary, deleteDiary } from '@/shared/api/api'
 import { Box, TextField, Button } from '@mui/material'
 import Utils from '@/shared/utils/utility'
-import { Day } from '@/shared/types/type'
+import { DiaryContentAndModifyBtnProps } from '@/shared/types/type'
 import CancelBtn from '@/shared/components/CancelBtn'
-
-export interface DiaryContentAndModifyBtnProps {
-  year: number
-  month: number
-  date: number
-  day: Day
-  diaryId: string | undefined
-}
 
 export default function DiaryContentAndModifyBtn({ year, month, date, day, diaryId }: DiaryContentAndModifyBtnProps) {
   const router = useRouter()
@@ -146,7 +138,7 @@ export default function DiaryContentAndModifyBtn({ year, month, date, day, diary
             {isModifyMode ? '수정완료' : '수정하기'}
           </Button>
           {/* 삭제 */}
-          <Button variant="contained" color="info" sx={{ marginLeft: '0.5rem' }} onClick={handleClickDeleteBtn}>
+          <Button variant="contained" color="info" sx={{ mx: '0.5rem' }} onClick={handleClickDeleteBtn}>
             삭제하기
           </Button>
           {/* 취소 btn */}
