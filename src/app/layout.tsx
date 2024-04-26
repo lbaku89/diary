@@ -8,7 +8,6 @@ import CssBaseline from '@mui/material/CssBaseline'
 // * import contextProvider
 import AuthContextProvider from '@/shared/context/AuthContextProvider'
 
-// const inter = Inter({ subsets: ['latin'] })
 import Container from '@mui/material/Container'
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter'
 

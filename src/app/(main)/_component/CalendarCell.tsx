@@ -47,7 +47,7 @@ export default function CalendarCell({ cellInfo }: { cellInfo?: CalendarCellInfo
         <CalendarCellContentContainer>
           <Box>
             {diaryList.map((diary: DiaryInfo) => (
-              <Box key={diary.uid} sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <Box key={diary.diaryId} sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <CalendarCellDiaryTitle diaryInfo={{ ...diary, day: cellInfo!.day }} />
                 <CalendarCellDiaryDeleteBtn diaryInfo={diary} setDiaryList={setDiaryList} />
               </Box>
