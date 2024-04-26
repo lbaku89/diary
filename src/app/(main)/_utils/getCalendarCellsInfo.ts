@@ -1,30 +1,11 @@
-// * import type
-import { CalendarInfo, CalendarCellInfo, CalendarRow, MonthIndex, CalendarDate, Month } from '@/shared/types/type'
-
-/**
- * 오늘 날짜 정보를 반환한다.
- */
-export const getTodayInfo = () => {
-  const today = new Date()
-  const year = today.getFullYear()
-  const monthIndex = today.getMonth() as MonthIndex
-  const month = (monthIndex + 1) as Month
-  const date = today.getDate() as CalendarDate
-
-  return {
-    year,
-    monthIndex,
-    month,
-    date,
-  }
-}
+import { CalendarCellInfo, CalendarRow, MonthIndex, CalendarDate } from '@/shared/types/type'
 
 /**
  * 년도, 월 입력받아 해당 달력의 날짜정보를 반환한다.
  * @param param0 year, month 정보
  * @returns {CalendarInfo}
  */
-export const getCalendarCellsInfo = ({ year, monthIndex }: { year: number; monthIndex: MonthIndex }): CalendarInfo => {
+export default function getCalendarCellsInfo({ year, monthIndex }: { year: number; monthIndex: MonthIndex }) {
   const selectedMonthData: {
     [key: number]: CalendarCellInfo
   } = {}
@@ -144,14 +125,4 @@ export const getCalendarCellsInfo = ({ year, monthIndex }: { year: number; month
   }
 
   return selectedMonthData
-}
-
-export const getDummyCellArray = (count: number): null[] => {
-  const dummyCellArray: null[] = []
-  let i = 1
-  while (i <= count) {
-    dummyCellArray.unshift(null)
-    i += 1
-  }
-  return dummyCellArray
 }

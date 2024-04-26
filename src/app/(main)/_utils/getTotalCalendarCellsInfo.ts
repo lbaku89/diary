@@ -1,5 +1,5 @@
-import { getCalendarCellsInfo } from '@/shared/utils/getCalendarInfo'
 import { MonthIndex } from '@/shared/types/type'
+import getCalendarCellsInfo from './getCalendarCellsInfo'
 
 export default function getTotalCalendarCellsInfo(year: number, monthIndex: number) {
   const calendarCellsInfo = getCalendarCellsInfo({

@@ -1,5 +1,5 @@
 import { Box, Typography, IconButton, Button } from '@mui/material'
-import { getTodayInfo } from '@/shared/utils/getCalendarInfo'
+import getTodayInfo from '@/shared/utils/getTodayInfo'
 import ArrowBackIosNewSharpIcon from '@mui/icons-material/ArrowBackIosNewSharp'
 import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp'
 import Link from 'next/link'

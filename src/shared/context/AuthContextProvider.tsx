@@ -35,7 +35,6 @@ export default function AuthContextProvider({ children }: { children: React.Reac
     })
   }, [])
 
-  // todo 의존성 배열에 객체 x -> 컨텍스트 설계 잘못
   const memoizedAuthContext = useMemo(
     () => ({ authContextValue, setAuthContextValue, isLoading, setIsLoading }),
     [authContextValue, isLoading]

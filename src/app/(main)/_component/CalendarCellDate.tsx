@@ -1,6 +1,6 @@
 import { Typography } from '@mui/material'
 import { CalendarCellInfo } from '@/shared/types/type'
-import { getTodayInfo } from '@/shared/utils/getCalendarInfo'
+import getTodayInfo from '@/shared/utils/getTodayInfo'
 import checkIsTodayCell from '../_utils/checkIsTodayCell'
 import getCalendarCellDateColorByColumn from '../_utils/getCalendarCellDateColor'
 

@@ -23,7 +23,7 @@ import Image from 'next/image'
 
 // * import utils
 import Utils from '@/shared/utils/utility'
-import { getTodayInfo } from '../utils/getCalendarInfo'
+import getTodayInfo from '../utils/getTodayInfo'
 
 export default function LoginButton() {
   const context = useContext(AuthContext)

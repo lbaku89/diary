@@ -88,7 +88,14 @@ export default function DiaryInputAndWriteBtn({ year, month, date, day }: DiaryI
 
       <Box sx={{ display: 'flex', justifyContent: 'end' }}>
         {/* 작성 btn */}
-        <Button variant="contained" onClick={handleClickWriteDiaryBtn} disabled={!uid}>
+        <Button
+          variant="contained"
+          onClick={handleClickWriteDiaryBtn}
+          disabled={!uid}
+          sx={{
+            mx: '0.5rem',
+          }}
+        >
           작성완료
         </Button>
         {/* 취소 btn */}
