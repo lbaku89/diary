@@ -1,5 +1,3 @@
-'use client'
-
 // * import type
 import { AuthContextValue, DiaryInfo } from '@/shared/types/type'
 
@@ -29,7 +27,11 @@ export const login = async (): Promise<null | AuthContextValue> => {
       return userInfo
     })
     .catch((err) => {
-      alert(`error:${err}`)
+      // popup창이 닫힐 때 발생하는 에러는 무시
+      if (err.message === 'Firebase: Error (auth/popup-closed-by-user).') {
+        return null
+      }
+      alert(`로그인에 실패했습니다. error message: ${err.message}`)
       return null
     })
   return result
