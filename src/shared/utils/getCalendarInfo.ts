@@ -43,7 +43,6 @@ export const getCalendarCellsInfo = ({ year, monthIndex }: { year: number; month
     const indexDate = new Date(year, monthIndex, i)
     const [indexDateMonth, indexDateDay] = [indexDate.getMonth(), indexDate.getDay()]
 
-    // todo default 에 대한 처리 필요
     // i 일이 다음달로 넘어가지 않은지 판별 후
     if (indexDateMonth === firstDateMonthIndex) {
       switch (indexDateDay) {
@@ -57,6 +56,7 @@ export const getCalendarCellsInfo = ({ year, monthIndex }: { year: number; month
             row,
             column: 0,
             key: `${row}-${0}`,
+            isDummyCell: false,
           }
           break
         case 1:
@@ -69,6 +69,7 @@ export const getCalendarCellsInfo = ({ year, monthIndex }: { year: number; month
             row,
             column: 1,
             key: `${row}-${1}`,
+            isDummyCell: false,
           }
           break
         case 2:
@@ -81,6 +82,7 @@ export const getCalendarCellsInfo = ({ year, monthIndex }: { year: number; month
             row,
             column: 2,
             key: `${row}-${2}`,
+            isDummyCell: false,
           }
           break
         case 3:
@@ -93,6 +95,7 @@ export const getCalendarCellsInfo = ({ year, monthIndex }: { year: number; month
             row,
             column: 3,
             key: `${row}-${3}`,
+            isDummyCell: false,
           }
           break
         case 4:
@@ -105,6 +108,7 @@ export const getCalendarCellsInfo = ({ year, monthIndex }: { year: number; month
             row,
             column: 4,
             key: `${row}-${4}`,
+            isDummyCell: false,
           }
           break
         case 5:
@@ -117,6 +121,7 @@ export const getCalendarCellsInfo = ({ year, monthIndex }: { year: number; month
             row,
             column: 5,
             key: `${row}-${5}`,
+            isDummyCell: false,
           }
           break
         case 6:
@@ -129,6 +134,7 @@ export const getCalendarCellsInfo = ({ year, monthIndex }: { year: number; month
             row,
             column: 6,
             key: `${row}-${6}`,
+            isDummyCell: false,
           }
           break
         default:
