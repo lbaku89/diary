@@ -5,9 +5,9 @@ import AuthContext from '@/shared/context/AuthContext'
 import { useContext, useEffect, useState } from 'react'
 import { getDiary, modifyDiary, deleteDiary } from '@/shared/api/api'
 import { Box, TextField, Button } from '@mui/material'
-import Utils from '@/shared/utils/utility'
 import { DiaryContentAndModifyBtnProps } from '@/shared/types/type'
 import CancelBtn from '@/shared/components/CancelBtn'
+import isEmptyText from '@/shared/utils/isEmptyText'
 
 export default function DiaryContentAndModifyBtn({ year, month, date, day, diaryId }: DiaryContentAndModifyBtnProps) {
   const router = useRouter()
@@ -51,7 +51,7 @@ export default function DiaryContentAndModifyBtn({ year, month, date, day, diary
     const mode = target.textContent
     if (mode === '수정완료') {
       // * 유효성 검사
-      const [isEmptyTitle, isEmptyContent] = [Utils.isEmptyText(title), Utils.isEmptyText(content)]
+      const [isEmptyTitle, isEmptyContent] = [isEmptyText(title), isEmptyText(content)]
       if (isEmptyTitle) {
         setIsTitleError(true)
       } else {

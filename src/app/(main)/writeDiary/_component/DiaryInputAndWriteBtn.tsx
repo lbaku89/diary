@@ -5,9 +5,9 @@ import { Button, TextField, Box } from '@mui/material'
 import { DiaryInputAndWriteBtnProps } from '@/shared/types/type'
 import AuthContext from '@/shared/context/AuthContext'
 import { useContext, useState } from 'react'
-import Utils from '@/shared/utils/utility'
 import { addDiary } from '@/shared/api/api'
 import CancelBtn from '@/shared/components/CancelBtn'
+import isEmptyText from '@/shared/utils/isEmptyText'
 
 export default function DiaryInputAndWriteBtn({ year, month, date, day }: DiaryInputAndWriteBtnProps) {
   const uid = useContext(AuthContext)?.authContextValue?.uid
@@ -19,7 +19,7 @@ export default function DiaryInputAndWriteBtn({ year, month, date, day }: DiaryI
   const [isContentError, setIsContentError] = useState<boolean>(false)
 
   const handleClickWriteDiaryBtn = () => {
-    const [isEmptyTitle, isEmptyContent] = [Utils.isEmptyText(title), Utils.isEmptyText(content)]
+    const [isEmptyTitle, isEmptyContent] = [isEmptyText(title), isEmptyText(content)]
 
     if (isEmptyTitle) {
       setIsTitleError(true)

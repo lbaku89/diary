@@ -1,7 +1,7 @@
 import { Day, Month, CalendarDate } from '@/shared/types/type'
 import { Box, Typography } from '@mui/material'
 import BackBtn from '@/shared/components/BackBtn'
-import Utils from '@/shared/utils/utility'
+import convertDayToKorean from '@/shared/utils/convertDayToKorean'
 import DiaryInputAndWriteBtn from './_component/DiaryInputAndWriteBtn'
 
 export default function DiaryWritePage({ searchParams }: { searchParams: { [key: string]: string | undefined } }) {
@@ -11,7 +11,7 @@ export default function DiaryWritePage({ searchParams }: { searchParams: { [key:
     <Box sx={{ padding: '2rem 0' }}>
       <BackBtn />
       <Typography variant="h5" sx={{ textAlign: 'center' }}>
-        {year}.{month}.{date} {Utils.convertDayToKorean(day as Day)}
+        {year}.{month}.{date} {convertDayToKorean(day as Day)}
       </Typography>
       <DiaryInputAndWriteBtn
         year={Number(year)}

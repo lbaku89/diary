@@ -4,10 +4,7 @@ import '@fontsource/roboto/400.css'
 import '@fontsource/roboto/500.css'
 import '@fontsource/roboto/700.css'
 import CssBaseline from '@mui/material/CssBaseline'
-
-// * import contextProvider
 import AuthContextProvider from '@/shared/context/AuthContextProvider'
-
 import Container from '@mui/material/Container'
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter'
 

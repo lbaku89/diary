@@ -1,9 +1,6 @@
 'use client'
 
-// * import type
 import { CalendarCellInfo, DiaryInfo } from '@/shared/types/type'
-
-// * import component
 import { Box } from '@mui/material'
 import { useEffect, useState, useContext } from 'react'
 import { getDiaryListByDate } from '@/shared/api/api'
@@ -14,7 +11,6 @@ import CalendarCellDiaryDeleteBtn from './CalendarCellDiaryDeleteBtn'
 import CalendarCellDiaryCreateBtn from './CalendarCellDiaryCreateBtn'
 import CalendarCellContentContainer from './CalendarCellContentContainer'
 
-// * check cellInfo 객체로 넘겨 줄 것인지 (리렌더링 최적화 관련)
 export default function CalendarCell({ cellInfo }: { cellInfo?: CalendarCellInfo }) {
   const uid = useContext(AuthContext)!.authContextValue?.uid
 

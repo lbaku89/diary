@@ -1,8 +1,8 @@
 import DiaryContentAndModifyBtn from '@/app/(main)/modifyDiary/_component/DiaryContentAndModifyBtn'
 import { Box, Typography } from '@mui/material'
 import BackBtn from '@/shared/components/BackBtn'
-import Utils from '@/shared/utils/utility'
 import { Day } from '@/shared/types/type'
+import convertDayToKorean from '@/shared/utils/convertDayToKorean'
 
 export default function DiaryModifyPage({ searchParams }: { searchParams: { [key: string]: string | undefined } }) {
   const { year, month, date, day, diaryId } = searchParams
@@ -11,7 +11,7 @@ export default function DiaryModifyPage({ searchParams }: { searchParams: { [key
     <Box sx={{ padding: '2rem 0' }}>
       <BackBtn />
       <Typography variant="h5" sx={{ textAlign: 'center' }}>
-        {year}.{month}.{date} {Utils.convertDayToKorean(day as Day)}
+        {year}.{month}.{date} {convertDayToKorean(day as Day)}
       </Typography>
       <DiaryContentAndModifyBtn
         year={Number(year)}

@@ -7,9 +7,8 @@ import { UserCredential, GoogleAuthProvider, signInWithPopup, signOut } from 'fi
 
 // * import firebase instance
 import { db, firebaseAuth } from '@/shared/firebase/firebaseClient'
-
+import getYYYYMMDD from '../utils/getYYYYMMDD'
 // * import utils
-import Utils from '@/shared/utils/utility'
 
 export const login = async (): Promise<null | AuthContextValue> => {
   const provider = new GoogleAuthProvider()
@@ -144,7 +143,7 @@ export const getDiary = async (
     diaryId: string
   }
 ) => {
-  const yyyymmdd = Utils.getYYYYMMDD(diaryInfo.year, diaryInfo.month, diaryInfo.date)
+  const yyyymmdd = getYYYYMMDD(diaryInfo.year, diaryInfo.month, diaryInfo.date)
   // * 해당 날짜의 collection 문서 가져오기
   const docRef = doc(db, `users/${uid}/${yyyymmdd}`, `${diaryInfo.diaryId}`)
   const querySnapshot = await getDoc(docRef)
@@ -163,7 +162,7 @@ export const modifyDiary = async (
     content: string
   }
 ) => {
-  const yyyymmdd = Utils.getYYYYMMDD(diaryInfo.year, diaryInfo.month, diaryInfo.date)
+  const yyyymmdd = getYYYYMMDD(diaryInfo.year, diaryInfo.month, diaryInfo.date)
 
   // * db에 diary 수정
   await setDoc(doc(db, `users/${uid}/${yyyymmdd}`, diaryInfo.diaryId), {
