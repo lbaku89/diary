@@ -75,7 +75,7 @@ export default function DiaryContentAndModifyBtn({ year, month, date, day, diary
         })
           .then(() => {
             alert('수정되었습니다.')
-            router.push('/')
+            router.back()
           })
           .catch((err) => {
             alert('요청중 오류가 발생 됐습니다.')
@@ -97,7 +97,7 @@ export default function DiaryContentAndModifyBtn({ year, month, date, day, diary
       })
         .then(() => {
           alert('삭제되었습니다.')
-          router.push('/')
+          router.back()
         })
         .catch((err) => {
           alert('삭제중 오류가 발생했습니다.')
