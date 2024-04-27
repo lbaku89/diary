@@ -11,6 +11,9 @@ import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter'
 export const metadata: Metadata = {
   title: 'Simple Diary',
   description: 'Write your diary easily By Simple Diary',
+  icons: {
+    icon: '/images/favicon.png',
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
