@@ -1,34 +1,26 @@
-'use client'
-
 import { Box } from '@mui/material'
 import LogoutButton from '@/shared/components/LogoutButton'
-import { useContext } from 'react'
-import AuthContext from '@/shared/context/AuthContext'
-import LoadingSpinner from '@/shared/components/LoadingSpinner'
-import Calendar from './_component/Calendar'
+import getTodayInfo from '@/shared/utils/getTodayInfo'
+import { Month } from '@/shared/types/type'
+import CalendarControlUI from './_component/CalendarControlUI'
+import CalendarUI from './_component/CalendarUI'
+import UserName from './_component/UserName'
 
-// * refactoring
-// todo: client -> server component로 전환
-// todo: component 화 진행 (가독성, 유지보수성 향상)
+export default function MainPage({ searchParams }: { searchParams: { [key: string]: string | string[] | undefined } }) {
+  const todayInfo = getTodayInfo()
+  const [selectedYear, selectedMonth] = [
+    Number(searchParams.year) || todayInfo.year,
+    (Number(searchParams.month) || todayInfo.month) as Month,
+  ]
 
-// * UI/UX update
-// todo: error.tsx , loading.tsx 이용
-// todo: UX/UI 개선 - 로그인 팝업창 취소시 다시 로그인 페이지로
-// todo: UX/UI 개선 - loading 중 로그아웃 버튼 숨김
-
-// todo: 성능 테스트 (light house)
-// todo: test tool 로 시나리오 테스트 (jest)
-// todo: test
-export default function MainPage() {
-  const context = useContext(AuthContext)
-  return context?.isLoading ? (
-    <LoadingSpinner />
-  ) : (
+  return (
     <>
       <Box sx={{ marginTop: '16px', display: 'flex', justifyContent: 'end' }}>
         <LogoutButton />
       </Box>
-      <Calendar />
+      <UserName />
+      <CalendarControlUI selectedYear={selectedYear} selectedMonth={selectedMonth} />
+      <CalendarUI selectedYear={selectedYear} selectedMonth={selectedMonth} />
     </>
   )
 }

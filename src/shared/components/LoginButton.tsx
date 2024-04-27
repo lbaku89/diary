@@ -1,28 +1,14 @@
 'use client'
 
-// * import component
 import { Button } from '@mui/material'
-
-// * import api
 import { login, addFirstVisitUser } from '@/shared/api/api'
-
-// * import routing
 import { useRouter } from 'next/navigation'
-
-// * import hook
 import { useContext } from 'react'
-
-// * import type
 import { AuthContextValue } from '@/shared/types/type'
-
-// * import context
 import AuthContext from '@/shared/context/AuthContext'
-
-// * import from next
 import Image from 'next/image'
-
-// * import utils
-import Utils from '@/shared/utils/utility'
+import getTodayInfo from '../utils/getTodayInfo'
+import setCookie from '../utils/setCookie'
 
 export default function LoginButton() {
   const context = useContext(AuthContext)
@@ -36,13 +22,14 @@ export default function LoginButton() {
           .then((res: AuthContextValue | null) => {
             if (res) {
               console.log(`${res.displayName}님 환영합니다😊`)
-              Utils.setCookie({
+              setCookie({
                 cookieName: 'isLoggedIn',
                 cookieValue: 'true',
                 validDays: 100,
               })
               addFirstVisitUser(res)
-              router.push('/')
+              const todayInfo = getTodayInfo()
+              router.push(`/?year=${todayInfo.year}&month=${todayInfo.month}`)
             }
           })
           .finally(() => {

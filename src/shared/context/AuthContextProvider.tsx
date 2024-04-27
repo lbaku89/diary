@@ -9,8 +9,6 @@ import { AuthContextValue } from '@/shared/types/type'
 // * import hook
 import { useEffect, useState, useMemo } from 'react'
 
-// * import
-
 // * firebase
 import { firebaseAuth } from '@/shared/firebase/firebaseClient'
 import { User, onAuthStateChanged } from 'firebase/auth'
@@ -25,14 +23,14 @@ export default function AuthContextProvider({ children }: { children: React.Reac
       if (user) {
         // User is signed in, see docs for a list of available properties
         // https://firebase.google.com/docs/reference/js/auth.user
-        setAuthContextValue!({
-          uid: user!.uid,
-          email: user!.email!,
-          displayName: user!.displayName!,
+        setAuthContextValue({
+          uid: user.uid,
+          email: user.email!,
+          displayName: user.displayName!,
         })
       } else {
         // User is signed out
-        setAuthContextValue!(null)
+        setAuthContextValue(null)
       }
     })
   }, [])

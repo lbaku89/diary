@@ -9,6 +9,7 @@
   },
   "ignorePatterns": ["next.config.js"],
   "rules": {
+    "react/require-default-props": "off", // defaultProps를 사용하지 않아도 되도록 설정,m
     "no-useless-escape": "off",
     "no-unused-vars": "off",
     "no-alert": "off",

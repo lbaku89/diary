@@ -1,7 +1,5 @@
-'use client'
-
 // * import type
-import { AuthContextValue } from '@/shared/types/type'
+import { AuthContextValue, DiaryInfo } from '@/shared/types/type'
 
 // * import from firebase
 import { doc, setDoc, addDoc, collection, getDocs, deleteDoc, getDoc } from 'firebase/firestore'
@@ -9,9 +7,8 @@ import { UserCredential, GoogleAuthProvider, signInWithPopup, signOut } from 'fi
 
 // * import firebase instance
 import { db, firebaseAuth } from '@/shared/firebase/firebaseClient'
-
+import getYYYYMMDD from '../utils/getYYYYMMDD'
 // * import utils
-import Utils from '@/shared/utils/utility'
 
 export const login = async (): Promise<null | AuthContextValue> => {
   const provider = new GoogleAuthProvider()
@@ -29,20 +26,17 @@ export const login = async (): Promise<null | AuthContextValue> => {
       return userInfo
     })
     .catch((err) => {
-      alert(`error:${err}`)
+      // popup창이 닫힐 때 발생하는 에러는 무시
+      if (err.message === 'Firebase: Error (auth/popup-closed-by-user).') {
+        return null
+      }
+      alert(`로그인에 실패했습니다. error message: ${err.message}`)
       return null
     })
   return result
 }
 
-export const logout = async () =>
-  signOut(firebaseAuth)
-    .then(() => {
-      alert('로그아웃 되었습니다.')
-    })
-    .catch((error) => {
-      alert(`error:${error}`)
-    })
+export const logout = async () => signOut(firebaseAuth)
 
 /** 로그인 시 유저정보 확인 후 처음 왔으면 db에 유저정보 생성 */
 export const addFirstVisitUser = async (authContextValue: AuthContextValue) => {
@@ -99,14 +93,7 @@ export const getDiaryListByDate = async ({
   // * 해당 날짜의 collection 문서 가져오기
   const querySnapshot = await getDocs(collection(db, `users/${uid}/${dateInfo.year}${convertedMonth}${convertedDate}`))
 
-  const diaryList: {
-    uid: string
-    diaryId: string
-    year: number
-    month: number
-    date: number
-    title: string
-  }[] = []
+  const diaryList: DiaryInfo[] = []
 
   // * 문서들을 순회하며 diaryList에 추가
   querySnapshot.forEach((document) => {
@@ -118,7 +105,7 @@ export const getDiaryListByDate = async ({
       month: dateInfo.month,
       date: dateInfo.date,
       title: diary.title,
-    }
+    } as DiaryInfo
 
     diaryList.push(diaryInfo)
   })
@@ -156,7 +143,7 @@ export const getDiary = async (
     diaryId: string
   }
 ) => {
-  const yyyymmdd = Utils.getYYYYMMDD(diaryInfo.year, diaryInfo.month, diaryInfo.date)
+  const yyyymmdd = getYYYYMMDD(diaryInfo.year, diaryInfo.month, diaryInfo.date)
   // * 해당 날짜의 collection 문서 가져오기
   const docRef = doc(db, `users/${uid}/${yyyymmdd}`, `${diaryInfo.diaryId}`)
   const querySnapshot = await getDoc(docRef)
@@ -175,7 +162,7 @@ export const modifyDiary = async (
     content: string
   }
 ) => {
-  const yyyymmdd = Utils.getYYYYMMDD(diaryInfo.year, diaryInfo.month, diaryInfo.date)
+  const yyyymmdd = getYYYYMMDD(diaryInfo.year, diaryInfo.month, diaryInfo.date)
 
   // * db에 diary 수정
   await setDoc(doc(db, `users/${uid}/${yyyymmdd}`, diaryInfo.diaryId), {

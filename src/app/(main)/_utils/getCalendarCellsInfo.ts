@@ -1,33 +1,11 @@
-// * import type
-import { CalendarInfo, CalendarCellInfo, CalendarRow, MonthIndex, CalendarDate } from '@/shared/types/type'
-
-/**
- * 오늘 날짜 정보를 반환한다.
- * @returns {{year: number, month: number, date: number}}}
- */
-export const getTodayInfo = (): {
-  year: number
-  monthIndex: MonthIndex
-  date: CalendarDate
-} => {
-  const today = new Date()
-  const year = today.getFullYear()
-  const monthIndex = today.getMonth() as MonthIndex
-  const date = today.getDate() as CalendarDate
-
-  return {
-    year,
-    monthIndex,
-    date,
-  }
-}
+import { CalendarCellInfo, CalendarRow, MonthIndex, CalendarDate } from '@/shared/types/type'
 
 /**
  * 년도, 월 입력받아 해당 달력의 날짜정보를 반환한다.
  * @param param0 year, month 정보
  * @returns {CalendarInfo}
  */
-export const getCalendarInfo = ({ year, monthIndex }: { year: number; monthIndex: MonthIndex }): CalendarInfo => {
+export default function getCalendarCellsInfo({ year, monthIndex }: { year: number; monthIndex: MonthIndex }) {
   const selectedMonthData: {
     [key: number]: CalendarCellInfo
   } = {}
@@ -46,7 +24,6 @@ export const getCalendarInfo = ({ year, monthIndex }: { year: number; monthIndex
     const indexDate = new Date(year, monthIndex, i)
     const [indexDateMonth, indexDateDay] = [indexDate.getMonth(), indexDate.getDay()]
 
-    // todo default 에 대한 처리 필요
     // i 일이 다음달로 넘어가지 않은지 판별 후
     if (indexDateMonth === firstDateMonthIndex) {
       switch (indexDateDay) {
@@ -59,6 +36,8 @@ export const getCalendarInfo = ({ year, monthIndex }: { year: number; monthIndex
             dayIndex: 0,
             row,
             column: 0,
+            key: `${row}-${0}`,
+            isDummyCell: false,
           }
           break
         case 1:
@@ -70,6 +49,8 @@ export const getCalendarInfo = ({ year, monthIndex }: { year: number; monthIndex
             dayIndex: 1,
             row,
             column: 1,
+            key: `${row}-${1}`,
+            isDummyCell: false,
           }
           break
         case 2:
@@ -81,6 +62,8 @@ export const getCalendarInfo = ({ year, monthIndex }: { year: number; monthIndex
             dayIndex: 2,
             row,
             column: 2,
+            key: `${row}-${2}`,
+            isDummyCell: false,
           }
           break
         case 3:
@@ -92,6 +75,8 @@ export const getCalendarInfo = ({ year, monthIndex }: { year: number; monthIndex
             dayIndex: 3,
             row,
             column: 3,
+            key: `${row}-${3}`,
+            isDummyCell: false,
           }
           break
         case 4:
@@ -103,6 +88,8 @@ export const getCalendarInfo = ({ year, monthIndex }: { year: number; monthIndex
             dayIndex: 4,
             row,
             column: 4,
+            key: `${row}-${4}`,
+            isDummyCell: false,
           }
           break
         case 5:
@@ -114,6 +101,8 @@ export const getCalendarInfo = ({ year, monthIndex }: { year: number; monthIndex
             dayIndex: 5,
             row,
             column: 5,
+            key: `${row}-${5}`,
+            isDummyCell: false,
           }
           break
         case 6:
@@ -125,6 +114,8 @@ export const getCalendarInfo = ({ year, monthIndex }: { year: number; monthIndex
             dayIndex: 6,
             row,
             column: 6,
+            key: `${row}-${6}`,
+            isDummyCell: false,
           }
           break
         default:
@@ -134,14 +125,4 @@ export const getCalendarInfo = ({ year, monthIndex }: { year: number; monthIndex
   }
 
   return selectedMonthData
-}
-
-export const getDummyCellArray = (count: number): null[] => {
-  const dummyCellArray: null[] = []
-  let i = 1
-  while (i <= count) {
-    dummyCellArray.unshift(null)
-    i += 1
-  }
-  return dummyCellArray
 }

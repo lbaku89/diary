@@ -1,7 +1,3 @@
-// * import firebase
-// Required for side-effects
-
-// import 'firebase/firestore'
 import { initializeApp } from 'firebase/app'
 
 // https://firebase.google.com/docs/web/setup#available-libraries

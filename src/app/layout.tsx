@@ -4,17 +4,16 @@ import '@fontsource/roboto/400.css'
 import '@fontsource/roboto/500.css'
 import '@fontsource/roboto/700.css'
 import CssBaseline from '@mui/material/CssBaseline'
-
-// * import contextProvider
 import AuthContextProvider from '@/shared/context/AuthContextProvider'
-
-// const inter = Inter({ subsets: ['latin'] })
 import Container from '@mui/material/Container'
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter'
 
 export const metadata: Metadata = {
   title: 'Simple Diary',
   description: 'Write your diary easily By Simple Diary',
+  icons: {
+    icon: '/images/favicon.png',
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

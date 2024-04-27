@@ -58,6 +58,12 @@ export type DayIndex = 0 | 1 | 2 | 3 | 4 | 5 | 6
 /** 한국어 요일 타입 */
 export type KoreanDay = '일요일' | '월요일' | '화요일' | '수요일' | '목요일' | '금요일' | '토요일'
 
+export interface TodayInfo {
+  year: number
+  monthIndex: MonthIndex
+  date: CalendarDate
+}
+
 export interface CalendarInfo {
   [key: number]: CalendarCellInfo
 }
@@ -70,12 +76,13 @@ export interface CalendarCellInfo {
   dayIndex: DayIndex // 요일 인덱스 0~6
   row: CalendarRow
   column: CalendarColumn
+  key: string // row-column 값 (component key값으로 사용하기 위해서 사용)
+  isDummyCell: boolean
 }
 
-export interface CalendarCellProps {
-  cellInfo?: CalendarCellInfo
-  todayInfo?: { year: number; monthIndex: MonthIndex; date: CalendarDate }
-  children?: React.ReactNode
+export interface CalendarDummyCellInfo {
+  key: string
+  isDummyCell: boolean
 }
 
 export interface IAuthContext {
@@ -83,4 +90,53 @@ export interface IAuthContext {
   setAuthContextValue: (value: AuthContextValue | null) => void
   isLoading: boolean
   setIsLoading: (value: boolean) => void
+}
+
+export interface CalendarCellDiaryTitleProps {
+  uid: string
+  year: number
+  month: number
+  date: number
+  title: string
+  diaryId: string
+  day: string
+}
+
+export interface DiaryInfo {
+  uid: string
+  diaryId: string
+  title: string
+  year: number
+  month: Month
+  date: CalendarDate
+}
+
+export interface CalendarCellDiaryDeleteBtnProps {
+  diaryInfo: DiaryInfo
+  setDiaryList: (diaryList: DiaryInfo[]) => void
+}
+
+export interface CalendarControlUIProps {
+  selectedYear: number
+  selectedMonth: Month
+}
+
+export interface CalendarUIProps {
+  selectedYear: number
+  selectedMonth: Month
+}
+
+export interface DiaryInputAndWriteBtnProps {
+  year: number
+  month: number
+  date: number
+  day: Day
+}
+
+export interface DiaryContentAndModifyBtnProps {
+  year: number
+  month: number
+  date: number
+  day: Day
+  diaryId: string | undefined
 }
