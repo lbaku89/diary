@@ -27,9 +27,12 @@ yarn build
 ```
 
 #### 기간
-
 - 약 2달 (퇴근 후, 주말 이용)
 - 2023.12.10 ~ 2023.2.10
+
+#### 추가 작업기간
+- 리팩토링 2주 ( 2024.4.13 ~ 2024.27 )
+
 
 #### 멤버
 
@@ -46,6 +49,7 @@ yarn build
     - ✔️typescript
   - framework
     - ✔️Nextjs 14 (app route)
+      - server component 이용   
       - middle ware 이용
         - 로그인 여부(cookie 값)에 따른 리다이렉팅 처리
       - nextJs 기본 routing 이용
