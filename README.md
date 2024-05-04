@@ -89,6 +89,5 @@ yarn build
 ##### 개선 사항 
 - Firestore -> mysql, Node Express로 변경경
 - 네트워크 요청 수 간소화 및 대체 전략 수립
-  - 캐싱처리?      
 - alert -> snackbar와 dialog component 이용
 - 특정 달을 한꺼번에 불러 올 수 있는 ui 추가 
