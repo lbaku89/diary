@@ -8,7 +8,6 @@ import { UserCredential, GoogleAuthProvider, signInWithPopup, signOut } from 'fi
 // * import firebase instance
 import { db, firebaseAuth } from '@/shared/firebase/firebaseClient'
 import getYYYYMMDD from '../utils/getYYYYMMDD'
-// * import utils
 
 export const login = async (): Promise<null | AuthContextValue> => {
   const provider = new GoogleAuthProvider()
@@ -110,6 +109,41 @@ export const getDiaryListByDate = async ({
     } as DiaryInfo
 
     diaryList.push(diaryInfo)
+  })
+
+  return diaryList
+}
+
+/** 해당 날짜의 diary 목록 불러오기 */
+export const getDiariesByMonth = async ({
+  uid,
+  dateInfo,
+}: {
+  uid: string
+  dateInfo: {
+    year: number //
+    month: number // 1 ~ 12
+  }
+}) => {
+  // * 한자리 숫자는 앞에 0 붙여주기
+  const convertedMonth = dateInfo.month < 10 ? `0${dateInfo.month}` : dateInfo.month
+
+  // * 해당 날짜의 collection 문서 가져오기
+  const querySnapshot = await getDocs(collection(db, `users/${uid}/${dateInfo.year}${convertedMonth}`))
+
+  const diaryList: {
+    [key: string]: Omit<DiaryInfo, 'diaryId'>[]
+  } = {}
+
+  // * 문서들을 순회하며 diaryList에 추가
+  querySnapshot.forEach((document) => {
+    const diary = document.data() as Omit<DiaryInfo, 'diaryId'>
+    if (diaryList[diary.date]) {
+      diaryList[diary.date].push(diary)
+    } else {
+      diaryList[diary.date] = []
+      diaryList[diary.date].push(diary)
+    }
   })
 
   return diaryList
