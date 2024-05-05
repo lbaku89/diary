@@ -132,17 +132,17 @@ export const getDiariesByMonth = async ({
   const querySnapshot = await getDocs(collection(db, `users/${uid}/${dateInfo.year}${convertedMonth}`))
 
   const diaryList: {
-    [key: string]: Omit<DiaryInfo, 'diaryId'>[]
+    [key: string]: DiaryInfo[]
   } = {}
 
   // * 문서들을 순회하며 diaryList에 추가
   querySnapshot.forEach((document) => {
     const diary = document.data() as Omit<DiaryInfo, 'diaryId'>
     if (diaryList[diary.date]) {
-      diaryList[diary.date].push(diary)
+      diaryList[diary.date].push({ ...diary, diaryId: document.id })
     } else {
       diaryList[diary.date] = []
-      diaryList[diary.date].push(diary)
+      diaryList[diary.date].push({ ...diary, diaryId: document.id })
     }
   })
 
