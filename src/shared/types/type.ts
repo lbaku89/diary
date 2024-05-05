@@ -109,6 +109,7 @@ export interface DiaryInfo {
   year: number
   month: Month
   date: CalendarDate
+  content: string
 }
 
 export interface CalendarCellDiaryDeleteBtnProps {
