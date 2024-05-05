@@ -65,12 +65,14 @@ export const addDiary = async ({
   }
 }) => {
   const convertedMonth = month < 10 ? `0${month}` : month
-  const convertedDate = date < 10 ? `0${date}` : date
-
   // * db에 diary 추가
-  await addDoc(collection(db, `users/${uid}/${year}${convertedMonth}${convertedDate}`), {
+  await addDoc(collection(db, `users/${uid}/${year}${convertedMonth}`), {
+    year,
+    month,
+    date,
     title,
     content,
+    uid,
   })
 }
 
