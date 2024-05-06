@@ -27,9 +27,12 @@ yarn build
 ```
 
 #### 기간
-
 - 약 2달 (퇴근 후, 주말 이용)
 - 2023.12.10 ~ 2023.2.10
+
+#### 추가 작업기간
+- 리팩토링 2주 ( 2024.4.13 ~ 2024.27 )
+
 
 #### 멤버
 
@@ -46,6 +49,7 @@ yarn build
     - ✔️typescript
   - framework
     - ✔️Nextjs 14 (app route)
+      - server component 이용   
       - middle ware 이용
         - 로그인 여부(cookie 값)에 따른 리다이렉팅 처리
       - nextJs 기본 routing 이용
@@ -81,3 +85,9 @@ yarn build
 ##### 후기
 
 - 평소에 구현해보고 싶었던 기능들을 구현 해볼 수 있는 값진 경험이었습니다😊
+
+##### 개선 사항 
+- Firestore -> mysql, Node Express로 변경경
+- 네트워크 요청 수 간소화 및 대체 전략 수립
+- alert -> snackbar와 dialog component 이용
+- 특정 달을 한꺼번에 불러 올 수 있는 ui 추가 
