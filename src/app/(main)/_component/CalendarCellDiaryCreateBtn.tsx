@@ -1,18 +1,28 @@
 import Link from 'next/link'
 import { IconButton } from '@mui/material'
 import CreateIcon from '@mui/icons-material/Create'
-import { CalendarCellInfo } from '@/shared/types/type'
+import { CalendarCellInfo, Month, CalendarDate, Day } from '@/shared/types/type'
 
-export default function CalendarCellDiaryCreateBtn({ calendarCellInfo }: { calendarCellInfo: CalendarCellInfo }) {
+export default function CalendarCellDiaryCreateBtn({
+  cellYear,
+  cellMonth,
+  cellDate,
+  cellDay,
+}: {
+  cellYear?: number
+  cellMonth?: Month
+  cellDate?: CalendarDate
+  cellDay?: Day
+}) {
   return (
     <Link
       href={{
         pathname: '/writeDiary',
         query: {
-          year: calendarCellInfo.year,
-          month: calendarCellInfo.monthIndex + 1,
-          date: calendarCellInfo.date,
-          day: calendarCellInfo.day,
+          year: cellYear,
+          month: cellMonth,
+          date: cellDate,
+          day: cellDay,
         },
       }}
     >

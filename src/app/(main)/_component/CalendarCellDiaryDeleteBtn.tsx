@@ -2,12 +2,12 @@
 
 import DeleteIcon from '@mui/icons-material/Delete'
 import { IconButton } from '@mui/material'
-import { getDiaryListByDate, deleteDiary } from '@/shared/api/api'
+import { deleteDiary, getDiariesByMonth } from '@/shared/api/api'
 import { useContext } from 'react'
 import AuthContext from '@/shared/context/AuthContext'
-import { CalendarCellDiaryDeleteBtnProps } from '@/shared/types/type'
+import { CalendarCellDiaryDeleteBtnProps, DiaryInfo } from '@/shared/types/type'
 
-export default function CalendarCellDiaryDeleteBtn({ diaryInfo, setDiaryList }: CalendarCellDiaryDeleteBtnProps) {
+export default function CalendarCellDiaryDeleteBtn({ diaryInfo, setDiaries }: CalendarCellDiaryDeleteBtnProps) {
   const uid = useContext(AuthContext)!.authContextValue?.uid
 
   return (
@@ -26,16 +26,14 @@ export default function CalendarCellDiaryDeleteBtn({ diaryInfo, setDiaryList }: 
             diaryId: diaryInfo.diaryId,
             dateInfo: { year: diaryInfo.year, month: diaryInfo.month, date: diaryInfo.date },
           }).then(() => {
-            getDiaryListByDate({
-              uid: uid!,
-              dateInfo: {
-                year: diaryInfo!.year,
-                month: diaryInfo!.month,
-                date: diaryInfo!.date,
-              },
-            }).then((res) => {
-              setDiaryList(res)
-            })
+            if (setDiaries && uid) {
+              getDiariesByMonth({ uid, dateInfo: { year: diaryInfo.year, month: diaryInfo.month } }).then(
+                (res: { [key: string]: DiaryInfo[] }) => {
+                  setDiaries(res)
+                }
+              )
+            }
+            // window.location.reload()
           })
         }
       }}
