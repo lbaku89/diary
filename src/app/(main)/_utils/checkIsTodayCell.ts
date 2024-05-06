@@ -1,9 +1,15 @@
-import { CalendarCellInfo, TodayInfo } from '@/shared/types/type'
+import getTodayInfo from '@/shared/utils/getTodayInfo'
 
-export default function checkIsTodayCell(todayInfo: TodayInfo, cellInfo: CalendarCellInfo) {
-  return (
-    todayInfo?.year === cellInfo?.year &&
-    todayInfo?.monthIndex === cellInfo?.monthIndex &&
-    todayInfo?.date === cellInfo?.date
-  )
+export default function checkIsTodayCell({
+  cellYear,
+  cellMonth,
+  cellDate,
+}: {
+  cellYear: number
+  cellMonth: number
+  cellDate: number
+}) {
+  const { year, month, date } = getTodayInfo()
+
+  return year === cellYear && month === cellMonth && date === cellDate
 }

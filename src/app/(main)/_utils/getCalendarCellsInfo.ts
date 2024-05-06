@@ -1,4 +1,4 @@
-import { CalendarCellInfo, CalendarRow, MonthIndex, CalendarDate } from '@/shared/types/type'
+import { CalendarCellInfo, CalendarRow, MonthIndex, CalendarDate, Month } from '@/shared/types/type'
 
 /**
  * 년도, 월 입력받아 해당 달력의 날짜정보를 반환한다.
@@ -7,7 +7,7 @@ import { CalendarCellInfo, CalendarRow, MonthIndex, CalendarDate } from '@/share
  */
 export default function getCalendarCellsInfo({ year, monthIndex }: { year: number; monthIndex: MonthIndex }) {
   const selectedMonthData: {
-    [key: number]: CalendarCellInfo
+    [key: number]: CalendarCellInfo & { month: Month }
   } = {}
 
   //  1일의 요일, 달을 구한다.
@@ -31,6 +31,7 @@ export default function getCalendarCellsInfo({ year, monthIndex }: { year: numbe
           selectedMonthData[i] = {
             year,
             monthIndex,
+            month: (monthIndex + 1) as Month,
             date,
             day: 'sunday',
             dayIndex: 0,
@@ -44,6 +45,7 @@ export default function getCalendarCellsInfo({ year, monthIndex }: { year: numbe
           selectedMonthData[i] = {
             year,
             monthIndex,
+            month: (monthIndex + 1) as Month,
             date,
             day: 'monday',
             dayIndex: 1,
@@ -57,6 +59,7 @@ export default function getCalendarCellsInfo({ year, monthIndex }: { year: numbe
           selectedMonthData[i] = {
             year,
             monthIndex,
+            month: (monthIndex + 1) as Month,
             date,
             day: 'tuesday',
             dayIndex: 2,
@@ -70,6 +73,7 @@ export default function getCalendarCellsInfo({ year, monthIndex }: { year: numbe
           selectedMonthData[i] = {
             year,
             monthIndex,
+            month: (monthIndex + 1) as Month,
             date,
             day: 'wednesday',
             dayIndex: 3,
@@ -83,6 +87,7 @@ export default function getCalendarCellsInfo({ year, monthIndex }: { year: numbe
           selectedMonthData[i] = {
             year,
             monthIndex,
+            month: (monthIndex + 1) as Month,
             date,
             day: 'thursday',
             dayIndex: 4,
@@ -96,6 +101,7 @@ export default function getCalendarCellsInfo({ year, monthIndex }: { year: numbe
           selectedMonthData[i] = {
             year,
             monthIndex,
+            month: (monthIndex + 1) as Month,
             date,
             day: 'friday',
             dayIndex: 5,
@@ -109,6 +115,7 @@ export default function getCalendarCellsInfo({ year, monthIndex }: { year: numbe
           selectedMonthData[i] = {
             year,
             monthIndex,
+            month: (monthIndex + 1) as Month,
             date,
             day: 'saturday',
             dayIndex: 6,

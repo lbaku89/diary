@@ -1,6 +1,6 @@
-export default function getCalendarCellDateColorByColumn(column: number) {
+export default function getCalendarCellDateColorByDayIndex(dayIndex: number) {
   let dateColor = null
-  switch (column) {
+  switch (dayIndex) {
     case 0:
       dateColor = '#FF4040'
       break

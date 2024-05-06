@@ -71,6 +71,7 @@ export interface CalendarInfo {
 export interface CalendarCellInfo {
   year: number // 년도
   monthIndex: MonthIndex // 달 0~11
+  month: Month // 달 1~12
   date: CalendarDate // 일
   day: Day // 요일
   dayIndex: DayIndex // 요일 인덱스 0~6
@@ -114,7 +115,9 @@ export interface DiaryInfo {
 
 export interface CalendarCellDiaryDeleteBtnProps {
   diaryInfo: DiaryInfo
-  setDiaryList: (diaryList: DiaryInfo[]) => void
+  setDiaries?: (diaries: { [key: string]: DiaryInfo[] } | undefined) => void
+
+  // setDiaryList?: (diaryList: DiaryInfo[]) => void
 }
 
 export interface CalendarControlUIProps {
