@@ -4,6 +4,18 @@
 
 <hr/>
 
+##### 개선사항
+
+- [x] db 구조 변경하여 network api 요청 횟수 줄이기
+- [ ] client 단에서 로그인 여부 값 access 못하게 수정
+- [ ] footer 추가
+- [ ] alert 대신 snackbar ui, dialog ui 로 변경
+- [ ] google 로그인 대신 다른 로그인 추가
+- [ ] diary cell ui 가독성 좋게 디자인 변경
+- [ ] light house 검사 결과 개선
+
+<hr/>
+
 ##### 트레블 슈팅
 
 현재 달력 UI는 렌더링 될 때마다 29~31개의 각 API를 호출함 각 API는 그 날짜에 기재된 모든 DIARY를 가져오는 API 이며 네트워크 요청 수가 많아 DATA FETCHING 속도가 느림
@@ -36,15 +48,30 @@ DATA FETCHING 하는 시간이 매우 짧기 때문에 스켈레톤 적용 X
 
 ##### 트레블 슈팅
 
+구글 로그인 버튼 클릭시 console.log 창에 index-219c3cac.js:9300 Cross-Origin-Opener-Policy policy would block the window.closed call. 와 같은 error 발생
+
+##### 사실 확인
+
+popup 을 이용한 로그인 보단 redirection 을 이용하는게 권장되는 것으로 여겨짐
+
+##### 해결방법
+
+TOBE
+
+<hr/>
+
+##### 트레블 슈팅
+
 Lighthouse 검사 결과 낮은 지표가 존재함
 
 ##### 사실확인
 
-<!-- TOBE -->
+TOBE
 
 ##### 해결방법
 
-<!-- TOBE -->
+TOBE
+
 <hr/>
 
 ##### 고민
@@ -53,8 +80,12 @@ Lighthouse 검사 결과 낮은 지표가 존재함
 
 ##### 사실확인
 
+TOBE
+
 <!-- TOBE -->
 
 ##### 해결방법
+
+TOBE
 
 <!-- TOBE -->
