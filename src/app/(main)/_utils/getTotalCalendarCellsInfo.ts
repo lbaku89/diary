@@ -11,7 +11,18 @@ export default function getTotalCalendarCellsInfo(year: number, monthIndex: numb
     isDummyCell: false,
   }))
   const dummyCellCount: number = calendarCellsInfoArray[0].dayIndex
-  const dummyCellsInfoArray = [...Array(dummyCellCount)].map((value, i) => ({ key: `0-${i}`, isDummyCell: true }))
+  const dummyCellsInfoArray = [...Array(dummyCellCount)].map((value, i) => ({
+    key: `0-${i}`,
+    isDummyCell: true,
+    date: undefined,
+    day: undefined,
+    dayIndex: undefined,
+    row: 0,
+    column: i,
+    year,
+    monthIndex,
+    month: (monthIndex + 1) as MonthIndex,
+  }))
 
   return [...dummyCellsInfoArray, ...calendarCellsInfoArray]
 }

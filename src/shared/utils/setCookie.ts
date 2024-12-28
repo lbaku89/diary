@@ -9,5 +9,5 @@ export default function setCookie({
 }) {
   document.cookie = `${encodeURIComponent(cookieName)}=${encodeURIComponent(cookieValue)}; max-age=${
     validDays * 24 * 60 * 60
-  }; path=/;}`
+  }; path=/`
 }

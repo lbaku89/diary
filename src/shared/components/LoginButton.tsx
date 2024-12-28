@@ -8,7 +8,6 @@ import { AuthContextValue } from '@/shared/types/type'
 import AuthContext from '@/shared/context/AuthContext'
 import Image from 'next/image'
 import getTodayInfo from '../utils/getTodayInfo'
-import setCookie from '../utils/setCookie'
 
 export default function LoginButton() {
   const context = useContext(AuthContext)
@@ -22,11 +21,6 @@ export default function LoginButton() {
           .then((res: AuthContextValue | null) => {
             if (res) {
               console.log(`${res.displayName}님 환영합니다😊`)
-              setCookie({
-                cookieName: 'isLoggedIn',
-                cookieValue: 'true',
-                validDays: 100,
-              })
               addFirstVisitUser(res)
               const todayInfo = getTodayInfo()
               router.push(`/?year=${todayInfo.year}&month=${todayInfo.month}`)

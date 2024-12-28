@@ -1,13 +1,24 @@
 import { Typography } from '@mui/material'
-import { CalendarCellInfo } from '@/shared/types/type'
-import getTodayInfo from '@/shared/utils/getTodayInfo'
+// import { CalendarCellInfo } from '@/shared/types/type'
+// import getTodayInfo from '@/shared/utils/getTodayInfo'
+import { CalendarCellInfo, Month, CalendarDate } from '@/shared/types/type'
 import checkIsTodayCell from '../_utils/checkIsTodayCell'
-import getCalendarCellDateColorByColumn from '../_utils/getCalendarCellDateColor'
+import getCalendarCellDateColorByDayIndex from '../_utils/getCalendarCellDateColor'
 
-export default function CalendarCellDate({ calendarCellInfo }: { calendarCellInfo: CalendarCellInfo }) {
-  const todayInfo = getTodayInfo()
-  const isToday = checkIsTodayCell(todayInfo, calendarCellInfo)
-  const dateColor = getCalendarCellDateColorByColumn(calendarCellInfo.column)
+export default function CalendarCellDate({
+  cellYear,
+  cellMonth,
+  cellDate,
+}: {
+  cellYear: number
+  cellMonth: Month
+  cellDate: CalendarDate
+}) {
+  // const todayInfo = getTodayInfo()
+
+  const isToday = checkIsTodayCell({ cellYear, cellMonth, cellDate })
+  const dayIndex = new Date(cellYear, cellMonth - 1, cellDate).getDay()
+  const dateColor = getCalendarCellDateColorByDayIndex(dayIndex)
   const dateDecoration = isToday
     ? {
         textDecoration: 'underline',
@@ -29,7 +40,7 @@ export default function CalendarCellDate({ calendarCellInfo }: { calendarCellInf
         ...dateDecoration,
       }}
     >
-      {calendarCellInfo.date}
+      {cellDate}
     </Typography>
   )
 }

@@ -11,7 +11,8 @@
   "rules": {
     "react/require-default-props": "off", // defaultProps를 사용하지 않아도 되도록 설정,m
     "no-useless-escape": "off",
-    "no-unused-vars": "off",
+    "no-unused-vars": "warn",
+    "no-console": "warn",
     "no-alert": "off",
     "react/jsx-props-no-spreading": "off",
     "react/react-in-jsx-scope": "off", // React 17버전 이후로 Import React from 'react'; 없이도 문제없이 코드를 작성
