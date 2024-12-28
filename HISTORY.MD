@@ -7,7 +7,6 @@
 ##### 개선사항
 
 - [x] db 구조 변경하여 network api 요청 횟수 줄이기
-- [ ] client 단에서 로그인 여부 값 access 못하게 수정
 - [ ] footer 추가
 - [ ] alert 대신 snackbar ui, dialog ui 로 변경
 - [ ] google 로그인 대신 다른 로그인 추가
@@ -56,7 +55,7 @@ popup 을 이용한 로그인 보단 redirection 을 이용하는게 권장되�
 
 ##### 해결방법
 
-TOBE
+-> 지연 : 현재 다른 유저들 또한 해당사항의 해결방법을 모색중이지만 별다른 방법은 아직 나오지 않음 추후 firebase에서 개선할 것으로 여겨짐짐
 
 <hr/>
 
