@@ -7,7 +7,6 @@ import { UserCredential, GoogleAuthProvider, signInWithPopup, signOut } from 'fi
 
 // * import firebase instance
 import { db, firebaseAuth } from '@/shared/firebase/firebaseClient'
-import getYYYYMMDD from '../utils/getYYYYMMDD'
 
 export const login = async (): Promise<null | AuthContextValue> => {
   const provider = new GoogleAuthProvider()
