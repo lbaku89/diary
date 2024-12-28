@@ -1,7 +1,9 @@
+'use client'
+
 import Link from 'next/link'
 import { IconButton } from '@mui/material'
 import CreateIcon from '@mui/icons-material/Create'
-import { CalendarCellInfo, Month, CalendarDate, Day } from '@/shared/types/type'
+import { Month, CalendarDate, Day } from '@/shared/types/type'
 
 export default function CalendarCellDiaryCreateBtn({
   cellYear,
