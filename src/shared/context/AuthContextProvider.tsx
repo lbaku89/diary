@@ -21,16 +21,17 @@ export default function AuthContextProvider({ children }: { children: React.Reac
     // Adds an observer for changes to the user's sign-in state.
     onAuthStateChanged(firebaseAuth, (user: User | null) => {
       if (user) {
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/auth.user
         setAuthContextValue({
           uid: user.uid,
           email: user.email!,
           displayName: user.displayName!,
         })
+        document.cookie = 'isLoggedIn=true'
       } else {
         // User is signed out
         setAuthContextValue(null)
+        const date = new Date(0).toUTCString()
+        document.cookie = `isLoggedIn=true; expires=${date}`
       }
     })
   }, [])
