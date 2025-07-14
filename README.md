@@ -1,8 +1,9 @@
-# ✍️Simple Diary
+
+# ✍️Simple Diary 
 
 #### 배포 URL
 
-- https://diary-sable.vercel.app/
+- https://diary-sable.vercel.app/ (호스팅문제로 현재 앱은 내려가 있음을 알려드립니다)
 
 #### 프로젝트 만든 계기
 
