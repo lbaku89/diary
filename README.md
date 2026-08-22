@@ -74,12 +74,7 @@ yarn build
     - ✔️FireBase auth (Backend)
       - 로그인(Google login) 기능 이용
         - 구글 계정으로 로그인 성공시 구글로부터 사용자에 대한 정보(유니크한 uid, 유저이름, 유저 이메일 등...) 확보 및 해당정보를 react context에 저장
-        - 서비스내에 "로그아웃" 하지 않는 이상 웹브라우저에서 로그인 상태 유지 (유효기간 100일)
 - ⏺️deploy (배포)
 
   - ✔️vercel 이용
 
-##### 부연 설명
-
-- 로그인 관련
-  - 구글 계정을 이용해 첫 로그인 성공시 유효기간 100일인 cookie 가 설정되고 로그아웃 버튼을 클릭시 해당 cookie값은 삭제 되며 이 cookie 값을 기준으로 middle ware에서 redirection 처리 합니다.
